@@ -1,27 +1,25 @@
 from typing import Self
 
+from playwright.sync_api import Locator
 
-class Input:
-    def __init__(self, page):
-        self.page = page
+from speak_ukrainian.src.base import BaseComponent
 
-    def input(self):
-        return self.page.locator("[class*='input']")
 
-    def set_input_value(self, input_value, selector_name) -> None:
-        placeholder = self.input().locator(selector_name).first
-        placeholder.fill(input_value)
+class Input(BaseComponent):
+    def __init__(self, locator: Locator):
+        super().__init__(locator)
 
-    def get_input_value(self, selector_name) -> str:
-        input_element = self.input().locator(selector_name).first
-        return input_element.get_attribute("value")
+    @property
+    def input(self) -> Locator:
+        return self.locator.locator("input")
 
-    def clear_input(self, selector_name) -> Self:
-        self.input().locator(selector_name).click()
-        self.page.keyboard.press("Control+A")
-        self.page.keyboard.press("Backspace")
-        self.page.keyboard.down("Meta")
-        self.page.keyboard.press("a")
-        self.page.keyboard.up("Meta")
-        self.page.keyboard.press("Backspace")
+    def set_input_value(self, input_value) -> None:
+        self.input.fill(input_value)
+
+    def get_input_value(self) -> Self:
+        self.input.input_value()
+        return self
+
+    def clear_input(self) -> Self:
+        self.input.clear()
         return self
