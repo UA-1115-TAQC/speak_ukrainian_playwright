@@ -29,4 +29,4 @@ class InputWithValidationStaticIconsAndErrors(InputWithValidationIconAndErrors):
 
     @property
     def static_icon(self):
-        return self.locator.locator("span.ant-input-suffix//div.icon")
+        return self.locator.locator("span.ant-input-suffix div.icon")
