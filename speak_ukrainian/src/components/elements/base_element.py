@@ -9,5 +9,5 @@ class BaseElement(BaseComponent):
         super().__init__(locator)
 
     def get_value_css_properties(self, locator, property_name):
-        return locator.evaluate('(element) => window.getComputedStyle(element).getPropertyValue(arguments[0])',
-                                property_name)
+        return locator.evaluate('(element) => window.getComputedStyle(element)'
+                                '.getPropertyValue(arguments[0])', property_name)
