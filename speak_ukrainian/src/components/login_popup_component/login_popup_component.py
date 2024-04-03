@@ -55,6 +55,7 @@ class LoginPopUpComponent(BaseComponent):
         # restore_password_button = self.locator.get_by_role("link", name="Забули пароль?")
         return self.locator.locator("a.restore-password-button")
 
+    @property
     def open_restoration_password_popup(self) -> 'RestorationPasswordPopup':
         self.restore_password_button.click()
         return RestorationPasswordPopup(self.locator.page.locator("div.modal-login").last)
@@ -78,6 +79,7 @@ class RestorationPasswordPopup(BaseComponent):
     def __init__(self, locator: Locator):
         super().__init__(locator)
 
+    @property
     def restoration_password_title(self) -> Locator:
         return self.locator.get_by_text("Відновлення", exact=True)
 
