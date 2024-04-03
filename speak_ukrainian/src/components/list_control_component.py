@@ -10,48 +10,30 @@ class ListControlComponent(BaseComponent):
 
     def __init__(self, locator):
         super().__init__(locator)
-        self._sort_by_alphabet = None
-        self._sort_by_rating = None
-        self._arrow_up = None
-        self._arrow_down = None
-        self._wrapper_list = None
-        self._wrapper_block = None
 
     @property
     def sort_by_alphabet(self):
-        if not self._sort_by_alphabet:
-            self._sort_by_alphabet = self.locator.get_by_text("за алфавітом")
-        return self._sort_by_alphabet
+        return self.locator.get_by_text("за алфавітом")
 
     @property
     def sort_by_rating(self):
-        if not self._sort_by_rating:
-            self._sort_by_rating = self.locator.get_by_text("за рейтингом")
-        return self._sort_by_rating
+        return self.locator.get_by_text("за рейтингом")
 
     @property
     def arrow_up(self):
-        if not self._arrow_up:
-            self._arrow_up = self.locator.locator(ARROW_UP_XPATH)
-        return self._arrow_up
+        return self.locator.locator(ARROW_UP_XPATH)
 
     @property
     def arrow_down(self):
-        if not self._arrow_down:
-            self._arrow_down = self.locator.locator(ARROW_DOWN_XPATH)
-        return self._arrow_down
+        return self.locator.locator(ARROW_DOWN_XPATH)
 
     @property
     def wrapper_list(self):
-        if not self._wrapper_list:
-            self._wrapper_list = self.locator.locator(WRAPPER_LIST_XPATH)
-        return self._wrapper_list
+        return self.locator.locator(WRAPPER_LIST_XPATH)
 
     @property
     def wrapper_block(self):
-        if not self._wrapper_block:
-            self._wrapper_block = self.locator.locator(WRAPPER_BLOCK_XPATH)
-        return self._wrapper_block
+        return self.locator.locator(WRAPPER_BLOCK_XPATH)
 
     def click_sort_by_alphabet(self):
         self.sort_by_alphabet.click()
