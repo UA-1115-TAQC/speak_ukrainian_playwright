@@ -10,14 +10,26 @@ from speak_ukrainian.src.elements.input_with_icons_and_errors import InputWithVa
 class AddClubStepTwo(BaseComponent):
     def __init__(self, locator: Locator) -> None:
         super().__init__(locator)
+        self._popup_title = None
+        self._locations_title = None
+        self._available_online_title = None
+        self._info_hint_icon = None
+        self._work_hours_title = None
+        self._contacts_title = None
+        self._next_step_button = None
+        self._previous_step_button = None
 
     @property
     def popup_title(self) -> Locator:
-        return self.locator.locator("div.add-club-header")
+        if self._popup_title is None:
+            self._popup_title = self.locator.locator("div.add-club-header")
+        return self._popup_title
 
     @property
     def locations_title(self) -> Locator:
-        return self.locator.get_by_text("Локації", exact=True)
+        if self._locations_title is None:
+            self._locations_title = self.locator.get_by_text("Локації", exact=True)
+        return self._locations_title
 
     @property
     def no_data_location_element(self) -> Locator:
@@ -32,7 +44,9 @@ class AddClubStepTwo(BaseComponent):
 
     @property
     def available_online_title(self) -> Locator:
-        return self.locator.get_by_text("Доступний онлайн", exact=True)
+        if self._available_online_title is None:
+            self._available_online_title = self.locator.get_by_text("Доступний онлайн", exact=True)
+        return self._available_online_title
 
     @property
     def switch_button(self) -> Locator:
@@ -47,7 +61,9 @@ class AddClubStepTwo(BaseComponent):
 
     @property
     def info_hint_icon(self) -> Locator:
-        return self.locator.get_by_label("info-circle", exact=True)
+        if self._info_hint_icon is None:
+            self._info_hint_icon = self.locator.get_by_label("info-circle", exact=True)
+        return self._info_hint_icon
 
     def click_info_hint_icon(self) -> Locator:
         self.info_hint_icon.click()
@@ -59,7 +75,9 @@ class AddClubStepTwo(BaseComponent):
 
     @property
     def work_hours_title(self) -> Locator:
-        return self.locator.get_by_text("Години роботи онлайн", exact=True)
+        if self._work_hours_title is None:
+            self._work_hours_title = self.locator.get_by_text("Години роботи онлайн", exact=True)
+        return self._work_hours_title
 
     @property
     def work_days_list(self) -> list[Locator]:
@@ -93,7 +111,9 @@ class AddClubStepTwo(BaseComponent):
 
     @property
     def contacts_title(self) -> Locator:
-        return self.locator.get_by_text("Контакти", exact=True)
+        if self._contacts_title is None:
+            self._contacts_title = self.locator.get_by_text("Контакти", exact=True)
+        return self._contacts_title
 
     @property
     def telephone_input_element(self) -> InputWithValidationStaticIconsAndErrors:
@@ -127,14 +147,18 @@ class AddClubStepTwo(BaseComponent):
 
     @property
     def next_step_button(self) -> Locator:
-        return self.locator.get_by_role("button", name="Наступний крок")
+        if self._next_step_button is None:
+            self._next_step_button = self.locator.get_by_role("button", name="Наступний крок")
+        return self._next_step_button
 
     def click_next_step_button(self) -> None:
         self.next_step_button.click()
 
     @property
     def previous_step_button(self) -> Locator:
-        return self.locator.get_by_role("button", name="Назад")
+        if self._previous_step_button is None:
+            self._previous_step_button = self.locator.get_by_role("button", name="Назад")
+        return self._previous_step_button
 
     def click_previous_step_button(self) -> 'AddClubStepOne':
         self.previous_step_button.click()

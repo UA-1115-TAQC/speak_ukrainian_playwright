@@ -9,10 +9,13 @@ from speak_ukrainian.src.elements.popup_step_element import PopUpStep
 class AddClubSider(BaseComponent):
     def __init__(self, locator: Locator) -> None:
         super().__init__(locator)
+        self._sider_steps_containers = None
 
     @property
     def sider_steps_containers(self) -> list[Locator]:
-        return self.locator.locator("div.ant-steps-item-container").all()
+        if self._sider_steps_containers is None:
+            self._sider_steps_containers = self.locator.locator("div.ant-steps-item-container").all()
+        return self._sider_steps_containers
 
     @property
     def step_one(self) -> PopUpStep:
@@ -43,5 +46,3 @@ class AddClubPopUp(BasePopUp):
     @property
     def step_two_container(self) -> AddClubStepTwo:
         return AddClubStepTwo(self._step_container)
-
-
