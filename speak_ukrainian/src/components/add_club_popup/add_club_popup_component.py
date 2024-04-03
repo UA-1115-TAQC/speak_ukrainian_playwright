@@ -2,6 +2,7 @@ from playwright._impl._locator import Locator
 
 from speak_ukrainian.src.base import BasePopUp, BaseComponent
 from speak_ukrainian.src.components.add_club_popup.add_club_step_one import AddClubStepOne
+from speak_ukrainian.src.components.add_club_popup.add_club_step_two import AddClubStepTwo
 from speak_ukrainian.src.elements.popup_step_element import PopUpStep
 
 
@@ -38,4 +39,9 @@ class AddClubPopUp(BasePopUp):
     @property
     def step_one_container(self) -> AddClubStepOne:
         return AddClubStepOne(self._step_container)
+
+    @property
+    def step_two_container(self) -> AddClubStepTwo:
+        return AddClubStepTwo(self._step_container)
+
 

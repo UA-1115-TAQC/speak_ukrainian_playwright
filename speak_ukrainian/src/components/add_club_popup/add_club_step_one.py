@@ -3,6 +3,7 @@ from typing import Self
 from playwright._impl._locator import Locator
 
 from speak_ukrainian.src.base import BaseComponent
+from speak_ukrainian.src.components.add_club_popup.add_club_step_two import AddClubStepTwo
 from speak_ukrainian.src.elements.dropdown import Dropdown
 from speak_ukrainian.src.elements.input_with_icons_and_errors import InputWithValidationIconAndErrors
 from speak_ukrainian.src.elements.number_input_element import NumberInput
@@ -78,7 +79,8 @@ class AddClubStepOne(BaseComponent):
 
     @property
     def next_step_button(self) -> Locator:
-        return self.locator.locator("button", hasText="Наступний крок")
+        return self.locator.get_by_role("button", name="Наступний крок")
 
-    def click_next_step_button(self) -> None:
+    def click_next_step_button(self) -> AddClubStepTwo:
         self.next_step_button.click()
+        return AddClubStepTwo(self.locator)
