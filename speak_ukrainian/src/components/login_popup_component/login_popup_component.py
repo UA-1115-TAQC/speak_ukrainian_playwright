@@ -57,7 +57,7 @@ class LoginPopUpComponent(BaseComponent):
 
     def open_restoration_password_popup(self) -> 'RestorationPasswordPopup':
         self.restore_password_button.click()
-        return RestorationPasswordPopup(self.locator.locator("div.modal-login").last)
+        return RestorationPasswordPopup(self.locator.page.locator("div.modal-login").last)
 
     @property
     def email_input_element(self) -> InputWithIconElement:
