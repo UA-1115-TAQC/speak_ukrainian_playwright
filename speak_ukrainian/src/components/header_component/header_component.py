@@ -12,6 +12,10 @@ class HeaderComponent(BaseComponent):
         self._about_us_container = None
         self._service_container = None
         self._add_club_button = None
+        self._location_icon = None
+        self._location_button = None
+        self._avatar = None
+        self._profile_menu_button = None
 
     @property
     def get_news_container_locator(self) -> Locator:
@@ -55,6 +59,34 @@ class HeaderComponent(BaseComponent):
                                      .get_by_role("button", name="Додати гурток"))
         return self._add_club_button
 
+    @property
+    def get_location_icon(self) -> Locator:
+        if not self._location_icon:
+            self._location_icon = (self.locator
+                                   .locator("span[aria-label='environment']"))
+        return self._location_icon
+
+    @property
+    def get_location_button(self) -> Locator:
+        if not self._location_button:
+            self._location_button = (self.locator
+                                     .locator("div.city"))
+        return self._location_button
+
+    @property
+    def get_avatar(self) -> Locator:
+        if not self._avatar:
+            self._avatar = (self.locator
+                            .locator("span.ant-avatar"))
+        return self._avatar
+
+    @property
+    def get_profile_menu_button(self) -> Locator:
+        if not self._profile_menu_button:
+            self._profile_menu_button = (self.locator
+                                         .locator("div.user-profile"))
+        return self._profile_menu_button
+
     def click_challenge_button(self):
         self.get_challenge_container.click()
 
@@ -63,7 +95,7 @@ class HeaderComponent(BaseComponent):
 
     def click_news_button(self) -> AllNewsPage:
         self.get_news_container_locator.click()
-        self.locator.page.wait_for_timeout(100)
+        self.locator.page.wait_for_selector(selector="#newsContainer", timeout=5000)
         return AllNewsPage(self.locator.page)
 
     def click_about_us_button(self):
@@ -75,3 +107,10 @@ class HeaderComponent(BaseComponent):
     def click_add_club_button(self):
         if self.get_add_club_button.is_visible():
             self.get_add_club_button.click()
+
+    #  ClubsPage will be returned
+    def select_city(self, city: str):
+        self.get_location_button.click()
+        self.locator.page.get_by_text(text=city, exact=True).click()
+
+
