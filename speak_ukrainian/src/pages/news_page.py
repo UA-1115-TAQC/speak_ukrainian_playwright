@@ -56,3 +56,26 @@ class NewsPage(BasePage):
                                          .locator(".title"))
         return self._news_carousel_title
 
+    @property
+    def get_news_carousel_block(self):
+        if not self._news_carousel_block:
+            self._news_carousel_block = BaseCarousel((self.page
+                                                      .locator(".news-carousel-block")))
+        return self._news_carousel_block
+
+    def click_carousel_right_arrow_button(self):
+        self.get_news_carousel_block.get_right_arrow_button.last.click()
+        return self
+
+    def click_carousel_left_arrow_button(self):
+        self.get_news_carousel_block.get_left_arrow_button.click()
+        return self
+
+    def get_list_news_card(self) -> list['NewsCardComponent']:
+        from ..components.news_card_component import NewsCardComponent
+        self.page.wait_for_selector(selector=".slick-active")
+        news_locator = (self.get_news_carousel_block
+                        .get_carousel_container
+                        .locator("div.slick-active").all())
+        return [NewsCardComponent(news) for news in news_locator]
+

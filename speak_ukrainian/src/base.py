@@ -70,6 +70,7 @@ class BaseCarousel(BaseComponent):
         if not self._carousel_container:
             self._carousel_container = (self.locator
                                         .locator("div.slick-slider"))
+        return self._carousel_container
 
     def click_slick_dot_by_index(self, index: int):
         self.get_slick_dots.nth(index).click()
