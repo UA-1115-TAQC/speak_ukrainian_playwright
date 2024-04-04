@@ -30,3 +30,23 @@ class InputWithValidationStaticIconsAndErrors(InputWithValidationIconAndErrors):
     @property
     def static_icon(self):
         return self.locator.locator("span.ant-input-suffix div.icon")
+
+
+class InputWithInfoValidationIconsAndErrors(InputWithValidationIconAndErrors):
+    def __init__(self, locator: Locator):
+        super().__init__(locator)
+
+    @property
+    def info_icon(self):
+        return self.locator.get_by_label("info-circle", exact=True)
+
+    def click_info_icon(self) -> Locator:
+        self.info_icon.click()
+        return self.info_icon_tooltip
+
+    @property
+    def info_icon_tooltip(self) -> Locator:
+        return self.locator.get_by_role("tooltip", exact=True)
+
+    def get_info_icon_tooltip_text(self) -> str:
+        return self.info_icon_tooltip.text_content()
