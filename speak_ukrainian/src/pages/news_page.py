@@ -79,3 +79,7 @@ class NewsPage(BasePage):
                         .locator("div.slick-active").all())
         return [NewsCardComponent(news) for news in news_locator]
 
+    def click_carousel_slick_dot(self, index: int):
+        self.get_news_carousel_block.click_slick_dot_by_index(index)
+        return self
+
