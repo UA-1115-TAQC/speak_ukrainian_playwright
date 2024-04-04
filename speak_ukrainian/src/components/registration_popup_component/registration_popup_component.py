@@ -55,37 +55,37 @@ class RegistrationPopUpComponent(BaseComponent):
     @property
     def lastname_input_element(self) -> InputWithIconElement:
         if self._lastname_input is None:
-            self._lastname_input = InputWithIconElement(self.locator.locator("div.ant-form-item.registration-input input").first)
+            self._lastname_input = InputWithIconElement(self.locator.locator("div.ant-form-item.registration-input").first)
         return self._lastname_input
 
     @property
     def firstname_input_element(self) -> InputWithIconElement:
         if self._firstname_input is None:
-            self._firstname_input = InputWithIconElement(self.locator.locator("div.ant-form-item.registration-input input").nth(1))
+            self._firstname_input = InputWithIconElement(self.locator.locator("div.ant-form-item.registration-input").nth(1))
         return self._firstname_input
 
     @property
     def phone_input_element(self) -> InputWithIconElement:
         if self._phone_input is None:
-            self._phone_input = InputWithIconElement(self.locator.locator("div.ant-form-item.registration-input input").nth(2))
+            self._phone_input = InputWithIconElement(self.locator.locator("div.ant-form-item.registration-input").nth(2))
         return self._phone_input
 
     @property
     def email_input_element(self) -> InputWithIconElement:
         if self._email_input is None:
-            self._email_input = InputWithIconElement(self.locator.locator("div.ant-form-item.registration-input input").nth(3))
+            self._email_input = InputWithIconElement(self.locator.locator("div.ant-form-item.registration-input").nth(3))
         return self._email_input
 
     @property
     def password_input_element(self) -> InputWithIconElement:
         if self._password_input is None:
-            self._password_input = InputWithIconElement(self.locator.locator("div.ant-form-item.registration-input input").nth(4))
+            self._password_input = InputWithIconElement(self.locator.locator("div.ant-form-item.registration-input").nth(4))
         return self._password_input
 
     @property
     def password_confirmation_input_element(self) -> InputWithIconElement:
         if self._password_confirmation_input is None:
-            self._password_confirmation_input = InputWithIconElement(self.locator.locator("div.ant-form-item.registration-input input").nth(5))
+            self._password_confirmation_input = InputWithIconElement(self.locator.locator("div.ant-form-item.registration-input").nth(5))
         return self._password_confirmation_input
 
     @property
