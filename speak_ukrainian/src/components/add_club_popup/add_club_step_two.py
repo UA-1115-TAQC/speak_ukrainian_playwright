@@ -4,6 +4,8 @@ from playwright._impl._locator import Locator
 
 from speak_ukrainian.src.base import BaseComponent
 from speak_ukrainian.src.components.add_club_popup.day_time_checkbox_element import DayTimeCheckboxElement
+from speak_ukrainian.src.components.add_club_popup.locations_list_element import LocationsListElement
+from speak_ukrainian.src.components.add_location_popup.add_location_popup_component import AddLocationPopUp
 from speak_ukrainian.src.elements.input_with_icons_and_errors import InputWithValidationStaticIconsAndErrors
 
 
@@ -39,8 +41,18 @@ class AddClubStepTwo(BaseComponent):
     def add_location_button(self) -> Locator:
         return self.locator.locator("span.add-club-location", has_text="Додати локацію")
 
-    def click_add_location_button(self) -> None:
+    def click_add_location_button(self) -> AddLocationPopUp:
         self.add_location_button.click()
+        filter_locator = self.locator.page.locator("div.add-club-header", hasText="Додати локацію")
+        return AddLocationPopUp(self.locator.page.locator("div.add-modal-club").filter(has=filter_locator))
+
+    @property
+    def get_list_of_location_elements(self) -> list[LocationsListElement]:
+        locations_list = self.locator.locator("li.ant-list-item").all()
+        return [LocationsListElement(location) for location in locations_list] if locations_list else []
+
+    def get_locations_name_list(self) -> list[str]:
+        return [location.get_location_title_text() for location in self.get_list_of_location_elements()]
 
     @property
     def available_online_title(self) -> Locator:
