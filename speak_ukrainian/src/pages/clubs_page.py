@@ -65,22 +65,3 @@ class ClubsPage (BasePage):
 
     def is_card_list_empty(self):
         return len(self.card_list) == 0
-
-
-def strt():
-    from playwright.sync_api import sync_playwright
-    with sync_playwright() as pw:
-        browser = pw.chromium.launch(headless=False)
-        page = browser.new_page()
-        page.goto("http://speak-ukrainian.eastus2.cloudapp.azure.com/dev/clubs")
-
-        c = ClubsPage(page)
-        c.search_clubs_header.click_advanced_search_icon()
-        print(c.search_sider.inner_text())
-        c.search_sider.enter_age("4")
-        print(c.search_sider.get_age_value())
-        c.search_sider.clear_age()
-        c.search_sider.enter_age("9")
-
-
-strt()

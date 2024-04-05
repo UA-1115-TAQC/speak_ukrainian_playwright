@@ -2,7 +2,7 @@ from speak_ukrainian.src.base import BaseComponent
 
 
 class SearchSiderComponent(BaseComponent):
-    CENTER_OR_CLUB_RADIO_BUTTON_XPATH = "//span[contains(@class,'ant-radio-checked')]/following-sibling::span"
+    CENTER_OR_CLUB_RADIO_BUTTON_XPATH = "//label[contains(@class,'ant-radio-wrapper')]"
     CHECKED_RADIO_BUTTON_XPATH = "//span[contains(@class,'ant-radio-checked')]/following-sibling::span"
 
     ONLINE_CHECKBOX_FIELD_XPATH = "//div[@id='basic_isOnline']"
@@ -45,12 +45,24 @@ class SearchSiderComponent(BaseComponent):
     def choose_club_radio_button(self):
         for e in self.center_or_club_radio_button:
             if e.text_content() == "Гурток":
-                e.click()
+                e.check()
 
     def choose_center_radio_button(self):
+
+        print(len(self.center_or_club_radio_button))
+
         for e in self.center_or_club_radio_button:
+
+            print(e.text_content())
+
             if e.text_content() == "Центр":
-                e.click()
+                e.check()
+
+    def check_online_checkbox(self):
+        self.online_checkbox_input.check()
+
+    def is_online_checkbox_checked(self):
+        return self.online_checkbox_input.is_checked()
 
     def check_direction_checkbox(self, direction):
         for d in self.direction_checkbox_field_list:
@@ -70,4 +82,4 @@ class SearchSiderComponent(BaseComponent):
         return self.age_input.input_value()
 
     def clear_age(self):
-        return self.clear()
+        return self.age_input.clear()
