@@ -1,10 +1,13 @@
 from speak_ukrainian.src.base import BaseComponent
+from speak_ukrainian.src.components.elements.location_search_sider_clubs_element import LocationSearchSiderElement
 
 
 class SearchSiderComponent(BaseComponent):
     CENTER_OR_CLUB_RADIO_BUTTON_XPATH = "//label[contains(@class,'ant-radio-wrapper')]"
     CHECKED_RADIO_BUTTON_XPATH = "//span[contains(@class,'ant-radio-checked')]/following-sibling::span"
-
+    SEARCH_CITY_XPATH = "/descendant::div[contains(@class,'ant-select-in-form-item')][1]"
+    SEARCH_DISTRICT_XPATH = "/descendant::div[contains(@class,'ant-select-in-form-item')][2]"
+    SEARCH_METRO_XPATH = "/descendant::div[contains(@class,'ant-select-in-form-item')][3]"
     ONLINE_CHECKBOX_FIELD_XPATH = "//div[@id='basic_isOnline']"
     ONLINE_CHECKBOX_INPUT_XPATH = "//div[@id='basic_isOnline']//span[contains(@class, 'ant-wave-target')]"
     DIRECTION_CHECKBOX_FIELD_LIST_XPATH = "//div[@id='basic_categoriesName']//label[contains(@class,'ant-checkbox-wrapper')]"
@@ -23,24 +26,49 @@ class SearchSiderComponent(BaseComponent):
         return self.locator.locator(self.CHECKED_RADIO_BUTTON_XPATH)
 
     @property
+    def search_city_box(self):
+        return LocationSearchSiderElement(self.locator.locator(self.SEARCH_CITY_XPATH))
+
+    @property
+    def search_district_box(self):
+        return LocationSearchSiderElement(self.locator.locator(self.SEARCH_DISTRICT_XPATH))
+
+    @property
+    def search_metro_box(self):
+        return LocationSearchSiderElement(self.locator.locator(self.SEARCH_METRO_XPATH))
+
+    @property
     def online_checkbox_field(self):
-        return self.locator.locator(self.ONLINE_CHECKBOX_FIELD_XPATH)
+        if self.is_element_present(self.ONLINE_CHECKBOX_FIELD_XPATH):
+            return self.locator.locator(self.ONLINE_CHECKBOX_FIELD_XPATH)
+        return None
 
     @property
     def online_checkbox_input(self):
-        return self.locator.locator(self.ONLINE_CHECKBOX_INPUT_XPATH)
+        if self.is_element_present(self.ONLINE_CHECKBOX_FIELD_XPATH):
+            return self.locator.locator(self.ONLINE_CHECKBOX_FIELD_XPATH)
+        return None
 
     @property
     def direction_checkbox_field_list(self):
-        return self.locator.locator(self.DIRECTION_CHECKBOX_FIELD_LIST_XPATH).all()
+        if self.is_element_present(self.DIRECTION_CHECKBOX_FIELD_LIST_XPATH):
+            return self.locator.locator(self.DIRECTION_CHECKBOX_FIELD_LIST_XPATH).all()
+        return None
 
     @property
     def direction_checkbox_input_list(self):
-        return self.locator.locator(self.DIRECTION_CHECKBOX_INPUT_LIST_XPATH).all()
+        if self.is_element_present(self.DIRECTION_CHECKBOX_INPUT_LIST_XPATH):
+            return self.locator.locator(self.DIRECTION_CHECKBOX_INPUT_LIST_XPATH).all()
+        return None
 
     @property
     def age_input(self):
-        return self.locator.locator(self.AGE_INPUT_XPATH)
+        if self.is_element_present(self.AGE_INPUT_XPATH):
+            return self.locator.locator(self.AGE_INPUT_XPATH)
+        return None
+
+    def is_element_present(self, xpath_name):
+        return self.page.locator(xpath_name)
 
     def choose_club_radio_button(self):
         for e in self.center_or_club_radio_button:

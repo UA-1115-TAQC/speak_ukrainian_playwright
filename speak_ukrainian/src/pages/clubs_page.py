@@ -18,8 +18,6 @@ class ClubsPage (BasePage):
     def __init__(self, page):
         super().__init__(page)
         self._search_clubs_header = None
-        self._list_control = None
-        self._search_sider = None
 
     @property
     def search_clubs_header(self):
@@ -35,15 +33,15 @@ class ClubsPage (BasePage):
 
     @property
     def list_control(self):
-        if not self._list_control and self.is_element_present(self.LIST_CONTROL_XPATH):
-            self._list_control = ListControlComponent(self.page.locator(self.LIST_CONTROL_XPATH))
-        return self._list_control
+        if self.is_element_present(self.LIST_CONTROL_XPATH):
+            return ListControlComponent(self.page.locator(self.LIST_CONTROL_XPATH))
+        return None
 
     @property
     def search_sider(self):
-        if not self._search_sider and self.is_element_present(self.SEARCH_SIDER_XPATH):
-            self._search_sider = SearchSiderComponent(self.page.locator(self.SEARCH_SIDER_XPATH))
-        return self._search_sider
+        if self.is_element_present(self.SEARCH_SIDER_XPATH):
+            return SearchSiderComponent(self.page.locator(self.SEARCH_SIDER_XPATH))
+        return None
 
     @property
     def card_list(self):
@@ -65,3 +63,6 @@ class ClubsPage (BasePage):
 
     def is_card_list_empty(self):
         return len(self.card_list) == 0
+
+
+# TODO test is_element_present here and seaarch_sider
