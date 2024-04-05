@@ -21,7 +21,7 @@ class HeaderComponent(BaseComponent):
     def get_news_container_locator(self) -> Locator:
         if not self._news_container:
             self._news_container = (self.locator
-                                    .locator("li", has_text='Новини'))
+                                    .locator("li", has_text="Новини"))
         return self._news_container
 
     @property
@@ -113,4 +113,7 @@ class HeaderComponent(BaseComponent):
         self.get_location_button.click()
         self.locator.page.get_by_text(text=city, exact=True).click()
 
-
+    def get_city_locators_list(self) -> Locator:
+        self.get_location_button.click()
+        return (self.locator.page.locator("div[class*=placement-bottom]")
+                .locator("li"))

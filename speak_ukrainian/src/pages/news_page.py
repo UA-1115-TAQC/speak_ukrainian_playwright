@@ -71,6 +71,7 @@ class NewsPage(BasePage):
         self.get_news_carousel_block.get_left_arrow_button.click()
         return self
 
+    @property
     def get_list_news_card(self) -> list['NewsCardComponent']:
         from ..components.news_card_component import NewsCardComponent
         self.page.wait_for_selector(selector=".slick-active")
