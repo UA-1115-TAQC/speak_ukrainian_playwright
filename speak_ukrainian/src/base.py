@@ -1,14 +1,21 @@
 from playwright._impl._locator import Locator
+from playwright._impl._page import Page
+from playwright.sync_api import expect
 
 
 class BasePage:
-    def __init__(self, page):
+    def __init__(self, page: Page):
         self.page = page
 
 
 class BaseComponent:
-    def __init__(self, locator):
+    def __init__(self, locator: Locator):
         self.locator = locator
+
+    def wait_to_be_visible(self, element: Locator) -> Locator:
+        element.scroll_into_view_if_needed()
+        expect(element).to_be_visible()
+        return element
 
 
 class BasePopUp(BaseComponent):
