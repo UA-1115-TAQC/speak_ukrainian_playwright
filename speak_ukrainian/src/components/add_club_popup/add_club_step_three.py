@@ -51,11 +51,15 @@ class AddClubStepThree(BaseComponent):
 
     @property
     def logo_uploaded_img_element(self) -> UploadedImageElement:
+        expect(self.logo_uploaded_container).to_be_visible()
         return UploadedImageElement(self.logo_uploaded_container)
 
     def upload_logo(self, img_path: str) -> Self:
-        self.logo_download_input.fill(img_path)
-        self.wait_to_be_visible(self.logo_uploaded_container)
+        if self.logo_uploaded_container.is_visible():
+            self.logo_uploaded_img_element.click_delete_button()
+            expect(self.logo_uploaded_container).not_to_be_visible()
+        self.logo_download_input.set_input_files(img_path)
+        expect(self.logo_uploaded_img_element.image_title).to_be_visible()
         return self
 
     @property
@@ -84,11 +88,15 @@ class AddClubStepThree(BaseComponent):
 
     @property
     def cover_uploaded_img_element(self) -> UploadedImageElement:
+        expect(self.cover_uploaded_container).to_be_visible()
         return UploadedImageElement(self.cover_uploaded_container)
 
     def upload_cover(self, img_path: str) -> Self:
-        self.cover_download_input.fill(img_path)
-        self.wait_to_be_visible(self.cover_uploaded_container)
+        if self.cover_uploaded_container.is_visible():
+            self.cover_uploaded_img_element.click_delete_button()
+            expect(self.cover_uploaded_container).not_to_be_visible()
+        self.cover_download_input.set_input_files(img_path)
+        expect(self.cover_uploaded_img_element.image_title).to_be_visible()
         return self
 
     @property
@@ -99,7 +107,9 @@ class AddClubStepThree(BaseComponent):
 
     @property
     def gallery_download_input(self) -> Locator:
-        return self.locator.get_by_role("button").filter(has=self.locator.page.get_by_label("plus")).locator("input")
+        return (self.locator.page.locator("div.ant-upload-select")
+                            .filter(has=self.locator.page.get_by_label("plus"))
+                            .locator("input"))
 
     @property
     def list_of_gallery_locators(self) -> list[Locator]:
@@ -128,8 +138,8 @@ class AddClubStepThree(BaseComponent):
 
     def upload_img_to_gallery(self, img_path: str) -> Self:
         img_count = len(self.list_of_gallery_locators)
-        self.gallery_download_input.fill(img_path)
-        expect(self.list_of_gallery_locators).to_have_count(img_count + 1)
+        self.gallery_download_input.set_input_files(img_path)
+        expect(self.list_of_gallery_image_elements[img_count].preview_image_file).to_be_visible()
         return self
 
     @property
