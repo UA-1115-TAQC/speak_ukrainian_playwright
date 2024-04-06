@@ -3,8 +3,9 @@ from typing import Self
 from playwright._impl._locator import Locator
 
 from speak_ukrainian.src.base import BaseComponent
+from speak_ukrainian.src.components.add_center_popup.add_center_step_two import AddCenterStepTwo
 from speak_ukrainian.src.components.add_location_popup.add_location_popup_component import AddLocationPopUp
-from speak_ukrainian.src.elements.input_with_icons_and_errors import InputWithInfoValidationIconsAndErrors
+from speak_ukrainian.src.elements.input_with_icons_and_errors import InputInfoValidationIconsAndErrors
 
 
 class AddCenterStepOne(BaseComponent):
@@ -28,9 +29,9 @@ class AddCenterStepOne(BaseComponent):
         return self._center_name_title
 
     @property
-    def name_input_element(self) -> InputWithInfoValidationIconsAndErrors:
-        return InputWithInfoValidationIconsAndErrors(self.locator.locator("div.ant-form-item-row")
-                                                     .filter(has=self.locator.page.locator("#basic_name")))
+    def name_input_element(self) -> InputInfoValidationIconsAndErrors:
+        return InputInfoValidationIconsAndErrors(self.locator.locator("div.ant-form-item-row")
+                                                 .filter(has=self.locator.page.locator("#basic_name")))
 
     def locations_title(self) -> Locator:
         if self._locations_title is None:
@@ -80,5 +81,6 @@ class AddCenterStepOne(BaseComponent):
             self._next_step_button = self.locator.get_by_role("button", name="Наступний крок")
         return self._next_step_button
 
-    def click_next_step_button(self) -> None:
+    def click_next_step_button(self) -> AddCenterStepTwo:
         self.next_step_button.click()
+        return AddCenterStepTwo(self.locator)

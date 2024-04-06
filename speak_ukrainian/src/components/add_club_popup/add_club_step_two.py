@@ -7,7 +7,7 @@ from speak_ukrainian.src.components.add_club_popup.add_club_step_three import Ad
 from speak_ukrainian.src.components.add_club_popup.day_time_checkbox_element import DayTimeCheckboxElement
 from speak_ukrainian.src.components.add_club_popup.locations_list_element import LocationsListElement
 from speak_ukrainian.src.components.add_location_popup.add_location_popup_component import AddLocationPopUp
-from speak_ukrainian.src.elements.input_with_icons_and_errors import InputWithValidationStaticIconsAndErrors
+from speak_ukrainian.src.elements.input_with_icons_and_errors import InputValidationStaticIconsAndErrors
 
 
 class AddClubStepTwo(BaseComponent):
@@ -129,34 +129,34 @@ class AddClubStepTwo(BaseComponent):
         return self._contacts_title
 
     @property
-    def telephone_input_element(self) -> InputWithValidationStaticIconsAndErrors:
-        return InputWithValidationStaticIconsAndErrors(self.locator.locator("div.add-club-contact")
-                                                       .filter(has=self.locator.page.locator("#basic_contactТелефон")))
+    def telephone_input_element(self) -> InputValidationStaticIconsAndErrors:
+        return InputValidationStaticIconsAndErrors(self.locator.locator("div.add-club-contact")
+                                                   .filter(has=self.locator.page.locator("#basic_contactТелефон")))
 
     @property
-    def facebook_input_element(self) -> InputWithValidationStaticIconsAndErrors:
-        return InputWithValidationStaticIconsAndErrors(self.locator.locator("div.add-club-contact")
-                                                       .filter(has=self.locator.page.locator("#basic_contactFacebook")))
+    def facebook_input_element(self) -> InputValidationStaticIconsAndErrors:
+        return InputValidationStaticIconsAndErrors(self.locator.locator("div.add-club-contact")
+                                                   .filter(has=self.locator.page.locator("#basic_contactFacebook")))
 
     @property
-    def whatsapp_input_element(self) -> InputWithValidationStaticIconsAndErrors:
-        return InputWithValidationStaticIconsAndErrors(self.locator.locator("div.add-club-contact")
-                                                       .filter(has=self.locator.page.locator("#basic_contactWhatsApp")))
+    def whatsapp_input_element(self) -> InputValidationStaticIconsAndErrors:
+        return InputValidationStaticIconsAndErrors(self.locator.locator("div.add-club-contact")
+                                                   .filter(has=self.locator.page.locator("#basic_contactWhatsApp")))
 
     @property
-    def email_input_element(self) -> InputWithValidationStaticIconsAndErrors:
-        return InputWithValidationStaticIconsAndErrors(self.locator.locator("div.add-club-contact")
-                                                       .filter(has=self.locator.page.locator("#basic_contactПошта")))
+    def email_input_element(self) -> InputValidationStaticIconsAndErrors:
+        return InputValidationStaticIconsAndErrors(self.locator.locator("div.add-club-contact")
+                                                   .filter(has=self.locator.page.locator("#basic_contactПошта")))
 
     @property
-    def skype_input_element(self) -> InputWithValidationStaticIconsAndErrors:
-        return InputWithValidationStaticIconsAndErrors(self.locator.locator("div.add-club-contact")
-                                                       .filter(has=self.locator.page.locator("#basic_contactSkype")))
+    def skype_input_element(self) -> InputValidationStaticIconsAndErrors:
+        return InputValidationStaticIconsAndErrors(self.locator.locator("div.add-club-contact")
+                                                   .filter(has=self.locator.page.locator("#basic_contactSkype")))
 
     @property
-    def site_input_element(self) -> InputWithValidationStaticIconsAndErrors:
-        return InputWithValidationStaticIconsAndErrors(self.locator.locator("div.add-club-contact")
-                                                       .filter(has=self.locator.page.locator("#basic_contactSite")))
+    def site_input_element(self) -> InputValidationStaticIconsAndErrors:
+        return InputValidationStaticIconsAndErrors(self.locator.locator("div.add-club-contact")
+                                                   .filter(has=self.locator.page.locator("#basic_contactSite")))
 
     @property
     def next_step_button(self) -> Locator:
