@@ -33,7 +33,7 @@ class Dropdown(BaseComponent):
 
     @property
     def visible_items_list(self) -> list[Locator]:
-        return (self.locator.page.locator("div").filter("#" + self._dropdown_id)
+        return (self.locator.page.locator("div").filter(has=self.locator.page.locator("#" + self._dropdown_id))
                                  .locator("div.rc-virtual-list div.ant-select-item.ant-select-item-option").all())
 
     def scroll_to_top(self):

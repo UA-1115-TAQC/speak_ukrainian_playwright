@@ -44,7 +44,9 @@ class AddLocationPopUp(BasePopUp):
 
     @property
     def city_dropdown_element(self) -> DropdownWithIconError:
-        return DropdownWithIconError(self.locator.locator("div.add-club-row").filter("#cityName"), "cityName_list")
+        return DropdownWithIconError(self.locator.locator("div.add-club-row")
+                                                 .filter(has=self.locator.page.locator("#cityName")),
+                                     "cityName_list")
 
     @property
     def district_title(self) -> Locator:
@@ -54,7 +56,8 @@ class AddLocationPopUp(BasePopUp):
 
     @property
     def district_dropdown_element(self) -> Dropdown:
-        return Dropdown(self.locator.locator("div.add-club-row").filter("#districtName"), "districtName_list")
+        return Dropdown(self.locator.locator("div.add-club-row").filter(has=self.locator.page.locator("#districtName")),
+                        "districtName_list")
 
     @property
     def station_title(self) -> Locator:
@@ -64,7 +67,8 @@ class AddLocationPopUp(BasePopUp):
 
     @property
     def metro_dropdown_element(self) -> Dropdown:
-        return Dropdown(self.locator.locator("div.add-club-row").filter("#stationName"), "stationName_list")
+        return Dropdown(self.locator.locator("div.add-club-row").filter(has=self.locator.page.locator("#stationName")),
+            "stationName_list")
 
     @property
     def address_title(self) -> Locator:
@@ -74,7 +78,8 @@ class AddLocationPopUp(BasePopUp):
 
     @property
     def address_input_element(self) -> InputWithValidationIconAndErrors:
-        return InputWithValidationIconAndErrors(self.locator.locator("div.add-club-row").filter("#address"))
+        return InputWithValidationIconAndErrors(self.locator.locator("div.add-club-row")
+                                                            .filter(has=self.locator.page.locator("#address")))
 
     @property
     def coordinates_title(self) -> Locator:
@@ -84,7 +89,8 @@ class AddLocationPopUp(BasePopUp):
 
     @property
     def coordinates_input_element(self) -> InputWithValidationIconAndErrors:
-        return InputWithValidationIconAndErrors(self.locator.locator("div.add-club-row").filter("#coordinates"))
+        return InputWithValidationIconAndErrors(self.locator.locator("div.add-club-row")
+                                                            .filter(has=self.locator.page.locator("#coordinates")))
 
     @property
     def telephone_title(self) -> Locator:
