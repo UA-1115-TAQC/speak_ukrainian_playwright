@@ -1,3 +1,5 @@
+from typing import Self
+
 from playwright._impl._locator import Locator
 from playwright.sync_api import expect
 
@@ -20,7 +22,7 @@ class InputWithValidationIconAndErrors(Input):
         return self.locator.locator("div.ant-form-item-explain-error").all()
 
     def get_error_messages_text_list(self) -> list[str]:
-        return [error.get_attribute("innerText") for error in self.error_messages_list]
+        return [error.text_content() for error in self.error_messages_list]
 
 
 class InputWithValidationStaticIconsAndErrors(InputWithValidationIconAndErrors):
@@ -40,13 +42,13 @@ class InputWithInfoValidationIconsAndErrors(InputWithValidationIconAndErrors):
     def info_icon(self):
         return self.locator.get_by_label("info-circle", exact=True)
 
-    def click_info_icon(self) -> Locator:
+    def click_info_icon(self) -> Self:
         self.info_icon.click()
-        return self.info_icon_tooltip
+        return self
 
     @property
     def info_icon_tooltip(self) -> Locator:
-        return self.locator.get_by_role("tooltip", exact=True)
+        return self.locator.page.get_by_role("tooltip", exact=True)
 
     def get_info_icon_tooltip_text(self) -> str:
         return self.info_icon_tooltip.text_content()
