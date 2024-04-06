@@ -1,6 +1,7 @@
 from playwright._impl._locator import Locator
 
 from speak_ukrainian.src.base import BaseComponent
+from speak_ukrainian.src.components.add_center_popup.add_center_step_three import AddCenterStepThree
 from speak_ukrainian.src.elements.input_with_icons_and_errors import InputValidationStaticIconsAndErrors
 
 
@@ -71,5 +72,6 @@ class AddCenterStepTwo(BaseComponent):
             self._next_step_button = self.locator.locator("button.next-btn")
         return self._next_step_button
 
-    def click_next_step_button(self) -> None:
+    def click_next_step_button(self) -> AddCenterStepThree:
         self.next_step_button.click()
+        return AddCenterStepThree(self.locator)

@@ -4,20 +4,18 @@ from playwright._impl._locator import Locator
 from playwright.sync_api import expect
 
 from speak_ukrainian.src.base import BaseComponent
-from speak_ukrainian.src.elements.galery_image_element import GalleryImageElement
 from speak_ukrainian.src.elements.uploaded_image_element import UploadedImageElement
 
 
-class AddClubStepThree(BaseComponent):
+class AddCenterStepThree(BaseComponent):
     def __init__(self, locator: Locator) -> None:
         super().__init__(locator)
         self._popup_title = None
         self._logo_title = None
-        self._cover_title = None
-        self._gallery_title = None
+        self._photo_title = None
         self._description_title = None
-        self._complete_button = None
         self._previous_step_button = None
+        self._next_step_button = None
 
     @property
     def popup_title(self) -> Locator:
@@ -46,8 +44,8 @@ class AddClubStepThree(BaseComponent):
     @property
     def logo_uploaded_container(self) -> Locator:
         return (self.locator.locator("div.ant-form-item-control-input-content")
-                .filter(has=self.logo_download_input)
-                .locator("div.ant-upload-list-item-container"))
+                            .filter(has=self.logo_download_input)
+                            .locator("div.ant-upload-list-item-container"))
 
     @property
     def logo_uploaded_img_element(self) -> UploadedImageElement:
@@ -63,83 +61,40 @@ class AddClubStepThree(BaseComponent):
         return self
 
     @property
-    def cover_title(self) -> Locator:
-        if self._cover_title is None:
-            self._cover_title = self.locator.get_by_text("Обкладинка", exact=True)
-        return self._cover_title
+    def photo_title(self) -> Locator:
+        if self._photo_title is None:
+            self._photo_title = self.locator.get_by_text("Фото", exact=True)
+        return self._photo_title
 
     @property
-    def cover_download_input(self) -> Locator:
+    def photo_download_input(self) -> Locator:
         return self.locator.page.locator("#basic_urlBackground")
 
     @property
-    def cover_download_button(self) -> Locator:
-        return self.locator.get_by_role("button").filter(has=self.cover_download_input)
+    def photo_download_button(self) -> Locator:
+        return self.locator.get_by_role("button").filter(has=self.photo_download_input)
 
-    def click_cover_download_button(self) -> Self:
-        self.cover_download_button.click()
+    def click_photo_download_button(self) -> Self:
+        self.photo_download_button.click()
         return self
 
     @property
-    def cover_uploaded_container(self) -> Locator:
+    def photo_uploaded_container(self) -> Locator:
         return (self.locator.locator("div.ant-form-item-control-input-content")
-                .filter(has=self.cover_download_input)
-                .locator("div.ant-upload-list-item-container"))
+                            .filter(has=self.photo_download_input)
+                            .locator("div.ant-upload-list-item-container"))
 
     @property
-    def cover_uploaded_img_element(self) -> UploadedImageElement:
-        expect(self.cover_uploaded_container).to_be_visible()
-        return UploadedImageElement(self.cover_uploaded_container)
+    def photo_uploaded_img_element(self) -> UploadedImageElement:
+        expect(self.photo_uploaded_container).to_be_visible()
+        return UploadedImageElement(self.photo_uploaded_container)
 
-    def upload_cover(self, img_path: str) -> Self:
-        if self.cover_uploaded_container.is_visible():
-            self.cover_uploaded_img_element.click_delete_button()
-            expect(self.cover_uploaded_container).not_to_be_visible()
-        self.cover_download_input.set_input_files(img_path)
-        expect(self.cover_uploaded_img_element.image_title).to_be_visible()
-        return self
-
-    @property
-    def gallery_title(self) -> Locator:
-        if self._gallery_title is None:
-            self._gallery_title = self.locator.get_by_text("Галерея", exact=True)
-        return self._gallery_title
-
-    @property
-    def gallery_download_input(self) -> Locator:
-        return (self.locator.page.locator("div.ant-upload-select")
-                .filter(has=self.locator.page.get_by_label("plus"))
-                .locator("input"))
-
-    @property
-    def list_of_gallery_locators(self) -> list[Locator]:
-        return (self.locator.locator("div.ant-form-item-control-input-content")
-                .filter(has=self.gallery_download_input)
-                .locator("div.ant-upload-list-item-container")
-                .all())
-
-    @property
-    def list_of_gallery_image_elements(self) -> list[GalleryImageElement]:
-        return [GalleryImageElement(image) for image in self.list_of_gallery_locators]
-
-    @property
-    def gallery_download_button(self) -> Locator:
-        return self.locator.get_by_role("button").filter(has=self.gallery_download_input)
-
-    def click_gallery_download_button(self) -> Self:
-        self.gallery_download_button.click()
-        return self
-
-    @property
-    def gallery_uploaded_container(self) -> Locator:
-        return (self.locator.locator("div.ant-form-item-control-input-content")
-                .filter(has=self.gallery_download_input)
-                .locator("div.ant-upload-list-item-container"))
-
-    def upload_img_to_gallery(self, img_path: str) -> Self:
-        img_count = len(self.list_of_gallery_locators)
-        self.gallery_download_input.set_input_files(img_path)
-        expect(self.list_of_gallery_image_elements[img_count].preview_image_file).to_be_visible()
+    def upload_photo(self, img_path: str) -> Self:
+        if self.photo_uploaded_container.is_visible():
+            self.photo_uploaded_img_element.click_delete_button()
+            expect(self.photo_uploaded_container).not_to_be_visible()
+        self.photo_download_input.set_input_files(img_path)
+        expect(self.photo_uploaded_img_element.image_title).to_be_visible()
         return self
 
     @property
@@ -182,16 +137,16 @@ class AddClubStepThree(BaseComponent):
             self._previous_step_button = self.locator.get_by_role("button", name="Назад")
         return self._previous_step_button
 
-    def click_previous_step_button(self) -> 'AddClubStepTwo':
+    def click_previous_step_button(self) -> 'AddCenterStepTwo':
         self.previous_step_button.click()
-        from speak_ukrainian.src.components.add_club_popup.add_club_step_two import AddClubStepTwo
-        return AddClubStepTwo(self.locator)
+        from speak_ukrainian.src.components.add_center_popup.add_center_step_two import AddCenterStepTwo
+        return AddCenterStepTwo(self.locator)
 
     @property
-    def complete_button(self):
-        if self._complete_button is None:
-            self._complete_button = self.locator.get_by_role("button", name="Завершити")
-        return self._complete_button
+    def next_step_button(self):
+        if self._next_step_button is None:
+            self._next_step_button = self.locator.get_by_role("button", name="Наступний крок")
+        return self._next_step_button
 
-    def click_complete_button(self) -> None:
-        self.complete_button.click()
+    def click_next_step_button(self) -> None:
+        self.next_step_button.click()
