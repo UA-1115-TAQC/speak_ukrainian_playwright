@@ -2,6 +2,8 @@ from playwright._impl._locator import Locator
 
 from speak_ukrainian.src.base import BaseComponent
 from speak_ukrainian.src.components.header_component.menu.guest_menu import GuestMenu
+from speak_ukrainian.src.components.header_component.menu.user_menu import UserMenu
+from speak_ukrainian.src.pages.all_news_page import AllNewsPage
 
 
 class HeaderComponent(BaseComponent):
@@ -121,5 +123,10 @@ class HeaderComponent(BaseComponent):
 
     @property
     def open_guest_menu(self) -> GuestMenu:
-        self.profile_menu_button.click()
+        self.get_profile_menu_button.click()
         return GuestMenu(self.locator.locator("ul.ant-dropdown-menu-light"))
+
+    @property
+    def open_user_menu(self) -> UserMenu:
+        self.get_profile_menu_button.click()
+        return UserMenu(self.locator.locator("ul.ant-dropdown-menu-light"))
