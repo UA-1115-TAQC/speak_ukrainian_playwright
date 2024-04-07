@@ -13,7 +13,7 @@ class ProfilePage(BasePage):
         self.edit_profile_modal_form = (page.locator("div.ant-modal css-13m256z user-edit")
                                         .and_(page.locator("div.ant-modal-content")))
 
-    def edit_profile_button_click(self) -> EditUserProfilePopup:
+    def click_edit_profile_button(self) -> EditUserProfilePopup:
         self.edit_profile_button.click()
         return EditUserProfilePopup(self.edit_profile_modal_form)
 
