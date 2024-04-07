@@ -4,6 +4,7 @@ from playwright._impl._locator import Locator
 from playwright.sync_api import expect
 
 from speak_ukrainian.src.base import BaseComponent
+from speak_ukrainian.src.components.add_center_popup.add_center_step_four import AddCenterStepFour
 from speak_ukrainian.src.elements.uploaded_image_element import UploadedImageElement
 
 
@@ -20,7 +21,7 @@ class AddCenterStepThree(BaseComponent):
     @property
     def popup_title(self) -> Locator:
         if self._popup_title is None:
-            self._popup_title = self.locator.locator("div.add-club-header")
+            self._popup_title = self.locator.locator("div.modal-title")
         return self._popup_title
 
     @property
@@ -148,5 +149,6 @@ class AddCenterStepThree(BaseComponent):
             self._next_step_button = self.locator.get_by_role("button", name="Наступний крок")
         return self._next_step_button
 
-    def click_next_step_button(self) -> None:
+    def click_next_step_button(self) -> AddCenterStepFour:
         self.next_step_button.click()
+        return AddCenterStepFour(self.locator)

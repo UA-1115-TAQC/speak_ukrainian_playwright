@@ -1,6 +1,7 @@
 from playwright._impl._locator import Locator
 
 from speak_ukrainian.src.base import BasePopUp
+from speak_ukrainian.src.components.add_center_popup.add_center_step_four import AddCenterStepFour
 from speak_ukrainian.src.components.add_center_popup.add_center_step_one import AddCenterStepOne
 from speak_ukrainian.src.components.add_center_popup.add_center_step_three import AddCenterStepThree
 from speak_ukrainian.src.components.add_center_popup.add_center_step_two import AddCenterStepTwo
@@ -44,9 +45,9 @@ class AddCenterPopUp(BasePopUp):
     def step_three_container(self) -> AddCenterStepThree:
         return AddCenterStepThree(self.step_container)
 
-    # @property
-    # def step_four_container(self) -> AddCenterStepFour:
-    #     return AddCenterStepFour(self.step_container)
+    @property
+    def step_four_container(self) -> AddCenterStepFour:
+        return AddCenterStepFour(self.step_container)
 
     @property
     def get_active_step(self) -> Locator:

@@ -27,33 +27,33 @@ class AddCenterStepTwo(BaseComponent):
 
     @property
     def telephone_element(self) -> InputValidationStaticIconsAndErrors:
-        return InputValidationStaticIconsAndErrors(self.locator.locator("div.ant-form-item-row")
+        return InputValidationStaticIconsAndErrors(self.locator.locator("div.add-club-contact")
                                                    .filter(has=self.locator.page.locator("#contacts_contactТелефон")))
 
     @property
     def facebook_element(self) -> InputValidationStaticIconsAndErrors:
-        return InputValidationStaticIconsAndErrors(self.locator.locator("div.ant-form-item-row")
+        return InputValidationStaticIconsAndErrors(self.locator.locator("div.add-club-contact")
                                                    .filter(has=self.locator.page.locator("#contacts_contactFacebook")))
 
     @property
     def whatsapp_element(self) -> InputValidationStaticIconsAndErrors:
-        return InputValidationStaticIconsAndErrors(self.locator.locator("div.ant-form-item-row")
+        return InputValidationStaticIconsAndErrors(self.locator.locator("div.add-club-contact")
                                                    .filter(has=self.locator.page.locator("#contacts_contactWhatsApp")))
 
     @property
     def email_element(self) -> InputValidationStaticIconsAndErrors:
-        return InputValidationStaticIconsAndErrors(self.locator.locator("div.ant-form-item-row")
+        return InputValidationStaticIconsAndErrors(self.locator.locator("div.add-club-contact")
                                                    .filter(has=self.locator.page.locator("#contacts_contactПошта")))
 
     @property
     def skype_element(self) -> InputValidationStaticIconsAndErrors:
-        return InputValidationStaticIconsAndErrors(self.locator.locator("div.ant-form-item-row")
+        return InputValidationStaticIconsAndErrors(self.locator.locator("div.add-club-contact")
                                                    .filter(has=self.locator.page.locator("#contacts_contactSkype")))
 
     @property
     def site_element(self) -> InputValidationStaticIconsAndErrors:
         return InputValidationStaticIconsAndErrors(self.locator.locator("div.ant-form-item-row")
-                                                   .filter(has=self.locator.page.locator("#contacts_contactSite")))
+                                                    .filter(has=self.locator.page.locator("#contacts_contactSite")))
 
     @property
     def previous_step_button(self):
