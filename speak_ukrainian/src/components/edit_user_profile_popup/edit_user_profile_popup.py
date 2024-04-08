@@ -3,7 +3,8 @@ from typing import Self
 from playwright._impl._locator import Locator
 
 from speak_ukrainian.src.base import BasePopUp
-from speak_ukrainian.src.elements.input_with_icons_and_errors import InputWithLabelValidationIconAndErrors
+from speak_ukrainian.src.elements.input_with_icons_and_errors import InputWithLabelValidationIconAndErrors, \
+    InputPasswordVisibilityIcon
 
 
 class EditUserProfilePopup(BasePopUp):
@@ -99,22 +100,22 @@ class EditUserProfilePopup(BasePopUp):
         return self.locator.get_by_role("checkbox").check()
 
     @property
-    def current_password_input_element(self):
-        return (self.locator.locator("xpath=(//div[contains(@class,'item-control-input')]"
-                                     "/span[contains(@class,'ant-input-password') "
-                                     "and not (contains(@class,'login-box'))])[1]"))
+    def current_password_input_element(self) -> InputPasswordVisibilityIcon:
+        return InputPasswordVisibilityIcon(self.locator.locator("xpath=(//div[contains(@class,'item-control-input')]"
+                                                                "/span[contains(@class,'ant-input-password') "
+                                                                "and not (contains(@class,'login-box'))])[1]"))
 
     @property
-    def new_password_input_element(self):
-        return (self.locator.locator("xpath=(//div[contains(@class,'item-control-input')]"
-                                     "/span[contains(@class,'ant-input-password') "
-                                     "and not (contains(@class,'login-box'))])[2]"))
+    def new_password_input_element(self) -> InputPasswordVisibilityIcon:
+        return InputPasswordVisibilityIcon(self.locator.locator("xpath=(//div[contains(@class,'item-control-input')]"
+                                                                "/span[contains(@class,'ant-input-password') "
+                                                                "and not (contains(@class,'login-box'))])[2]"))
 
     @property
-    def get_confirm_password_input_element(self):
-        return (self.locator.locator("xpath=(//div[contains(@class,'item-control-input')]"
-                                     "/span[contains(@class,'ant-input-password') "
-                                     "and not (contains(@class,'login-box'))])[3]"))
+    def get_confirm_password_input_element(self) -> InputPasswordVisibilityIcon:
+        return InputPasswordVisibilityIcon(self.locator.locator("xpath=(//div[contains(@class,'item-control-input')]"
+                                                                "/span[contains(@class,'ant-input-password') "
+                                                                "and not (contains(@class,'login-box'))])[3]"))
 
     @property
     def submit_button(self) -> Locator:
