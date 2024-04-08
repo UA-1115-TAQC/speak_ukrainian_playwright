@@ -129,4 +129,4 @@ class HeaderComponent(BaseComponent):
     @property
     def open_user_menu(self) -> UserMenu:
         self.get_profile_menu_button.click()
-        return UserMenu(self.locator.locator("ul.ant-dropdown-menu-light"))
+        return UserMenu(self.locator.page.locator("ul.ant-dropdown-menu-light"))

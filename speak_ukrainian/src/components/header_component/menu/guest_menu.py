@@ -5,9 +5,6 @@ from speak_ukrainian.src.components.login_popup_component.login_popup_component 
 from speak_ukrainian.src.components.registration_popup_component.registration_popup_component import \
     RegistrationPopUpComponent
 
-REGISTRATION_FORM = "//div[@class='ant-modal-content']//div[@class='registration-header']/../.."
-LOGIN_FORM = "//descendant::div[contains(@class, 'modal-login')][1]"
-
 
 class GuestMenu(BaseComponent):
     def __init__(self, locator: Locator):
@@ -24,9 +21,9 @@ class GuestMenu(BaseComponent):
     @property
     def open_register_form(self) -> RegistrationPopUpComponent:
         self.registration.click()
-        return RegistrationPopUpComponent(self.locator.locator(REGISTRATION_FORM))
+        return RegistrationPopUpComponent(self.locator.page.locator("div.modal-registration"))
 
     @property
     def open_login_form(self) -> LoginPopUpComponent:
         self.login.click()
-        return LoginPopUpComponent(self.locator.locator(LOGIN_FORM))
+        return LoginPopUpComponent(self.locator.page.locator("div.modal-login"))
