@@ -38,15 +38,15 @@ class DayTimeCheckboxElement(BaseComponent):
     def hours_picker_list(self) -> list[Locator]:
         return self.time_picker_container.locator("ul.ant-picker-time-panel-column").first.locator("li").all()
 
-    def hours_text_picker_list(self) -> list[Locator]:
+    def hours_text_picker_list(self) -> list[str]:
         return [item.text_content() for item in self.hours_picker_list]
 
     @property
     def minutes_picker_list(self) -> list[Locator]:
         return self.time_picker_container.locator("ul.ant-picker-time-panel-column").last.locator("li").all()
 
-    def minutes_text_picker_list(self) -> list[Locator]:
-        return [item.text_content() for item in self.hours_picker_list]
+    def minutes_text_picker_list(self) -> list[str]:
+        return [item.text_content() for item in self.minutes_picker_list]
 
     @property
     def time_to_input(self) -> Locator:
