@@ -30,3 +30,12 @@ class InputWithValidationStaticIconsAndErrors(InputWithValidationIconAndErrors):
     @property
     def static_icon(self):
         return self.locator.locator("span.ant-input-suffix div.icon")
+
+
+class InputWithLabelValidationIconAndErrors(InputWithValidationIconAndErrors):
+    def __init__(self, locator: Locator):
+        super().__init__(locator)
+
+    @property
+    def label(self):
+        return self.locator.locator("div.ant-form-item-label > label")

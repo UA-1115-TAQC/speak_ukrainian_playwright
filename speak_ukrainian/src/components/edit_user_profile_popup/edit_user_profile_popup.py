@@ -3,6 +3,7 @@ from typing import Self
 from playwright._impl._locator import Locator
 
 from speak_ukrainian.src.base import BasePopUp
+from speak_ukrainian.src.elements.input_with_icons_and_errors import InputWithLabelValidationIconAndErrors
 
 
 class EditUserProfilePopup(BasePopUp):
@@ -41,12 +42,14 @@ class EditUserProfilePopup(BasePopUp):
         return self.manager_type_button.click()
 
     @property
-    def last_name_element(self):
-        return self.locator.locator("xpath=./descendant::div[contains(@class,'user-edit-input')][1]")
+    def last_name_element(self) -> InputWithLabelValidationIconAndErrors:
+        return InputWithLabelValidationIconAndErrors(
+            self.locator.locator("xpath=./descendant::div[contains(@class,'user-edit-input')][1]"))
 
     @property
-    def first_name_element(self):
-        return self.locator.locator("xpath=./descendant::div[contains(@class,'user-edit-input')][2]")
+    def first_name_element(self) -> InputWithLabelValidationIconAndErrors:
+        return InputWithLabelValidationIconAndErrors(
+            self.locator.locator("xpath=./descendant::div[contains(@class,'user-edit-input')][2]"))
 
     @property
     def phone_country_code(self) -> Locator:
@@ -55,8 +58,9 @@ class EditUserProfilePopup(BasePopUp):
         return self._country_code
 
     @property
-    def phone_element(self):
-        return self.locator.locator("xpath=./descendant::div[contains(@class,'user-edit-input')][3]")
+    def phone_element(self) -> InputWithLabelValidationIconAndErrors:
+        return InputWithLabelValidationIconAndErrors(
+            self.locator.locator("xpath=./descendant::div[contains(@class,'user-edit-input')][3]"))
 
     @property
     def email_element(self):
