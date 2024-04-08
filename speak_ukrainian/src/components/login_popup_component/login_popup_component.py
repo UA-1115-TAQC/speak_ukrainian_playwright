@@ -70,7 +70,6 @@ class LoginPopUpComponent(BaseComponent):
 
     @property
     def sing_in_button(self) -> Locator:
-        # sign_in_button = self.locator.get_by_role("button", name="Увійти")
         if self._sing_in_button is None:
             self._sing_in_button = self.locator.locator("button[class*=login-button]")
         return self._sing_in_button
@@ -80,7 +79,6 @@ class LoginPopUpComponent(BaseComponent):
 
     @property
     def restore_password_button(self) -> Locator:
-        # restore_password_button = self.locator.get_by_role("link", name="Забули пароль?")
         if self._restore_password_button is None:
             self._restore_password_button = self.locator.locator("a.restore-password-button")
         return self._restore_password_button
