@@ -1,6 +1,7 @@
 from playwright._impl._locator import Locator
 
 from speak_ukrainian.src.base import BaseComponent, BasePage
+from speak_ukrainian.src.components.add_center_popup.add_center_popup_component import AddCenterPopUp
 from speak_ukrainian.src.components.add_club_popup.add_club_popup_component import AddClubPopUp
 from speak_ukrainian.src.pages.search_certificate import SearchCertificatePage
 from speak_ukrainian.src.profile_page import ProfilePage
@@ -50,12 +51,12 @@ class UserMenu(BaseComponent):
     @property
     def open_add_club_form(self) -> AddClubPopUp:
         self.add_club.click()
-        return AddClubPopUp(self.locator.locator("div.modal-add-club"))
+        return AddClubPopUp(self.locator.page.locator("div.modal-add-club"))
 
-    def open_add_center_form(self):  # TODO
+    @property
+    def open_add_center_form(self) -> AddCenterPopUp:
         self.add_center.click()
-        # self.locator.locator("div.addCenter")
-        pass
+        return AddCenterPopUp(self.locator.page.locator("div.addCenter"))
 
     @property
     def open_search_certificate_page(self) -> SearchCertificatePage:
