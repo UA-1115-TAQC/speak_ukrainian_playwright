@@ -1,3 +1,6 @@
+import asyncio
+
+import playwright
 from playwright._impl._locator import Locator
 from playwright._impl._page import Page
 from playwright.sync_api import expect
@@ -17,6 +20,12 @@ class BaseComponent:
         expect(element).to_be_visible()
         return element
 
+    async def wait_for_selector(self, selector, timeout=30):
+        for _ in range(timeout):
+            if await self.locator.is_selector_present(selector):
+                return True
+            await asyncio.sleep(1)
+        return False
 
 class BasePopUp(BaseComponent):
     def __init__(self, locator: Locator) -> None:
