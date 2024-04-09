@@ -2,6 +2,7 @@ from playwright._impl._locator import Locator
 from playwright._impl._page import Page
 
 from speak_ukrainian.src.base import BasePage
+from speak_ukrainian.src.components.add_comment_popup.add_comment_popup_component import AddCommentPopUpComponent
 from speak_ukrainian.src.components.sign_up_to_club_popup.sign_up_to_club import SignUpToClub
 from speak_ukrainian.src.components.write_to_manager_popup.write_to_manager_component import WriteToManagerPopUp
 
@@ -33,3 +34,13 @@ class ClubPage(BasePage):
     def click_write_to_manager_button(self) -> WriteToManagerPopUp:
         self.write_to_manager_button.click()
         return WriteToManagerPopUp(self.page.locator("div.ant-modal-content"))
+
+    @property
+    def leave_comment_button(self) -> Locator:
+        if self.leave_comment is None:
+            self.leave_comment = (self.page.get_by_role("button", name="Залишити коментар"))
+            return self.leave_comment
+
+    def click_leave_comment_button(self) -> AddCommentPopUpComponent:
+        self.leave_comment_button.click()
+        return AddCommentPopUpComponent(self.page.locator("div.ant-modal-content"))
