@@ -1,6 +1,6 @@
 from playwright.sync_api import Locator
 
-from speak_ukrainian.src.components.elements.input import Input
+from speak_ukrainian.src.elements.input import Input
 
 
 class InputWithIconElement(Input):

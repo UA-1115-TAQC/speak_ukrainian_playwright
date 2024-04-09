@@ -2,8 +2,8 @@ from typing import Self
 
 from playwright.sync_api import Locator
 
-from speak_ukrainian.src.base import BaseComponent
-from speak_ukrainian.src.components.elements.input_with_icon_element import InputWithIconElement
+from speak_ukrainian.src.base import BaseComponent, BasePage
+from speak_ukrainian.src.elements.input_with_icon_element import InputWithIconElement
 
 
 class LoginPopUpComponent(BaseComponent):
@@ -70,17 +70,17 @@ class LoginPopUpComponent(BaseComponent):
 
     @property
     def sing_in_button(self) -> Locator:
-        # sign_in_button = self.locator.get_by_role("button", name="Увійти")
         if self._sing_in_button is None:
             self._sing_in_button = self.locator.locator("button[class*=login-button]")
         return self._sing_in_button
 
-    def click_sign_in_button(self) -> None:
+    @property
+    def click_sign_in_button(self) -> BasePage:
         self.sing_in_button.click()
+        return BasePage(self.locator.page)
 
     @property
     def restore_password_button(self) -> Locator:
-        # restore_password_button = self.locator.get_by_role("link", name="Забули пароль?")
         if self._restore_password_button is None:
             self._restore_password_button = self.locator.locator("a.restore-password-button")
         return self._restore_password_button

@@ -17,10 +17,14 @@ class AdvancedSearchClubsHeaderComponent(AdvancedSearchHeaderComponent):
 
     def __init__(self, locator):
         super().__init__(locator)
+        self._show_on_map_button = None
+
 
     @property
     def show_on_map_button(self):
-        return self.locator.get_by_text("Показати на мапі")
+        if not self._show_on_map_button:
+            self._show_on_map_button = self.locator.get_by_text("Показати на мапі")
+        return self._show_on_map_button
 
     def click_show_on_map_button(self):
         self.show_on_map_button.click()
