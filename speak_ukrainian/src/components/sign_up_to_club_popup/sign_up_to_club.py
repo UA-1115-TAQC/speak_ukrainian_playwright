@@ -1,9 +1,9 @@
 from playwright._impl._locator import Locator
 
-from speak_ukrainian.src.base import BaseComponent
+from speak_ukrainian.src.base import BasePopUp
 
 
-class SignUpToClub(BaseComponent):
+class SignUpToClub(BasePopUp):
     def __init__(self, locator: Locator):
         super().__init__(locator)
         self.add_child_button = None
@@ -12,6 +12,6 @@ class SignUpToClub(BaseComponent):
 
     @property
     def add_child_button(self) -> Locator:
-        if not self.add_child_button:
-            self.add_child_button = (self.locator.get_by_role("button", name="plus Додати дитину"))
+        if self.add_child_button is None:
+            self.add_child_button = self.locator.get_by_role("button", name="plus Додати дитину")
             return self.add_child_button
