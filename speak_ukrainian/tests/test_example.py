@@ -11,7 +11,7 @@ LOGGER = logging.getLogger(__name__)
 def page():
     with sync_playwright() as pw:
         browser = pw.chromium.launch(headless=False)
-        context = browser.new_context()
+        context = browser.new_context(ignore_https_errors=True)
         page = context.new_page()
         page.goto("http://speak-ukrainian.eastus2.cloudapp.azure.com/dev")
         yield page
