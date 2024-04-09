@@ -16,7 +16,7 @@ class PopUpStep(BaseComponent):
 
     @property
     def step_icon(self) -> Locator:
-        return self.locator.locator("span.ant-steps-item-icon")
+        return self.locator.locator("div.ant-steps-item-icon")
 
     @property
     def step_success_icon(self) -> Locator:
