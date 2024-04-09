@@ -12,8 +12,6 @@ class ClubCardComponent(BaseComponent):
     ADDRESS_XPATH = "//div[contains(@class,'address')]"
     DETAILS_BUTTONS_XPATH = "//*[contains(@class,'details-button')]"
     CLUB_INFO_POPUP_ROOT_XPATH = "//div[contains(@class,'clubInfo')]"
-    # for wait in click_title
-    # POPUP_XPATH = "//div[@class='ant-modal-root css-1kvr9ql']"
 
     def __init__(self, locator):
         super().__init__(locator)
@@ -88,7 +86,7 @@ class ClubCardComponent(BaseComponent):
 
     def click_title(self):
         self.name.click()
-        return ClubInfoPopup(self.locator.locator(self.CLUB_INFO_POPUP_ROOT_XPATH))
+        return ClubInfoPopup(self.locator.page.locator(self.CLUB_INFO_POPUP_ROOT_XPATH))
 
     def click_address(self):
         self.address.click()
@@ -121,24 +119,27 @@ class ClubCardWithEditComponent(ClubCardComponent):
 
     @property
     def participants_club_menu_item(self):
-        return self.locator.locator(self.MENU_ITEM_XPATH).nth(0)
+        return self.locator.page.locator(self.MENU_ITEM_XPATH).nth(0)
 
     @property
     def edit_club_menu_item(self):
-        return self.locator.locator(self.MENU_ITEM_XPATH).nth(1)
+        return self.locator.page.locator(self.MENU_ITEM_XPATH).nth(1)
 
     @property
     def delete_club_menu_item(self):
-        return self.locator.locator(self.MENU_ITEM_XPATH).nth(2)
+        return self.locator.page.locator(self.MENU_ITEM_XPATH).nth(2)
 
     def click_more_button(self):
         self.more_button.click()
 
     def click_participants_club(self):
+        self.more_button.click()
         self.participants_club_menu_item.click()
 
     def click_edit_club(self):
+        self.more_button.click()
         self.edit_club_menu_item.click()
 
     def click_delete_club(self):
+        self.more_button.click()
         self.delete_club_menu_item.click()

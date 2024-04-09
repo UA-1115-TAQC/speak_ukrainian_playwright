@@ -24,5 +24,5 @@ class ContactElement(BaseElement):
 
     def click_contact(self):
         href = self.name.get_by_role("link")
-        if href:
+        if href.is_visible():
             href.click()

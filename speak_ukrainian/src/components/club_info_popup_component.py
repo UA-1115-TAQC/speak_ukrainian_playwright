@@ -117,9 +117,3 @@ class ClubInfoPopup(BasePopUp):
 
     def click_details_button(self):
         self.details_button.click()
-
-    def click_feedback(self):
-        self.feedback.click()
-
-    def click_download_button(self):
-        self.download_button.click()

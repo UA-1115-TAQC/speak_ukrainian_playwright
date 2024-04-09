@@ -12,8 +12,8 @@ class ClubsPage (BasePage):
     PAGINATION_XPATH = "//ul[contains(@class,'ant-pagination') and contains(@class,'pagination')]"
     LIST_CONTROL_XPATH = "//div[contains(@class, 'club-list-control')]"
     SEARCH_SIDER_XPATH = "//div[contains(@class, 'ant-layout-sider-children')]"
-    CLUB_CARDS_XPATH = "//div[contains(@class,'content-clubs-list')]/child::div"
-    CENTER_CARDS_XPATH = "//div[contains(@class,'content-center-list')]/child::div"
+    CLUB_CARDS_XPATH = "//div[contains(@class,'content-clubs-list')]/div"
+    CENTER_CARDS_XPATH = "//div[contains(@class,'content-center-list')]/div"
 
     def __init__(self, page):
         super().__init__(page)
@@ -47,19 +47,16 @@ class ClubsPage (BasePage):
         else:
             return self.get_club_card_list()
 
-    def get_center_card_list(self):
-        card_list = self.page.locator(self.CLUB_CARDS_XPATH).all()
-        return [ClubCardComponent(club) for club in card_list]
-
     def get_club_card_list(self):
-        center_list = self.page.locator(self.CENTER_CARDS_XPATH).all()
-        return [CenterCardComponent(center) for center in center_list]
+        card_list = self.page.locator(self.CLUB_CARDS_XPATH).all()
+        return [ClubCardComponent(center) for center in card_list]
+
+    def get_center_card_list(self):
+        card_list = self.page.locator(self.CENTER_CARDS_XPATH).all()
+        return [CenterCardComponent(club) for club in card_list]
 
     def is_element_present(self, xpath_name):
         return self.page.locator(xpath_name).is_visible()
 
     def is_card_list_empty(self):
         return len(self.card_list) == 0
-
-
-# TODO test cardWithEdit,
