@@ -3,7 +3,7 @@ from typing import Self
 from playwright._impl._locator import Locator
 
 from speak_ukrainian.src.components.add_location_popup.add_location_popup_component import AddLocationPopUp
-from speak_ukrainian.src.components.elements.base_element import BaseElement
+from speak_ukrainian.src.elements.base_element import BaseElement
 
 
 class LocationsListElement(BaseElement):
