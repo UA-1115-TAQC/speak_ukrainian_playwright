@@ -45,7 +45,7 @@ class AddClubStepTwo(BaseComponent):
     def click_add_location_button(self) -> AddLocationPopUp:
         self.add_location_button.click()
         filter_locator = self.locator.page.locator("div.add-club-header", hasText="Додати локацію")
-        return AddLocationPopUp(self.locator.page.locator("div.add-modal-club").filter(has=filter_locator))
+        return AddLocationPopUp(self.locator.page.locator("div.modal-add-club").filter(has=filter_locator))
 
     @property
     def get_list_of_location_elements(self) -> list[LocationsListElement]:
@@ -78,9 +78,9 @@ class AddClubStepTwo(BaseComponent):
             self._info_hint_icon = self.locator.get_by_label("info-circle", exact=True)
         return self._info_hint_icon
 
-    def click_info_hint_icon(self) -> Locator:
+    def click_info_hint_icon(self) -> Self:
         self.info_hint_icon.click()
-        return self.info_hint_container
+        return self
 
     @property
     def info_hint_container(self) -> Locator:
@@ -89,7 +89,7 @@ class AddClubStepTwo(BaseComponent):
     @property
     def work_hours_title(self) -> Locator:
         if self._work_hours_title is None:
-            self._work_hours_title = self.locator.get_by_text("Години роботи онлайн", exact=True)
+            self._work_hours_title = self.locator.get_by_text("Години роботи", exact=True)
         return self._work_hours_title
 
     @property

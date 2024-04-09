@@ -52,7 +52,7 @@ class AddClubStepOne(BaseComponent):
     def click_on_category_by_name(self, value: str) -> Self:
         for category in self.categories_checkbox_list:
             if category.input_value() == value:
-                category.check()
+                category.click()
         return self
 
     def get_category_texts_list(self) -> list[str]:
@@ -91,7 +91,7 @@ class AddClubStepOne(BaseComponent):
 
     @property
     def center_dropdown_element(self) -> Dropdown:
-        return Dropdown(self.locator.locator("div.add-club-select"))
+        return Dropdown(self.locator.locator("div.add-club-select"), "basic_centerId_list")
 
     @property
     def next_step_button(self) -> Locator:
