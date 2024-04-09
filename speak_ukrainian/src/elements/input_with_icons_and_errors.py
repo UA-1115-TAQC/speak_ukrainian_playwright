@@ -54,7 +54,7 @@ class InputInfoValidationIconsAndErrors(InputValidationIconAndErrors):
         return self.info_icon_tooltip.text_content()
 
 
-class InputWithLabelValidationIconAndErrors(InputWithValidationIconAndErrors):
+class InputWithLabelValidationIconAndErrors(InputValidationIconAndErrors):
     def __init__(self, locator: Locator):
         super().__init__(locator)
 
@@ -63,7 +63,7 @@ class InputWithLabelValidationIconAndErrors(InputWithValidationIconAndErrors):
         return self.locator.locator("div.ant-form-item-label > label")
 
 
-class InputPasswordVisibilityIcon(InputWithValidationIconAndErrors):
+class InputPasswordVisibilityIcon(InputValidationIconAndErrors):
     def __init__(self, locator: Locator):
         super().__init__(locator)
 

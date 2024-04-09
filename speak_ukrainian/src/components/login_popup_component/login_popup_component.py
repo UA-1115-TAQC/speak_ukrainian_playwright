@@ -99,10 +99,12 @@ class LoginPopUpComponent(BaseComponent):
         return InputWithIconElement(self.locator.locator("div.login-input").nth(1))
 
     def enter_email(self, email: str) -> Self:
-        return self.email_input_element.set_input_value(email)
+        self.email_input_element.set_input_value(email)
+        return self
 
     def enter_password(self, password: str) -> Self:
-        return self.password_input_element.set_input_value(password)
+        self.password_input_element.set_input_value(password)
+        return self
 
 
 class RestorationPasswordPopup(BaseComponent):
