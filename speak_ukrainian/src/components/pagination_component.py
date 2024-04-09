@@ -1,24 +1,29 @@
 from speak_ukrainian.src.base import BaseComponent
 
-ITEMS_XPATH = "//li[contains(@class, 'ant-pagination-item') or contains(@class, 'ant-pagination-jump-')]"
-
 
 class PaginationComponent(BaseComponent):
+    ITEMS_XPATH = "//li[contains(@class, 'ant-pagination-item') or contains(@class, 'ant-pagination-jump-')]"
 
     def __init__(self, locator):
         super().__init__(locator)
+        self._previous = None
+        self._next = None
 
     @property
     def previous(self):
-        return self.locator.get_by_title("Previous Page")
+        if not self._previous:
+            self._previous = self.locator.get_by_title("Previous Page")
+        return self._previous
 
     @property
     def next(self):
-        return self.locator.get_by_title("Next Page")
+        if not self._next:
+            self._next = self.locator.get_by_title("Next Page")
+        return self._next
 
     @property
     def items(self):
-        return self.locator.locator(ITEMS_XPATH).all()
+        return self.locator.locator(self.ITEMS_XPATH).all()
 
     def click_previous(self):
         self.previous.click()
