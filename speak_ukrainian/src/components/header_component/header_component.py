@@ -1,10 +1,6 @@
 from playwright._impl._locator import Locator
 
 from speak_ukrainian.src.base import BaseComponent
-from speak_ukrainian.src.components.login_popup_component.login_popup_component import LoginPopUpComponent
-from speak_ukrainian.src.components.registration_popup_component.registration_popup_component import \
-    RegistrationPopUpComponent
-from speak_ukrainian.src.pages.all_news_page import AllNewsPage
 from speak_ukrainian.src.components.header_component.menu.admin_menu import AdminMenu
 from speak_ukrainian.src.components.header_component.menu.guest_menu import GuestMenu
 from speak_ukrainian.src.components.header_component.menu.user_menu import UserMenu
@@ -28,36 +24,31 @@ class HeaderComponent(BaseComponent):
     @property
     def get_news_container_locator(self) -> Locator:
         if not self._news_container:
-            self._news_container = (self.locator
-                                    .locator("li", has_text="Новини"))
+            self._news_container = (self.locator.locator("li", has_text="Новини"))
         return self._news_container
 
     @property
     def get_club_container(self) -> Locator:
         if not self._club_container:
-            self._club_container = (self.locator
-                                    .locator("li", has_text="Гуртки"))
+            self._club_container = (self.locator.locator("li", has_text="Гуртки"))
         return self._club_container
 
     @property
     def get_challenge_container(self) -> Locator:
         if not self._challenge_container:
-            self._challenge_container = (self.locator
-                                         .locator("li", has_text="Челендж"))
+            self._challenge_container = (self.locator.locator("li", has_text="Челендж"))
         return self._challenge_container
 
     @property
     def get_about_us_container(self) -> Locator:
         if not self._about_us_container:
-            self._about_us_container = (self.locator
-                                        .locator("li", has_text="Про нас"))
+            self._about_us_container = (self.locator.locator("li", has_text="Про нас"))
         return self._about_us_container
 
     @property
     def get_service_container(self) -> Locator:
         if not self._service_container:
-            self._service_container = (self.locator
-                                       .locator("li", has_text="Послуги"))
+            self._service_container = (self.locator.locator("li", has_text="Послуги"))
         return self._service_container
 
     @property
@@ -75,36 +66,31 @@ class HeaderComponent(BaseComponent):
     @property
     def get_add_club_button(self) -> Locator:
         if not self._add_club_button:
-            self._add_club_button = (self.locator
-                                     .get_by_role("button", name="Додати гурток"))
+            self._add_club_button = (self.locator.get_by_role("button", name="Додати гурток"))
         return self._add_club_button
 
     @property
     def get_location_icon(self) -> Locator:
         if not self._location_icon:
-            self._location_icon = (self.locator
-                                   .locator("span[aria-label='environment']"))
+            self._location_icon = (self.locator.locator("span[aria-label='environment']"))
         return self._location_icon
 
     @property
     def get_location_button(self) -> Locator:
         if not self._location_button:
-            self._location_button = (self.locator
-                                     .locator("div.city"))
+            self._location_button = (self.locator.locator("div.city"))
         return self._location_button
 
     @property
     def get_avatar(self) -> Locator:
         if not self._avatar:
-            self._avatar = (self.locator
-                            .locator("span.ant-avatar"))
+            self._avatar = (self.locator.locator("span.ant-avatar"))
         return self._avatar
 
     @property
     def get_profile_menu_button(self) -> Locator:
         if not self._profile_menu_button:
-            self._profile_menu_button = (self.locator
-                                         .locator("div.user-profile"))
+            self._profile_menu_button = (self.locator.locator("div.user-profile"))
         return self._profile_menu_button
 
     def click_challenge_button(self):
@@ -135,8 +121,7 @@ class HeaderComponent(BaseComponent):
 
     def get_city_locators_list(self) -> Locator:
         self.get_location_button.click()
-        return (self.locator.page.locator("div[class*=placement-bottom]")
-                .locator("li"))
+        return (self.locator.page.locator("div[class*=placement-bottom]").locator("li"))
 
     @property
     def open_guest_menu(self) -> GuestMenu:
