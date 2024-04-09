@@ -1,9 +1,7 @@
-from typing import Self
-
 from playwright.sync_api import Locator
 
 from speak_ukrainian.src.base import BaseComponent
-from speak_ukrainian.src.components.elements.input_with_icon_element import InputWithIconElement
+from speak_ukrainian.src.elements.input_with_icon_element import InputWithIconElement
 
 
 class RegistrationPopUpComponent(BaseComponent):

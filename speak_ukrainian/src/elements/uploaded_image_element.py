@@ -2,7 +2,7 @@ from typing import Self
 
 from playwright._impl._locator import Locator
 
-from speak_ukrainian.src.components.elements.base_element import BaseElement
+from speak_ukrainian.src.elements.base_element import BaseElement
 
 
 class UploadedImageElement(BaseElement):
