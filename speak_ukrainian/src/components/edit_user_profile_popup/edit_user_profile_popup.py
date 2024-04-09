@@ -3,8 +3,8 @@ from typing import Self
 from playwright._impl._locator import Locator
 
 from speak_ukrainian.src.base import BasePopUp
-from speak_ukrainian.src.elements.input_with_icons_and_errors import InputWithLabelValidationIconAndErrors, \
-    InputPasswordVisibilityIcon
+from speak_ukrainian.src.elements.input_with_icons_and_errors import (InputWithLabelValidationIconAndErrors,
+                                                                      InputPasswordVisibilityIcon)
 
 
 class EditUserProfilePopup(BasePopUp):
@@ -123,4 +123,3 @@ class EditUserProfilePopup(BasePopUp):
 
     def click_on_submit_button(self) -> Self:
         return self.submit_button.click()
-
