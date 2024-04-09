@@ -1,9 +1,6 @@
-import asyncio
-
-import playwright
-
 from playwright.sync_api import expect, Page, Locator
 
+from speak_ukrainian.src.components.footer_component import FooterComponent
 from speak_ukrainian.src.components.header_component.advanced_search_header import AdvancedSearchHeaderComponent
 from speak_ukrainian.src.components.header_component.header_component import HeaderComponent
 
@@ -66,11 +63,10 @@ class BaseComponent:
         expect(element).to_be_visible()
         return element
 
-    async def wait_for_selector(self, selector, timeout=30):
+    def wait_for_selector(self, selector, timeout=30):
         for _ in range(timeout):
-            if await self.locator.is_selector_present(selector):
+            if self.locator.is_selector_present(selector):
                 return True
-            await asyncio.sleep(1)
         return False
 
 

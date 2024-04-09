@@ -1,6 +1,4 @@
-import asyncio
-
-from playwright.sync_api import Page
+from playwright.sync_api import Page, expect
 
 from speak_ukrainian.src.base import BasePageWithAdvancedSearch
 from speak_ukrainian.src.pages.payment.payment_page import Payment
@@ -56,19 +54,17 @@ class BaseChallengePage(BasePageWithAdvancedSearch):
         raise ValueError("The index must be between 0 and "
                          + str(len(self.contacts_social_media_icons) - 1) + ", inclusive.")
 
-    async def click_social_media_icon_by_index(self, index):
-        previous_tab_amount = self.get_tab_handles()
+    def click_social_media_icon_by_index(self, index):
+        previous_tab_amount = len(self.get_tab_handles())
         self.get_social_media_icon_by_index(index).click()
-        while len(self.get_tab_handles()) == previous_tab_amount:
-            await asyncio.sleep(0.5)  # Waiting for the new tab to open
+        expect(len(self.get_tab_handles()) > previous_tab_amount)
         new_tab_index = len(self.get_tab_handles()) - 1
         self.get_tab_handles()[new_tab_index].bring_to_front()
 
-    async def click_help_project_button(self):
-        previous_tab_amount = self.get_tab_handles()
+    def click_help_project_button(self):
+        previous_tab_amount = len(self.get_tab_handles())
         self.help_project_button.click()
-        while len(self.get_tab_handles()) == previous_tab_amount:
-            await asyncio.sleep(0.5)  # Waiting for the new tab to open
+        expect(len(self.get_tab_handles()) > previous_tab_amount)
         new_tab_index = len(self.get_tab_handles()) - 1
         self.get_tab_handles()[new_tab_index].bring_to_front()
         return Payment(self.page)

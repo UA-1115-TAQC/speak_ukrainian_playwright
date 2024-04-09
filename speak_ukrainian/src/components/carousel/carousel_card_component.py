@@ -21,9 +21,9 @@ class CarouselCardComponent(BasicCarouselComponent):
         return self.locator.locator(CAROUSEL_CARD_ALL_CLUBS_BUTTON_XPATH)
 
     @property
-    async def carousel_cards(self) -> list[ClubDirectionCard]:
+    def carousel_cards(self) -> list[ClubDirectionCard]:
         if not self._carousel_cards:
-            cards = await self.slider_container.locator.locator(CAROUSEL_CARD_XPATH).all()
+            cards = self.slider_container.locator.locator(CAROUSEL_CARD_XPATH).all()
             self._carousel_cards = [ClubDirectionCard(card) for card in cards]
         return self._carousel_cards
 
@@ -31,31 +31,31 @@ class CarouselCardComponent(BasicCarouselComponent):
     def click_carousel_card_all_clubs_button(self):
         self.carousel_card_all_clubs_button.click()
 
-    async def get_club_direction_card_by_index(self, index):
-        if 0 <= index <= (len(await self.carousel_cards) - 1):
-            return (await self.carousel_cards)[index]
+    def get_club_direction_card_by_index(self, index):
+        if 0 <= index <= (len(self.carousel_cards) - 1):
+            return (self.carousel_cards)[index]
         raise ValueError(
-            f"The index must be in the range between 0 and {len(await self.carousel_cards) - 1}, inclusive")
+            f"The index must be in the range between 0 and {len(self.carousel_cards) - 1}, inclusive")
 
-    async def check_that_the_club_direction_card_obtained_by_index_is_active(self, index) -> bool:
-        return (await self.get_club_direction_card_by_index(index)).club_card_heading.is_displayed()
+    def check_that_the_club_direction_card_obtained_by_index_is_active(self, index) -> bool:
+        return (self.get_club_direction_card_by_index(index)).club_card_heading.is_displayed()
 
-    async def get_active_carousel_cards(self) :
+    def get_active_carousel_cards(self) :
         if not self._active_carousel_cards:
-            self._active_carousel_cards = await self.__filter_displayed_cards__(await self.carousel_cards)
+            self._active_carousel_cards = self.__filter_displayed_cards__(self.carousel_cards)
         old_cards = self._active_carousel_cards
         try:
-            await self.locator.wait_for(not old_cards[-1].is_displayed())
-            self._active_carousel_cards = await self.__filter_displayed_cards__(await self.carousel_cards)
+            self.locator.wait_for(not old_cards[-1].is_displayed())
+            self._active_carousel_cards = self.__filter_displayed_cards__(self.carousel_cards)
         except Exception:
             print("You are already at the beginning/end of the cards list")
         return self._active_carousel_cards
 
-    async def __filter_displayed_cards__(self, cards) :
-        return [card for card in cards if await card.club_card_heading.is_displayed()]
+    def __filter_displayed_cards__(self, cards):
+        return [card for card in cards if card.club_card_heading.is_displayed()]
 
-    async def get_active_carousel_card_by_index(self, index) :
-        active_cards = await self.get_active_carousel_cards()
+    def get_active_carousel_card_by_index(self, index) :
+        active_cards = self.get_active_carousel_cards()
         if 0 <= index <= (len(active_cards) - 1):
             return active_cards[index]
         raise ValueError(f"The index must be in the range between 0 and {len(active_cards) - 1}, inclusive")

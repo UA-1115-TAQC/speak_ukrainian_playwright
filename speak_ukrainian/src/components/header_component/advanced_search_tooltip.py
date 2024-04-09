@@ -13,39 +13,39 @@ class AdvancedSearchToolTip(BaseComponent):
         self._clubs = None
 
     @property
-    async def categories(self) -> dict:
+    def categories(self) -> dict:
         if not self._categories:
             self._categories = {}
-            category_elements = await self.locator.locator(CATEGORY_XPATH).all()
+            category_elements = self.locator.locator(CATEGORY_XPATH).all()
             for category_element in category_elements:
-                title = await category_element.get_attribute("title")
+                title = category_element.get_attribute("title")
                 self._categories[title] = category_element
         return self._categories
 
     @property
-    async def clubs(self) -> dict:
+    def clubs(self) -> dict:
         if not self._clubs:
             self._clubs = {}
-            club_elements = await self.locator.locator(CLUB_XPATH).all()
+            club_elements = self.locator.locator(CLUB_XPATH).all()
             for club_element in club_elements:
-                title = await club_element.get_attribute("title")
+                title = club_element.get_attribute("title")
                 self._clubs[title] = club_element
         return self._clubs
 
-    async def get_club_by_title(self, title: str):
-        clubs = await self.clubs
+    def get_club_by_title(self, title: str):
+        clubs = self.clubs
         return clubs.get(title)
 
-    async def get_category_by_title(self, title: str):
-        categories = await self.categories
+    def get_category_by_title(self, title: str):
+        categories = self.categories
         return categories.get(title)
 
-    async def click_club_by_title(self, title: str):
-        club_element = await self.get_club_by_title(title)
+    def click_club_by_title(self, title: str):
+        club_element = self.get_club_by_title(title)
         if club_element:
-            await club_element.click()
+            club_element.click()
 
-    async def click_category_by_title(self, title: str):
-        category_element = await self.get_category_by_title(title)
+    def click_category_by_title(self, title: str):
+        category_element = self.get_category_by_title(title)
         if category_element:
-            await category_element.click()
+            category_element.click()

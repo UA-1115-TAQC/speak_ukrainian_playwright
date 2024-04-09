@@ -38,31 +38,31 @@ class BasicCarouselComponent(BaseComponent):
     def click_right_arrow_button(self):
         self.right_arrow_button.click()
 
-    async def click_slick_dot_by_index(self, index):
-        slick_dot = await self.get_slick_dot_by_index(index)
+    def click_slick_dot_by_index(self, index):
+        slick_dot = self.get_slick_dot_by_index(index)
         slick_dot.click()
         try:
-            await self.wait_for_selector(
+            self.wait_for_selector(
                 f"(//ul[contains(@class,'slick-dots')]/li)[{index + 1}][@style='background-color: rgb(250, 140, 22)']"
             )
         except Exception as e:
             print(f"Error occurred: {e}")
 
-    async def get_slick_dot_by_index(self, index) -> ElementHandle:
-        if 0 <= index < len(await self.slick_dots):
+    def get_slick_dot_by_index(self, index) -> ElementHandle:
+        if 0 <= index < len(self.slick_dots):
             return self.slick_dots[index]
-        raise ValueError("The index must be in the range between 0 and " + str((len(await self.slick_dots) - 1))
+        raise ValueError("The index must be in the range between 0 and " + str((len(self.slick_dots) - 1))
                          + ", inclusive")
 
-    async def get_active_slick_dot(self):
-        for dot in await self.slick_dots:
+    def get_active_slick_dot(self):
+        for dot in self.slick_dots:
             if "slick-active" in dot.get_attribute("class"):
                 return dot
 
-    async def click_active_slick_dot(self):
-        active_dot = await self.get_active_slick_dot()
+    def click_active_slick_dot(self):
+        active_dot = self.get_active_slick_dot()
         if active_dot:
-            await active_dot.click()
+            active_dot.click()
         return self
 
     def get_slick_dot_color(self, slick_dot: ElementHandle) -> str:
