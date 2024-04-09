@@ -1,5 +1,8 @@
 from playwright._impl._locator import Locator
 from speak_ukrainian.src.base import BaseComponent
+from speak_ukrainian.src.components.login_popup_component.login_popup_component import LoginPopUpComponent
+from speak_ukrainian.src.components.registration_popup_component.registration_popup_component import \
+    RegistrationPopUpComponent
 from ...pages.all_news_page import AllNewsPage
 
 
@@ -52,6 +55,20 @@ class HeaderComponent(BaseComponent):
                                        .locator("li", has_text="Послуги"))
         return self._service_container
 
+    @property
+    def profile_menu_button(self) -> Locator:
+        return self.locator.locator("div.ant-dropdown-trigger.user-profile")
+
+    @property
+    def register_menu_button(self) -> Locator:
+        return self.locator.locator("li", has_text="Зареєструватися")
+
+    @property
+    def login_menu_button(self) -> Locator:
+        return self.locator.locator("li", has_text="Увійти")
+
+    #  Як повернути news page, якщо в компоненті немає Page
+    def click_news_button(self):
     @property
     def get_add_club_button(self) -> Locator:
         if not self._add_club_button:
@@ -117,3 +134,13 @@ class HeaderComponent(BaseComponent):
         self.get_location_button.click()
         return (self.locator.page.locator("div[class*=placement-bottom]")
                 .locator("li"))
+
+    def click_register_button(self) -> RegistrationPopUpComponent:
+        self.profile_menu_button.click()
+        self.register_menu_button.click()
+        return RegistrationPopUpComponent(self.locator.locator('div.ant-modal-content'))
+
+    def click_login_button(self) -> LoginPopUpComponent:
+        self.profile_menu_button.click()
+        self.login_menu_button.click()
+        return LoginPopUpComponent(self.locator.locator('div.ant-modal-content'))
