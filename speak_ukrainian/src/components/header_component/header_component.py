@@ -1,6 +1,10 @@
 from playwright._impl._locator import Locator
 
 from speak_ukrainian.src.base import BaseComponent
+from speak_ukrainian.src.components.login_popup_component.login_popup_component import LoginPopUpComponent
+from speak_ukrainian.src.components.registration_popup_component.registration_popup_component import \
+    RegistrationPopUpComponent
+from speak_ukrainian.src.pages.all_news_page import AllNewsPage
 from speak_ukrainian.src.components.header_component.menu.admin_menu import AdminMenu
 from speak_ukrainian.src.components.header_component.menu.guest_menu import GuestMenu
 from speak_ukrainian.src.components.header_component.menu.user_menu import UserMenu
@@ -55,6 +59,18 @@ class HeaderComponent(BaseComponent):
             self._service_container = (self.locator
                                        .locator("li", has_text="Послуги"))
         return self._service_container
+
+    @property
+    def profile_menu_button(self) -> Locator:
+        return self.locator.locator("div.ant-dropdown-trigger.user-profile")
+
+    @property
+    def register_menu_button(self) -> Locator:
+        return self.locator.locator("li", has_text="Зареєструватися")
+
+    @property
+    def login_menu_button(self) -> Locator:
+        return self.locator.locator("li", has_text="Увійти")
 
     @property
     def get_add_club_button(self) -> Locator:
