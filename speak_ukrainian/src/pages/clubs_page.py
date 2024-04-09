@@ -29,19 +29,16 @@ class ClubsPage (BasePage):
     def pagination(self):
         if self.is_element_present(self.PAGINATION_XPATH):
             return PaginationComponent(self.page.locator(self.PAGINATION_XPATH))
-        return None
 
     @property
     def list_control(self):
         if self.is_element_present(self.LIST_CONTROL_XPATH):
             return ListControlComponent(self.page.locator(self.LIST_CONTROL_XPATH))
-        return None
 
     @property
     def search_sider(self):
         if self.is_element_present(self.SEARCH_SIDER_XPATH):
             return SearchSiderComponent(self.page.locator(self.SEARCH_SIDER_XPATH))
-        return None
 
     @property
     def card_list(self):
