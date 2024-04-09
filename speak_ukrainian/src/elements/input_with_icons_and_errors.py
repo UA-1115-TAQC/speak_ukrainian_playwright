@@ -6,7 +6,7 @@ from playwright.sync_api import expect
 from speak_ukrainian.src.elements.input import Input
 
 
-class InputWithValidationIconAndErrors(Input):
+class InputValidationIconAndErrors(Input):
     def __init__(self, locator: Locator):
         super().__init__(locator)
 
@@ -25,7 +25,7 @@ class InputWithValidationIconAndErrors(Input):
         return [error.text_content() for error in self.error_messages_list]
 
 
-class InputWithValidationStaticIconsAndErrors(InputWithValidationIconAndErrors):
+class InputValidationStaticIconsAndErrors(InputValidationIconAndErrors):
     def __init__(self, locator: Locator):
         super().__init__(locator)
 
@@ -34,7 +34,7 @@ class InputWithValidationStaticIconsAndErrors(InputWithValidationIconAndErrors):
         return self.locator.locator("span.ant-input-suffix div.icon")
 
 
-class InputWithInfoValidationIconsAndErrors(InputWithValidationIconAndErrors):
+class InputInfoValidationIconsAndErrors(InputValidationIconAndErrors):
     def __init__(self, locator: Locator):
         super().__init__(locator)
 

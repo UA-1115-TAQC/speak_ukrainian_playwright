@@ -2,8 +2,8 @@ from playwright._impl._locator import Locator
 
 from speak_ukrainian.src.base import BasePopUp
 from speak_ukrainian.src.elements.dropdown import DropdownWithIconError, Dropdown
-from speak_ukrainian.src.elements.input_with_icons_and_errors import InputWithInfoValidationIconsAndErrors, \
-    InputWithValidationIconAndErrors
+from speak_ukrainian.src.elements.input_with_icons_and_errors import InputInfoValidationIconsAndErrors, \
+    InputValidationIconAndErrors
 
 
 class AddLocationPopUp(BasePopUp):
@@ -32,9 +32,9 @@ class AddLocationPopUp(BasePopUp):
         return self._name_title
 
     @property
-    def name_input_element(self) -> InputWithInfoValidationIconsAndErrors:
-        return InputWithInfoValidationIconsAndErrors(self.locator.locator("div.add-club-row")
-                                                                 .filter(has=self.locator.page.locator("#name")))
+    def name_input_element(self) -> InputInfoValidationIconsAndErrors:
+        return InputInfoValidationIconsAndErrors(self.locator.locator("div.add-club-row")
+                                                 .filter(has=self.locator.page.locator("#name")))
 
     @property
     def city_title(self) -> Locator:
@@ -77,9 +77,9 @@ class AddLocationPopUp(BasePopUp):
         return self._address_title
 
     @property
-    def address_input_element(self) -> InputWithValidationIconAndErrors:
-        return InputWithValidationIconAndErrors(self.locator.locator("div.add-club-row")
-                                                            .filter(has=self.locator.page.locator("#address")))
+    def address_input_element(self) -> InputValidationIconAndErrors:
+        return InputValidationIconAndErrors(self.locator.locator("div.add-club-row")
+                                            .filter(has=self.locator.page.locator("#address")))
 
     @property
     def coordinates_title(self) -> Locator:
@@ -88,9 +88,9 @@ class AddLocationPopUp(BasePopUp):
         return self._coordinates_title
 
     @property
-    def coordinates_input_element(self) -> InputWithValidationIconAndErrors:
-        return InputWithValidationIconAndErrors(self.locator.locator("div.add-club-row")
-                                                            .filter(has=self.locator.page.locator("#coordinates")))
+    def coordinates_input_element(self) -> InputValidationIconAndErrors:
+        return InputValidationIconAndErrors(self.locator.locator("div.add-club-row")
+                                            .filter(has=self.locator.page.locator("#coordinates")))
 
     @property
     def telephone_title(self) -> Locator:
@@ -99,9 +99,9 @@ class AddLocationPopUp(BasePopUp):
         return self._telephone_title
 
     @property
-    def telephone_input_element(self) -> InputWithInfoValidationIconsAndErrors:
-        return InputWithInfoValidationIconsAndErrors(self.locator.locator("div.add-club-row")
-                                                                 .filter(has=self.locator.page.locator("#phone")))
+    def telephone_input_element(self) -> InputInfoValidationIconsAndErrors:
+        return InputInfoValidationIconsAndErrors(self.locator.locator("div.add-club-row")
+                                                 .filter(has=self.locator.page.locator("#phone")))
 
     @property
     def add_location_button(self) -> Locator:

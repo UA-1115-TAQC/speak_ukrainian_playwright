@@ -46,8 +46,8 @@ class AddClubStepThree(BaseComponent):
     @property
     def logo_uploaded_container(self) -> Locator:
         return (self.locator.locator("div.ant-form-item-control-input-content")
-                            .filter(has=self.logo_download_input)
-                            .locator("div.ant-upload-list-item-container"))
+                .filter(has=self.logo_download_input)
+                .locator("div.ant-upload-list-item-container"))
 
     @property
     def logo_uploaded_img_element(self) -> UploadedImageElement:
@@ -83,8 +83,8 @@ class AddClubStepThree(BaseComponent):
     @property
     def cover_uploaded_container(self) -> Locator:
         return (self.locator.locator("div.ant-form-item-control-input-content")
-                            .filter(has=self.cover_download_input)
-                            .locator("div.ant-upload-list-item-container"))
+                .filter(has=self.cover_download_input)
+                .locator("div.ant-upload-list-item-container"))
 
     @property
     def cover_uploaded_img_element(self) -> UploadedImageElement:
@@ -108,15 +108,15 @@ class AddClubStepThree(BaseComponent):
     @property
     def gallery_download_input(self) -> Locator:
         return (self.locator.page.locator("div.ant-upload-select")
-                            .filter(has=self.locator.page.get_by_label("plus"))
-                            .locator("input"))
+                .filter(has=self.locator.page.get_by_label("plus"))
+                .locator("input"))
 
     @property
     def list_of_gallery_locators(self) -> list[Locator]:
         return (self.locator.locator("div.ant-form-item-control-input-content")
-                            .filter(has=self.gallery_download_input)
-                            .locator("div.ant-upload-list-item-container")
-                            .all())
+                .filter(has=self.gallery_download_input)
+                .locator("div.ant-upload-list-item-container")
+                .all())
 
     @property
     def list_of_gallery_image_elements(self) -> list[GalleryImageElement]:
@@ -133,8 +133,8 @@ class AddClubStepThree(BaseComponent):
     @property
     def gallery_uploaded_container(self) -> Locator:
         return (self.locator.locator("div.ant-form-item-control-input-content")
-                            .filter(has=self.gallery_download_input)
-                            .locator("div.ant-upload-list-item-container"))
+                .filter(has=self.gallery_download_input)
+                .locator("div.ant-upload-list-item-container"))
 
     def upload_img_to_gallery(self, img_path: str) -> Self:
         img_count = len(self.list_of_gallery_locators)
