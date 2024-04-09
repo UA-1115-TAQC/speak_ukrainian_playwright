@@ -5,9 +5,7 @@ from speak_ukrainian.src.components.elements.location_search_sider_clubs_element
 class SearchSiderComponent(BaseComponent):
     CENTER_OR_CLUB_RADIO_BUTTON_XPATH = "//label[contains(@class,'ant-radio-wrapper')]"
     CHECKED_RADIO_BUTTON_XPATH = "//span[contains(@class,'ant-radio-checked')]/following-sibling::span"
-    SEARCH_CITY_XPATH = "/descendant::div[contains(@class,'ant-select-in-form-item')][1]"
-    SEARCH_DISTRICT_XPATH = "/descendant::div[contains(@class,'ant-select-in-form-item')][2]"
-    SEARCH_METRO_XPATH = "/descendant::div[contains(@class,'ant-select-in-form-item')][3]"
+    SEARCH_LOCATION_XPATH = "//div[contains(@class,'ant-select-in-form-item')]"
     ONLINE_CHECKBOX_FIELD_XPATH = "//div[@id='basic_isOnline']"
     ONLINE_CHECKBOX_INPUT_XPATH = "//div[@id='basic_isOnline']//span[contains(@class, 'ant-wave-target')]"
     DIRECTION_CHECKBOX_FIELD_LIST_XPATH = "//div[@id='basic_categoriesName']//label[contains(@class,'ant-checkbox-wrapper')]"
@@ -27,15 +25,15 @@ class SearchSiderComponent(BaseComponent):
 
     @property
     def search_city_box(self):
-        return LocationSearchSiderElement(self.locator.locator(self.SEARCH_CITY_XPATH))
+        return LocationSearchSiderElement(self.locator.locator(self.SEARCH_LOCATION_XPATH).nth(0))
 
     @property
     def search_district_box(self):
-        return LocationSearchSiderElement(self.locator.locator(self.SEARCH_DISTRICT_XPATH))
+        return LocationSearchSiderElement(self.locator.locator(self.SEARCH_LOCATION_XPATH).nth(1))
 
     @property
     def search_metro_box(self):
-        return LocationSearchSiderElement(self.locator.locator(self.SEARCH_METRO_XPATH))
+        return LocationSearchSiderElement(self.locator.locator(self.SEARCH_LOCATION_XPATH).nth(2))
 
     @property
     def online_checkbox_field(self):
@@ -76,13 +74,7 @@ class SearchSiderComponent(BaseComponent):
                 e.check()
 
     def choose_center_radio_button(self):
-
-        print(len(self.center_or_club_radio_button))
-
         for e in self.center_or_club_radio_button:
-
-            print(e.text_content())
-
             if e.text_content() == "Центр":
                 e.check()
 

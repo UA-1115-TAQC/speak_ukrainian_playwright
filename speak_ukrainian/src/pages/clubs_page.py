@@ -11,7 +11,7 @@ class ClubsPage (BasePage):
     SEARCH_CLUB_HEADER_XPATH = "//div[contains(@class, 'lower-header-box')]"
     PAGINATION_XPATH = "//ul[contains(@class,'ant-pagination') and contains(@class,'pagination')]"
     LIST_CONTROL_XPATH = "//div[contains(@class, 'club-list-control')]"
-    SEARCH_SIDER_XPATH = "//div[contains(@class, 'sider')]"
+    SEARCH_SIDER_XPATH = "//div[contains(@class, 'ant-layout-sider-children')]"
     CLUB_CARDS_XPATH = "//div[contains(@class,'content-clubs-list')]/child::div"
     CENTER_CARDS_XPATH = "//div[contains(@class,'content-center-list')]/child::div"
 
@@ -59,10 +59,9 @@ class ClubsPage (BasePage):
         return [CenterCardComponent(center) for center in center_list]
 
     def is_element_present(self, xpath_name):
-        return self.page.locator(xpath_name)
+        return self.page.locator(xpath_name).is_visible()
 
     def is_card_list_empty(self):
         return len(self.card_list) == 0
 
 
-# TODO test is_element_present here and seaarch_sider

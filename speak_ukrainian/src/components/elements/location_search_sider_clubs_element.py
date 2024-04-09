@@ -26,14 +26,14 @@ class LocationSearchSiderElement(BaseComponent):
         xpath = "//div[@id='" + self.input_box.get_attribute("aria-owns") + "']/following-sibling::div"
         return LocationSearchSiderDropdownElement(self.locator.locator(xpath))
 
+    def get_input_value(self):
+        return self.input_content.inner_text()
+
     def click_clear(self):
-        # TODO check if we need this
-        # ActionChains(self.driver).move_to_element(self.node).perform()
         self.select_clear.click()
         return self
 
     def click_dropdown(self):
-        # click just the box itself
         self.locator.click()
         return self
 
@@ -60,4 +60,3 @@ class LocationSearchSiderDropdownElement(BaseComponent):
 
     def find_item(self, item_name):
         pass
-
