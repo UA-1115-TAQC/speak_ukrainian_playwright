@@ -94,6 +94,25 @@ class CertificateTable(BaseComponent):
     def descending_sorting_icon(self) -> Locator:
         return self.serial_number_filter_list[1]
 
+    @property
+    def member_information_list(self) -> list[Locator]:
+        return self.locator.locator("tbody.ant-table-tbody tr").all()
+
+    def member_and_certification_information_list(self) -> list[dict]:
+        member_rows = self.member_information_list
+        table_header_elements = [self.member_header, self.email_header,
+                                 self.serial_number_header, self.date_of_issue_header,
+                                 self.time_duration_header, self.certificate_status_header]
+        information_report = []
+        for row in member_rows:
+            table_body_elements = row.locator("td").all()
+            data = {
+                header.text_content(): td.text_content()
+                for header, td in zip(table_header_elements, table_body_elements)
+            }
+            information_report.append(data)
+        return information_report
+
 
 class SearchCertificatePage(BasePage):
     def __init__(self, page: Page):
