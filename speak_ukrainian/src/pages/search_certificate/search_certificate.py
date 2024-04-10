@@ -16,36 +16,41 @@ class CertificateTable(BaseComponent):
 
     @property
     def member_header(self) -> Locator:
-        return next((head_title for head_title in self.table_header_list if "Учасник" in head_title.text_content()),
-                    None)
+        return next((head_title for head_title in self.table_header_list
+                     if "Учасник" in head_title.text_content()), None)
 
     @property
     def email_header(self) -> Locator:
-        return next(
-            (head_title for head_title in self.table_header_list if "Електронна пошта" in head_title.text_content()),
-            None)
+        return next((head_title for head_title in self.table_header_list
+                     if "Електронна пошта" in head_title.text_content()), None)
 
     @property
     def serial_number_header(self) -> Locator:
-        return next(
-            (head_title for head_title in self.table_header_list if "Електронна пошта" in head_title.text_content()),
-            None)
+        return next((head_title for head_title in self.table_header_list
+                     if "Електронна пошта" in head_title.text_content()), None)
 
     @property
     def date_of_issue_header(self) -> Locator:
-        return next((head_title for head_title in self.table_header_list if "Дата видачі" in head_title.text_content()),
-                    None)
+        return next((head_title for head_title in self.table_header_list
+                     if "Дата видачі" in head_title.text_content()), None)
 
     @property
     def time_duration_header(self) -> Locator:
-        return next(
-            (head_title for head_title in self.table_header_list if "Тривалість челенджу" in head_title.text_content()),
-            None)
+        return next((head_title for head_title in self.table_header_list
+                     if "Тривалість челенджу" in head_title.text_content()), None)
 
     @property
     def certificate_status_header(self) -> Locator:
-        return next(
-            (head_title for head_title in self.table_header_list if "Статус видачі" in head_title.text_content()), None)
+        return next((head_title for head_title in self.table_header_list
+                     if "Статус видачі" in head_title.text_content()), None)
+
+    @property
+    def certificate_filter(self) -> Locator:
+        return self.certificate_status_header.filter(has=self.locator.get_by_role("button"))
+
+    def filter_dropdown(self):
+        self.certificate_filter.click()
+
 
 
 class SearchCertificatePage(BasePage):
