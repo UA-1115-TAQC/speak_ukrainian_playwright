@@ -1,3 +1,4 @@
+import time
 from typing import Self
 
 from playwright._impl._locator import Locator
@@ -28,7 +29,7 @@ class CertificateTable(BaseComponent):
     @property
     def serial_number_header(self) -> Locator:
         return next((head_title for head_title in self.table_header_list
-                     if "Електронна пошта" in head_title.text_content()), None)
+                     if "Серійний номер" in head_title.text_content()), None)
 
     @property
     def date_of_issue_header(self) -> Locator:
@@ -57,8 +58,41 @@ class CertificateTable(BaseComponent):
         self.filter_dropdown()
         return FilterDropDownMenu(self.locator.page.locator("div.ant-table-filter-dropdown"))
 
+    @property
+    def filter_icon(self) -> Locator:
+        return self.locator.get_by_role("img", name="filter")
 
+    @property
+    def serial_number_filter_list(self) -> list[Locator]:
+        return self.locator.locator("span.ant-table-column-sorter-inner > span").all()
 
+    def click_sort_serial_number_button(self) -> Self:
+        self.serial_number_header.click()
+        return self
+
+    def click_sort_descending_order(self) -> None:
+        while True:
+            if self.serial_number_header.get_attribute("aria-sort") != "descending":
+                self.click_sort_serial_number_button()
+                time.sleep(1)
+            else:
+                break
+
+    def click_sort_ascending_order(self) -> None:
+        while True:
+            if self.serial_number_header.get_attribute("aria-sort") != "ascending":
+                self.click_sort_serial_number_button()
+                time.sleep(1)
+            else:
+                break
+
+    @property
+    def ascending_sorting_icon(self) -> Locator:
+        return self.serial_number_filter_list[0]
+
+    @property
+    def descending_sorting_icon(self) -> Locator:
+        return self.serial_number_filter_list[1]
 
 
 class SearchCertificatePage(BasePage):
@@ -127,4 +161,5 @@ class SearchCertificatePage(BasePage):
         return self
 
     def get_search_input_value(self) -> Self:
-        return self.search_input.get_attribute("value")
+        self.search_input.get_attribute("value")
+        return self
