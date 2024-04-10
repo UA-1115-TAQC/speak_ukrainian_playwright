@@ -2,7 +2,7 @@ from typing import Self
 
 from playwright._impl._locator import Locator
 
-from speak_ukrainian.src.components.add_club_popup.add_club_popup_component import AddClubPopUp, AddClubSider
+from speak_ukrainian.src.components.add_club_popup.add_club_popup_component import AddClubPopUp
 from speak_ukrainian.src.components.add_club_popup.add_club_step_one import AddClubStepOne
 from speak_ukrainian.src.components.add_club_popup.add_club_step_three import AddClubStepThree
 from speak_ukrainian.src.components.add_club_popup.add_club_step_two import AddClubStepTwo

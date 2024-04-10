@@ -5,11 +5,11 @@ from speak_ukrainian.src.components.add_center_popup.add_center_step_four import
 from speak_ukrainian.src.components.add_center_popup.add_center_step_one import AddCenterStepOne
 from speak_ukrainian.src.components.add_center_popup.add_center_step_three import AddCenterStepThree
 from speak_ukrainian.src.components.add_center_popup.add_center_step_two import AddCenterStepTwo
-from speak_ukrainian.src.components.add_club_popup.add_club_popup_component import AddClubSider
+from speak_ukrainian.src.components.add_club_popup.add_club_popup_component import Sider
 from speak_ukrainian.src.elements.popup_step_element import PopUpStep
 
 
-class AddCenterSider(AddClubSider):
+class AddCenterSider(Sider):
     def __init__(self, locator: Locator) -> None:
         super().__init__(locator)
 
