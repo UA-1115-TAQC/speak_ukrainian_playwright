@@ -18,11 +18,11 @@ class InputValidationIconAndErrors(Input):
         return check_circle if check_circle.is_visible() else close_circle
 
     @property
-    def error_messages_list(self) -> list[Locator]:
-        return self.locator.locator("div.ant-form-item-explain-error").all()
+    def error_messages_list(self) -> Locator:
+        return self.locator.locator("div.ant-form-item-explain-error")
 
     def get_error_messages_text_list(self) -> list[str]:
-        return [error.text_content() for error in self.error_messages_list]
+        return [error.text_content() for error in self.error_messages_list.all()]
 
 
 class InputValidationStaticIconsAndErrors(InputValidationIconAndErrors):

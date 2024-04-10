@@ -6,6 +6,7 @@ from playwright._impl._page import Page
 from playwright.sync_api import sync_playwright
 
 from speak_ukrainian.src.components.header_component.header_component import HeaderComponent
+from speak_ukrainian.src.pages.home_page import HomePage
 
 load_dotenv()
 
@@ -21,28 +22,30 @@ def page() -> Page:
 
 
 @pytest.fixture
-def page_with_admin(page) -> Page:
+def page_with_admin(page) -> HomePage:
     base_page = (HeaderComponent(page.get_by_role("banner"))
                  .open_guest_menu.open_login_form
                  .enter_email(os.environ["ADMIN_EMAIL"])
                  .enter_password(os.environ["ADMIN_PASSWORD"])
                  .click_sign_in_button)
-    return base_page
+    return HomePage(base_page.page)
 
 
 @pytest.fixture
-def page_with_manager(page) -> Page:
+def page_with_manager(page) -> HomePage:
     base_page = (HeaderComponent(page.get_by_role("banner"))
                  .open_guest_menu.open_login_form
                  .enter_email(os.environ["MANAGER_EMAIL"])
                  .enter_password(os.environ["MANAGER_PASSWORD"])
                  .click_sign_in_button)
-    return base_page
+    return HomePage(base_page.page)
+
+
 @pytest.fixture
-def page_with_user(page) -> Page:
+def page_with_user(page) -> HomePage:
     base_page = (HeaderComponent(page.get_by_role("banner"))
                  .open_guest_menu.open_login_form
                  .enter_email(os.environ["USER_EMAIL"])
                  .enter_password(os.environ["USER_PASSWORD"])
                  .click_sign_in_button)
-    return base_page
+    return HomePage(base_page.page)
