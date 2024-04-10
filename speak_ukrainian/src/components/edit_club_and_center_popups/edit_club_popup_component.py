@@ -34,6 +34,10 @@ class EditClubStepOne(AddClubStepOne):
     def center_dropdown_element(self) -> Dropdown:
         return Dropdown(self.locator.locator("div.add-club-select"), "edit_category_centerId_list")
 
+    def click_next_step_button(self) -> 'EditClubStepTwo':
+        self.next_step_button.click()
+        return EditClubStepTwo(self.locator)
+
 
 class EditClubStepTwo(AddClubStepTwo):
     def __init__(self, locator: Locator) -> None:
@@ -73,6 +77,14 @@ class EditClubStepTwo(AddClubStepTwo):
         return InputValidationStaticIconsAndErrors(self.locator.locator("div.add-club-contact")
                                                    .filter(has=self.locator.page.locator("#basic_Site")))
 
+    def click_next_step_button(self) -> 'EditClubStepThree':
+        self.next_step_button.click()
+        return EditClubStepThree(self.locator)
+
+    def click_previous_step_button(self) -> EditClubStepOne:
+        self.previous_step_button.click()
+        return EditClubStepOne(self.locator)
+
 
 class EditClubStepThree(AddClubStepThree):
     def __init__(self, locator: Locator) -> None:
@@ -91,6 +103,10 @@ class EditClubStepThree(AddClubStepThree):
     @property
     def error_messages_list(self) -> list[Locator]:
         return self.locator.locator("#basic_descriptionText_help").locator("div.ant-form-item-explain-error").all()
+
+    def click_previous_step_button(self) -> EditClubStepTwo:
+        self.previous_step_button.click()
+        return EditClubStepTwo(self.locator)
 
 
 class EditClubPopUp(AddClubPopUp):
