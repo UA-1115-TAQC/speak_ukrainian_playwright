@@ -1,6 +1,7 @@
 from playwright._impl._locator import Locator
 
 from speak_ukrainian.src.base import BaseComponent
+from speak_ukrainian.src.components.add_club_popup.add_club_popup_component import AddClubPopUp
 from speak_ukrainian.src.components.header_component.menu.admin_menu import AdminMenu
 from speak_ukrainian.src.components.header_component.menu.guest_menu import GuestMenu
 from speak_ukrainian.src.components.header_component.menu.user_menu import UserMenu
@@ -113,6 +114,7 @@ class HeaderComponent(BaseComponent):
     def click_add_club_button(self):
         if self.get_add_club_button.is_visible():
             self.get_add_club_button.click()
+            return AddClubPopUp(self.locator.page.locator("//div[contains(@class,'modal-add-club')]"))
 
     #  ClubsPage will be returned
     def select_city(self, city: str):
