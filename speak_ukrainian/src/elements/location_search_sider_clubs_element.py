@@ -2,7 +2,7 @@ from speak_ukrainian.src.base import BaseComponent
 
 
 class LocationSearchSiderElement(BaseComponent):
-    SELECT_CLEAR_XPATH ="//span[contains(@class,'ant-select-clear')]"
+    SELECT_CLEAR_XPATH = "//span[contains(@class,'ant-select-clear')]"
     INPUT_CONTENT_XPATH = "//span[contains(@class,'ant-select-selection-placeholder') or contains(@class, 'ant-select-selection-item')]"
     INPUT_BOX_XPATH = "//input[@type='search']"
 
@@ -24,7 +24,7 @@ class LocationSearchSiderElement(BaseComponent):
     @property
     def dropdown_box(self):
         xpath = "//div[@id='" + self.input_box.get_attribute("aria-owns") + "']/following-sibling::div"
-        return LocationSearchSiderDropdownElement(self.locator.locator(xpath))
+        return LocationSearchSiderDropdownElement(self.locator.page.locator(xpath))
 
     def get_input_value(self):
         return self.input_content.inner_text()
@@ -55,8 +55,22 @@ class LocationSearchSiderDropdownElement(BaseComponent):
     def select_item(self, item_name):
         item = self.find_item(item_name)
         if item:
-            # ActionChains(self.driver).move_to_element(item).perform()
             item.click()
 
     def find_item(self, item_name):
-        pass
+        while True:
+            goal_item = self.find_in_list(item_name)
+            if goal_item:
+                return goal_item
+
+            current_last_element_name = self.item_list[len(self.item_list) - 1].get_attribute("title")
+            self.item_list[len(self.item_list) - 1].hover()
+            self.locator.page.keyboard.down("ArrowDown")
+            new_last_element_name = self.item_list[len(self.item_list) - 1].get_attribute("title")
+            if current_last_element_name == new_last_element_name:
+                break
+
+    def find_in_list(self, item_name):
+        for item in self.item_list:
+            if item.get_attribute("title") == item_name:
+                return item

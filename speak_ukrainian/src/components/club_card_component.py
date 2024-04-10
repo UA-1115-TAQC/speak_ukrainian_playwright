@@ -1,4 +1,6 @@
 from speak_ukrainian.src.base import BaseComponent
+from speak_ukrainian.src.components.club_info_popup_component import ClubInfoPopup
+from speak_ukrainian.src.elements.direction_element import DirectionElement
 
 
 class ClubCardComponent(BaseComponent):
@@ -9,8 +11,7 @@ class ClubCardComponent(BaseComponent):
     RATING_XPATH = "//ul[contains(@class,'rating')]"
     ADDRESS_XPATH = "//div[contains(@class,'address')]"
     DETAILS_BUTTONS_XPATH = "//*[contains(@class,'details-button')]"
-    # POPUP_XPATH = "//div[@class='ant-modal-root css-1kvr9ql']"
-    # CLUB_INFO_POPUP_ROOT_XPATH = "//div[contains(@class,'clubInfo')]"
+    CLUB_INFO_POPUP_ROOT_XPATH = "//div[contains(@class,'clubInfo')]"
 
     def __init__(self, locator):
         super().__init__(locator)
@@ -85,6 +86,7 @@ class ClubCardComponent(BaseComponent):
 
     def click_title(self):
         self.name.click()
+        return ClubInfoPopup(self.locator.page.locator(self.CLUB_INFO_POPUP_ROOT_XPATH))
 
     def click_address(self):
         self.address.click()
@@ -93,26 +95,51 @@ class ClubCardComponent(BaseComponent):
         self.details_button.click()
 
 
-class DirectionElement(BaseComponent):
-    DIRECTION_LOGO_XPATH = "//div[contains(@class,'icon')]"
-    DIRECTION_NAME_XPATH = "//span[contains(@class,'name')]"
+class ClubCardWithEditComponent(ClubCardComponent):
+    NAME_XPATH = "//div[@class='title-name']"
+    MORE_BUTTON_XPATH = "//span[@aria-label='more']"
+    MENU_ITEM_XPATH = "//ul[contains(@class,'update-menu')]/li"
 
     def __init__(self, locator):
         super().__init__(locator)
-        self._logo = None
         self._name = None
-
-    @property
-    def logo(self):
-        if not self._logo:
-            self._logo = self.locator.locator(self.DIRECTION_LOGO_XPATH)
-        return self._logo
+        self._more_button = None
 
     @property
     def name(self):
         if not self._name:
-            self._name = self.locator.locator(self.DIRECTION_NAME_XPATH)
+            self._name = self.locator.locator(self.NAME_XPATH)
         return self._name
 
-    def get_name_text(self):
-        return self.name.text_content()
+    @property
+    def more_button(self):
+        if not self._more_button:
+            self._more_button = self.locator.locator(self.MORE_BUTTON_XPATH)
+        return self._more_button
+
+    @property
+    def participants_club_menu_item(self):
+        return self.locator.page.locator(self.MENU_ITEM_XPATH).nth(0)
+
+    @property
+    def edit_club_menu_item(self):
+        return self.locator.page.locator(self.MENU_ITEM_XPATH).nth(1)
+
+    @property
+    def delete_club_menu_item(self):
+        return self.locator.page.locator(self.MENU_ITEM_XPATH).nth(2)
+
+    def click_more_button(self):
+        self.more_button.click()
+
+    def click_participants_club(self):
+        self.more_button.click()
+        self.participants_club_menu_item.click()
+
+    def click_edit_club(self):
+        self.more_button.click()
+        self.edit_club_menu_item.click()
+
+    def click_delete_club(self):
+        self.more_button.click()
+        self.delete_club_menu_item.click()

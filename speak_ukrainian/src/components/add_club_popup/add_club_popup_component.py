@@ -7,7 +7,7 @@ from speak_ukrainian.src.components.add_club_popup.add_club_step_two import AddC
 from speak_ukrainian.src.elements.popup_step_element import PopUpStep
 
 
-class AddClubSider(BaseComponent):
+class Sider(BaseComponent):
     def __init__(self, locator: Locator) -> None:
         super().__init__(locator)
         self._sider_steps_containers = None
@@ -37,8 +37,8 @@ class AddClubPopUp(BasePopUp):
         self._step_container = self.locator.locator("main.add-club-container")
 
     @property
-    def sider_element(self) -> AddClubSider:
-        return AddClubSider(self.locator.locator("aside"))
+    def sider_element(self) -> Sider:
+        return Sider(self.locator.locator("aside"))
 
     @property
     def step_one_container(self) -> AddClubStepOne:

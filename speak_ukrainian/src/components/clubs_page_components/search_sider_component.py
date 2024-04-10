@@ -39,31 +39,26 @@ class SearchSiderComponent(BaseComponent):
     def online_checkbox_field(self):
         if self.is_element_present(self.ONLINE_CHECKBOX_FIELD_XPATH):
             return self.locator.locator(self.ONLINE_CHECKBOX_FIELD_XPATH)
-        return None
 
     @property
     def online_checkbox_input(self):
         if self.is_element_present(self.ONLINE_CHECKBOX_FIELD_XPATH):
             return self.locator.locator(self.ONLINE_CHECKBOX_FIELD_XPATH)
-        return None
 
     @property
     def direction_checkbox_field_list(self):
         if self.is_element_present(self.DIRECTION_CHECKBOX_FIELD_LIST_XPATH):
             return self.locator.locator(self.DIRECTION_CHECKBOX_FIELD_LIST_XPATH).all()
-        return None
 
     @property
     def direction_checkbox_input_list(self):
         if self.is_element_present(self.DIRECTION_CHECKBOX_INPUT_LIST_XPATH):
             return self.locator.locator(self.DIRECTION_CHECKBOX_INPUT_LIST_XPATH).all()
-        return None
 
     @property
     def age_input(self):
         if self.is_element_present(self.AGE_INPUT_XPATH):
             return self.locator.locator(self.AGE_INPUT_XPATH)
-        return None
 
     def is_element_present(self, xpath_name):
         return self.page.locator(xpath_name)

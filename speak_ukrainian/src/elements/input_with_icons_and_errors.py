@@ -54,7 +54,7 @@ class InputInfoValidationIconsAndErrors(InputValidationIconAndErrors):
         return self.info_icon_tooltip.text_content()
 
 
-class InputWithLabelValidationIconAndErrors(InputValidationIconAndErrors):
+class InputLabelValidationIconAndErrors(InputValidationIconAndErrors):
     def __init__(self, locator: Locator):
         super().__init__(locator)
 

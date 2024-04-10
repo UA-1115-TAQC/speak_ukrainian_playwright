@@ -18,17 +18,15 @@ class ProfilePage(BasePage):
         self.add_drop_down = page.get_by_role("button", name="plus Додати")
         self.add_club_button = page.locator("//div[contains(@class,'ant-dropdown')]/child::*[1]//div[text()='Додати центр']")
         self.add_center_button = page.get_by_role("menuitem", name="Додати центр").locator("div")
-        self.edit_profile_modal_form = (page.locator("div.ant-modal css-13m256z user-edit")
-                                        .and_(page.locator("div.ant-modal-content")))
-        self.edit_modal_form = page.locator("./descendant::div[contains(@class, 'ant-modal css-13m256z user-edit')]//div["
-                                            "@class='ant-modal-content']")
+        self.edit_modal_form = page.locator("xpath=./descendant::div[contains(@class, 'ant-modal css-13m256z user-edit')]"
+                                            "//div[@class='ant-modal-content']")
         self.club_cards_list = page.locator(".//div[contains(@class,'ant-card-body')]")
         self.switch_pagination = page.locator(".//ul[contains(@class,'ant-pagination') and contains(@class,'pagination')]")
         self.center_cards_list = page.locator(".//div[contains(@class, 'menu-component')]")
 
     def click_edit_profile_button(self) -> EditUserProfilePopup:
         self.edit_profile_button.click()
-        return EditUserProfilePopup(self.edit_profile_modal_form)
+        return EditUserProfilePopup(self.edit_modal_form)
 
     def my_drop_down_selected_item_click(self) -> None:
         self.my_drop_down_selected_item.click()
