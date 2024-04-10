@@ -5,6 +5,7 @@ from speak_ukrainian.src.components.header_component.menu.admin_menu import Admi
 from speak_ukrainian.src.components.header_component.menu.guest_menu import GuestMenu
 from speak_ukrainian.src.components.header_component.menu.user_menu import UserMenu
 from speak_ukrainian.src.pages.all_news_page import AllNewsPage
+from speak_ukrainian.src.pages.clubs_page import ClubsPage
 
 
 class HeaderComponent(BaseComponent):
@@ -111,12 +112,14 @@ class HeaderComponent(BaseComponent):
     def click_challenge_button(self):
         self.get_challenge_container.click()
 
-    def click_club_button(self):
+    def click_club_button(self) -> ClubsPage:
         self.get_club_container.click()
+        self.locator.page.wait_for_selector(selector='.ant-card-bordered', timeout=5000)
+        return ClubsPage(self.locator.page)
 
     def click_news_button(self) -> AllNewsPage:
         self.get_news_container_locator.click()
-        self.locator.page.wait_for_selector(selector="#newsContainer", timeout=5000)
+        self.locator.page.wait_for_selector(selector='#newsContainer', timeout=5000)
         return AllNewsPage(self.locator.page)
 
     def click_about_us_button(self):
@@ -129,7 +132,6 @@ class HeaderComponent(BaseComponent):
         if self.get_add_club_button.is_visible():
             self.get_add_club_button.click()
 
-    #  ClubsPage will be returned
     def select_city(self, city: str):
         self.get_location_button.click()
         self.locator.page.get_by_text(text=city, exact=True).click()

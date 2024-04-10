@@ -4,17 +4,16 @@ from speak_ukrainian.src.pages.home_page import HomePage
 
 invalid_name_data = [
     ('AfBbCcDdEeFfGgHhIiJjKkLlMmNn', 'Ім\'я не може містити більше, ніж 25 символів'),
-    #('AfBbCcDdEeFfGgHhIiJjKkLlMm', 'Ім\'я не може містити більше, ніж 25 символів'),
-    #('!@#$%^&,', 'Ім\'я не може містити спеціальні символи'),
-    #('1234', 'Ім\'я не може містити цифри'),
-    #('-Name', 'Ім\'я повинно починатися та закінчуватися літерою'),
-    #(' Name', 'Ім\'я не може містити спеціальні символи'),
-    #('\'Name', 'Ім\'я повинно починатися та закінчуватися літерою'),
-    #('Name-', 'Ім\'я повинно починатися та закінчуватися літерою'),
-    #('Name ', 'Ім\'я не може містити спеціальні символи'),
-    #('Name\'', 'Ім\'я повинно починатися та закінчуватися літерою'),
-    #('', 'Введіть Ваше ім\'я')
-
+    ('AfBbCcDdEeFfGgHhIiJjKkLlMm', 'Ім\'я не може містити більше, ніж 25 символів'),
+    ('!@#$%^&,', 'Ім\'я не може містити спеціальні символи'),
+    ('1234', 'Ім\'я не може містити цифри'),
+    ('-Name', 'Ім\'я повинно починатися та закінчуватися літерою'),
+    (' Name', 'Ім\'я не може містити спеціальні символи'),
+    ('\'Name', 'Ім\'я повинно починатися та закінчуватися літерою'),
+    ('Name-', 'Ім\'я повинно починатися та закінчуватися літерою'),
+    ('Name ', 'Ім\'я не може містити спеціальні символи'),
+    ('Name\'', 'Ім\'я повинно починатися та закінчуватися літерою'),
+    ('', 'Введіть Ваше ім\'я')
 ]
 
 
@@ -27,8 +26,8 @@ def test_edit_name_filed_with_invalid_data(page_with_user: HomePage, invalid_nam
                   .first_name_element)
     name_field.set_input_value(invalid_name)
 
-    (expect(name_field.error_messages_list, f'\'{expected_error_msg}\' should be displayed')
-     .to_have_text(expected_error_msg))
+    (expect(name_field.error_messages_list[0], f'\'{expected_error_msg}\' should be displayed')
+     .to_have_text(expected_error_msg, timeout=300))
 
     (expect(profile_pop_up.submit_button, 'Submit button should be disabled')
-     .to_be_disabled(timeout=500))
+     .to_be_disabled(timeout=300))
