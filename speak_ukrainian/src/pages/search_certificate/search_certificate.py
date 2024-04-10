@@ -4,6 +4,7 @@ from playwright._impl._locator import Locator
 from playwright._impl._page import Page
 
 from speak_ukrainian.src.base import BasePage, BaseComponent
+from speak_ukrainian.src.pages.search_certificate.filter_dropdown_menu import FilterDropDownMenu
 
 
 class CertificateTable(BaseComponent):
@@ -46,10 +47,17 @@ class CertificateTable(BaseComponent):
 
     @property
     def certificate_filter(self) -> Locator:
-        return self.certificate_status_header.filter(has=self.locator.get_by_role("button"))
+        return self.locator.get_by_role("button", name="filter")
 
     def filter_dropdown(self):
         self.certificate_filter.click()
+
+    @property
+    def certificate_filter_dropdown_menu(self) -> FilterDropDownMenu:
+        self.filter_dropdown()
+        return FilterDropDownMenu(self.locator.page.locator("div.ant-table-filter-dropdown"))
+
+
 
 
 
