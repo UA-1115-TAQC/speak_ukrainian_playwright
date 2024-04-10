@@ -3,8 +3,8 @@ from typing import Self
 from playwright._impl._locator import Locator
 
 from speak_ukrainian.src.base import BasePopUp
-from speak_ukrainian.src.elements.input_with_icons_and_errors import (InputWithLabelValidationIconAndErrors,
-                                                                      InputPasswordVisibilityIcon)
+from speak_ukrainian.src.elements.input_with_icons_and_errors import (InputPasswordVisibilityIcon,
+                                                                      InputLabelValidationIconAndErrors)
 
 
 class EditUserProfilePopup(BasePopUp):
@@ -43,13 +43,13 @@ class EditUserProfilePopup(BasePopUp):
         return self.manager_type_button.click()
 
     @property
-    def last_name_element(self) -> InputWithLabelValidationIconAndErrors:
-        return InputWithLabelValidationIconAndErrors(
+    def last_name_element(self) -> InputLabelValidationIconAndErrors:
+        return InputLabelValidationIconAndErrors(
             self.locator.locator("xpath=./descendant::div[contains(@class,'user-edit-input')][1]"))
 
     @property
-    def first_name_element(self) -> InputWithLabelValidationIconAndErrors:
-        return InputWithLabelValidationIconAndErrors(
+    def first_name_element(self) -> InputLabelValidationIconAndErrors:
+        return InputLabelValidationIconAndErrors(
             self.locator.locator("xpath=./descendant::div[contains(@class,'user-edit-input')][2]"))
 
     @property
@@ -59,8 +59,8 @@ class EditUserProfilePopup(BasePopUp):
         return self._country_code
 
     @property
-    def phone_element(self) -> InputWithLabelValidationIconAndErrors:
-        return InputWithLabelValidationIconAndErrors(
+    def phone_element(self) -> InputLabelValidationIconAndErrors:
+        return InputLabelValidationIconAndErrors(
             self.locator.locator("xpath=./descendant::div[contains(@class,'user-edit-input')][3]"))
 
     @property
@@ -119,7 +119,8 @@ class EditUserProfilePopup(BasePopUp):
 
     @property
     def submit_button(self) -> Locator:
-        return self.locator.get_by_role("button", name="Зберегти зміни")
+        return self.locator.locator("button", has_text="Зберегти зміни")
+        #return self.locator.get_by_role("button")
 
     def click_on_submit_button(self) -> Self:
         return self.submit_button.click()

@@ -35,7 +35,7 @@ class FooterComponent (BaseComponent):
 
     @property
     def list_of_social_links(self) -> list[Locator]:
-        return [self.locator.locator(".links").all()]
+        return self.locator.locator(".links").all()
 
     def social_links(self) -> list[str]:
         return [link.get_attribute("href") for link in self.list_of_social_links] if self.list_of_social_links else []
@@ -54,7 +54,7 @@ class FooterComponent (BaseComponent):
 
     @property
     def list_of_sponsors_links(self) -> list[Locator]:
-        return [self.locator.locator(".sponsors").all()]
+        return self.locator.locator(".sponsors").all()
 
     def sponsors_links(self) -> list[str]:
         return [link.get_attribute("href") for link in self.list_of_sponsors_links] if self.list_of_sponsors_links else []
