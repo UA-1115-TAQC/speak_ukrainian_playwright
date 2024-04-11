@@ -61,7 +61,7 @@ class SearchSiderComponent(BaseComponent):
             return self.locator.locator(self.AGE_INPUT_XPATH)
 
     def is_element_present(self, xpath_name):
-        return self.page.locator(xpath_name)
+        return self.locator.page.locator(xpath_name).nth(0).is_visible()
 
     def choose_club_radio_button(self):
         for e in self.center_or_club_radio_button:

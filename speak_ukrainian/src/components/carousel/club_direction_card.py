@@ -1,10 +1,10 @@
 from speak_ukrainian.src.base import BaseComponent
 
-CLUB_CARD_IMAGE_XPATH = ".//div[contains(@class,\"icon-box\")]/img"
-CLUB_CARD_HEADING_XPATH = ".//div[contains(@class,\"name\")]"
-CLUB_CARD_TEXT_XPATH = ".//div[contains(@class,\"description\")]"
-CLUB_CARD_BUTTON_XPATH = ".//div[contains(@class,\"details\")]"
-CLUB_CARD_BUTTON_POINTER_XPATH = ".//span[@aria-label=\"arrow-right\"]"
+CLUB_CARD_IMAGE_XPATH = "//div[contains(@class,\"icon-box\")]/img"
+CLUB_CARD_HEADING_XPATH = "//div[contains(@class,\"name\")]"
+CLUB_CARD_TEXT_XPATH = "//div[contains(@class,\"description\")]"
+CLUB_CARD_BUTTON_XPATH = "//div[contains(@class,\"details\")]"
+CLUB_CARD_BUTTON_POINTER_XPATH = "//span[@aria-label=\"arrow-right\"]"
 
 
 class ClubDirectionCard(BaseComponent):
@@ -32,7 +32,6 @@ class ClubDirectionCard(BaseComponent):
         return self.locator.locator(CLUB_CARD_BUTTON_POINTER_XPATH)
 
     def click_card(self):
-        # TODO added method
         self.club_card_heading.click()
 
     # ClubsPage will be returned as a result

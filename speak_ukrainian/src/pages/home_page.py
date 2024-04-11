@@ -90,5 +90,4 @@ class HomePage(BasePageWithAdvancedSearch):
         return self
 
     def wait_until_directions_carousel_is_visible(self):
-        # TODO added method
-        expect(self.carousel_card_component.carousel_cards[0].club_card_image).to_be_visible()
+        self.page.wait_for_selector(CAROUSEL_CARD_COMPONENT_XPATH)
