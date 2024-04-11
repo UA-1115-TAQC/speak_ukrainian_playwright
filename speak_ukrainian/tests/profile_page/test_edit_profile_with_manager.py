@@ -21,17 +21,16 @@ invalid_data = [
     ]
 
 
-@pytest.mark.parametrize("invalid_input,expected_message", invalid_data)
-def test_first_name_element_invalid_data(page_with_manager: Page, page, invalid_input, expected_message):
+@pytest.mark.parametrize("invalid_first_name,expected_error_message", invalid_data)
+def test_first_name_element_invalid_data(page_with_manager: Page, page, invalid_first_name, expected_error_message):
     edit_user = (HeaderComponent(page.get_by_role("banner"))
                  .open_user_menu
                  .open_profile_page
                  .click_edit_profile_button())
-    (edit_user.first_name_element.set_input_value(invalid_input))
-    #print(edit_user.first_name_element.get_error_messages_text_list())
-    error_messages = edit_user.first_name_element.get_error_messages_text_list()
-    #expect(error_messages).to_contain_text(expected_message)
-    assert expected_message in error_messages
-    expect(edit_user.submit_button).to_be_disabled()
+    (edit_user.first_name_element.set_input_value(invalid_first_name))
 
+    (expect(edit_user.first_name_element.error_messages_list[0], f'\'{expected_error_message}\' should be displayed')
+     .to_have_text(expected_error_message, timeout=300))
+
+    (expect(edit_user.submit_button, 'Submit button should be disabled').to_be_disabled(timeout=100))
 
