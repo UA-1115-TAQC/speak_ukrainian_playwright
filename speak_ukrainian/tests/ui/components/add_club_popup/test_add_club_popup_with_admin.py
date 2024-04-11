@@ -4,8 +4,9 @@ import pytest
 
 
 # TUA-312
-def test_display_add_club_popup(page_with_admin, page):
-    add_club_popup = HomePage(page).header.click_add_club_button()
+def test_display_add_club_popup(page_with_admin):
+    # add_club_popup = HomePage(page).header.click_add_club_button()
+    add_club_popup = page_with_admin.header.click_add_club_button()
     expect(add_club_popup.locator).to_be_visible()
 
 
@@ -20,8 +21,9 @@ valid_club_names = ["0123456789",
 
 
 @pytest.mark.parametrize("valid_name", valid_club_names)
-def test_valid_club_name(page_with_admin, page, valid_name):
-    add_club_popup = HomePage(page).header.click_add_club_button()
+def test_valid_club_name(page_with_admin,valid_name):
+    # add_club_popup = HomePage(page).header.click_add_club_button()
+    add_club_popup = page_with_admin.header.click_add_club_button()
     step_one = add_club_popup.step_one_container
 
     step_one.name_input_element.set_input_value(valid_name)
