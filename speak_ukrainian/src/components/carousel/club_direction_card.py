@@ -31,6 +31,10 @@ class ClubDirectionCard(BaseComponent):
     def club_card_button_pointer(self):
         return self.locator.locator(CLUB_CARD_BUTTON_POINTER_XPATH)
 
+    def click_card(self):
+        # TODO added method
+        self.club_card_heading.click()
+
     # ClubsPage will be returned as a result
     def click_club_card_button(self):
         self.club_card_button.click()

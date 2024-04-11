@@ -88,3 +88,7 @@ class HomePage(BasePageWithAdvancedSearch):
     def scroll_to_carousel_card_component_web_element(self):
         self.carousel_card_component.slider_container.scroll_into_view_if_needed()
         return self
+
+    def wait_until_directions_carousel_is_visible(self):
+        # TODO added method
+        expect(self.carousel_card_component.carousel_cards[0].club_card_image).to_be_visible()
