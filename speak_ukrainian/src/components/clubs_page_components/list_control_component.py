@@ -1,4 +1,5 @@
 from speak_ukrainian.src.base import BaseComponent
+from playwright.sync_api import expect
 
 
 class ListControlComponent(BaseComponent):
@@ -6,6 +7,7 @@ class ListControlComponent(BaseComponent):
     ARROW_DOWN_XPATH = "//span[contains(@aria-label, 'arrow-down')]"
     WRAPPER_LIST_XPATH = "//label[contains(@class, 'ant-radio-button-wrapper')][1]"
     WRAPPER_BLOCK_XPATH = "//label[contains(@class, 'ant-radio-button-wrapper')][2]"
+    FIRST_CLUB_NAME_XPATH = "//div[contains(@class,'content-clubs-list')]//div[contains(@class, 'ant-card-body')]//div[@class='title']//div[@class='name']"
 
     def __init__(self, locator):
         super().__init__(locator)
@@ -52,6 +54,10 @@ class ListControlComponent(BaseComponent):
             self._wrapper_block = self.locator.locator(self.WRAPPER_BLOCK_XPATH)
         return self._wrapper_block
 
+    @property
+    def first_club_name(self):
+        return self.locator.page.locator(self.FIRST_CLUB_NAME_XPATH).nth(0)
+
     def click_sort_by_alphabet(self):
         self.sort_by_alphabet.click()
 
@@ -59,7 +65,9 @@ class ListControlComponent(BaseComponent):
         self.sort_by_rating.click()
 
     def click_arrow_up(self):
+        first_club_text = self.first_club_name.text_content()
         self.arrow_up.click()
+        expect(self.first_club_name).not_to_contain_text(first_club_text)
 
     def click_arrow_down(self):
         self.arrow_down.click()

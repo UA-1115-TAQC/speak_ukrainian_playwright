@@ -4,7 +4,7 @@ from speak_ukrainian.src.components.club_card_component import ClubCardComponent
 from speak_ukrainian.src.components.clubs_page_components.search_sider_component import SearchSiderComponent
 from speak_ukrainian.src.components.header_component.advanced_search_header import AdvancedSearchClubsHeaderComponent
 from speak_ukrainian.src.components.clubs_page_components.list_control_component import ListControlComponent
-from speak_ukrainian.src.components.pagination_component import PaginationComponent
+from speak_ukrainian.src.components.pagination_component import ClubsPaginationComponent
 
 
 class ClubsPage (BasePage):
@@ -28,7 +28,7 @@ class ClubsPage (BasePage):
     @property
     def pagination(self):
         if self.is_element_present(self.PAGINATION_XPATH):
-            return PaginationComponent(self.page.locator(self.PAGINATION_XPATH))
+            return ClubsPaginationComponent(self.page.locator(self.PAGINATION_XPATH))
 
     @property
     def list_control(self):
