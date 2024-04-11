@@ -35,5 +35,6 @@ def get_club_name_list(page):
         pagination = clubs_page.pagination
         if not pagination or pagination.is_next_disabled():
             break
+
         pagination.click_next()
     return names
