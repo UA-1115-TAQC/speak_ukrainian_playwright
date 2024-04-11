@@ -30,4 +30,3 @@ def test_news_button_redirects_to_news_page(page: Page):
      .not_to_have_class(re.compile(expected_active_class)))
     (expect(page, 'Home page should be opened')
      .not_to_have_url(re.compile(expected_news_path)))
-
