@@ -4,6 +4,7 @@ from speak_ukrainian.src.base import BaseComponent
 from speak_ukrainian.src.components.header_component.menu.admin_menu import AdminMenu
 from speak_ukrainian.src.components.header_component.menu.guest_menu import GuestMenu
 from speak_ukrainian.src.components.header_component.menu.user_menu import UserMenu
+from speak_ukrainian.src.components.add_club_popup.add_club_popup_component import AddClubPopUp
 from speak_ukrainian.src.pages.all_news_page import AllNewsPage
 from speak_ukrainian.src.pages.clubs_page import ClubsPage
 
@@ -131,6 +132,10 @@ class HeaderComponent(BaseComponent):
     def click_add_club_button(self):
         if self.get_add_club_button.is_visible():
             self.get_add_club_button.click()
+        pop_up_locator = (self.locator.page
+                          .locator('div.ant-modal-wrap')
+                          .filter(has=self.locator.page.get_by_text('Додати гурток')))
+        return AddClubPopUp(pop_up_locator)
 
     def select_city(self, city: str):
         self.get_location_button.click()

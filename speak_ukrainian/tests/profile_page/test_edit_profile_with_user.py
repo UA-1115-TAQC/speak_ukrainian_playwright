@@ -31,3 +31,22 @@ def test_edit_name_filed_with_invalid_data(page_with_user: HomePage, invalid_nam
 
     (expect(profile_pop_up.submit_button, 'Submit button should be disabled')
      .to_be_disabled(timeout=300))
+
+
+def test_verify_photo_link_visible(page_with_user: HomePage):
+    expected_message = ("Приймас зображення формату JPG / PNG"
+                        " із мінімальною роздільною здатністю 200x200 пікселів"
+                        " та максимальним розміром файлу 5МВ")
+    profile_pop_up = (page_with_user.header
+                      .open_user_menu
+                      .open_profile_page
+                      .click_edit_profile_button())
+
+    (expect(profile_pop_up.photo_title, '\'Фото\' link should be visible')
+     .to_be_visible())
+
+    (expect(profile_pop_up.uploaded_photo_element, '\'Завантажити фото\' link should be visible')
+     .to_be_visible())
+
+    (expect(profile_pop_up.tooltip_form(), f'\'{expected_message}\' should be visible')
+     .to_have_text(expected_message))

@@ -8,12 +8,7 @@ from speak_ukrainian.src.elements.input_with_icons_and_errors import (InputPassw
 
 
 class EditUserProfilePopup(BasePopUp):
-
     def __init__(self, locator: Locator):
-        super().__init__(locator)
-        self._edit_user_popup_title = None
-
-    def __int__(self, locator: Locator):
         super().__init__(locator)
         self._edit_user_popup_title = None
         self._country_code = None
@@ -70,7 +65,7 @@ class EditUserProfilePopup(BasePopUp):
     @property
     def photo_title(self) -> Locator:
         if self._photo_title is None:
-            self._photo_title = self.locator.get_by_text("Фото")
+            self._photo_title = self.locator.get_by_title("Фото")
         return self._photo_title
 
     @property
@@ -80,7 +75,8 @@ class EditUserProfilePopup(BasePopUp):
         return self._question_circle_for_photo
 
     def tooltip_form(self) -> Locator:
-        return self.locator.get_by_role("tooltip", name="Приймас зображення формату")
+        self.question_photo_circle.hover()
+        return self.locator.page.locator('div[role=tooltip]')
 
     @property
     def uploaded_photo_element(self):
