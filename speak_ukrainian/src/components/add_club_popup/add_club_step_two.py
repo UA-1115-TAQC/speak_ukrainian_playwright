@@ -48,12 +48,12 @@ class AddClubStepTwo(BaseComponent):
         return AddLocationPopUp(self.locator.page.locator("div.modal-add-club").filter(has=filter_locator))
 
     @property
-    def get_list_of_location_elements(self) -> list[LocationsListElement]:
+    def list_of_location_elements(self) -> list[LocationsListElement]:
         locations_list = self.locator.locator("li.ant-list-item").all()
         return [LocationsListElement(location) for location in locations_list] if locations_list else []
 
     def get_locations_name_list(self) -> list[str]:
-        return [location.get_location_title_text() for location in self.get_list_of_location_elements()]
+        return [location.location_title.text_content() for location in self.list_of_location_elements]
 
     @property
     def available_online_title(self) -> Locator:
