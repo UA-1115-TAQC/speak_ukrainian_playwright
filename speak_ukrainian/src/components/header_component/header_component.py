@@ -98,6 +98,9 @@ class HeaderComponent(BaseComponent):
 
     def click_club_button(self):
         self.get_club_container.click()
+        self.locator.page.wait_for_selector("//div[contains(@class,'content-clubs-list')]")
+        from speak_ukrainian.src.pages.clubs_page import ClubsPage
+        return ClubsPage(self.locator.page)
 
     def click_news_button(self) -> AllNewsPage:
         self.get_news_container_locator.click()
