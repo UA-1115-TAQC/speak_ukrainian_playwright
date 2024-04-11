@@ -26,3 +26,6 @@ class InputWithIconElement(Input):
     @property
     def error_messages_list(self) -> list[Locator]:
         return self.locator.locator("div.ant-form-item-explain-error").all()
+
+    def get_error_messages_text_list(self) -> list[str]:
+        return [error.text_content() for error in self.error_messages_list]
