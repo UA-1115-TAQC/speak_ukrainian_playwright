@@ -87,11 +87,15 @@ class CertificateTable(BaseComponent):
                 break
 
     @property
-    def ascending_sorting_icon(self) -> Locator:
+    def ascending_sorting_icon(self) -> Locator | None:
+        if not self.serial_number_filter_list[0]:
+            return
         return self.serial_number_filter_list[0]
 
     @property
-    def descending_sorting_icon(self) -> Locator:
+    def descending_sorting_icon(self) -> Locator | None:
+        if not self.serial_number_filter_list[1]:
+            return
         return self.serial_number_filter_list[1]
 
     @property
