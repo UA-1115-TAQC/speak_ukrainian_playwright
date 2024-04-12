@@ -2,10 +2,10 @@ from playwright._impl._locator import Locator
 
 from speak_ukrainian.src.web.base import BaseComponent
 from speak_ukrainian.src.web.components.add_club_popup import AddClubPopUp
-from speak_ukrainian.src.web.components.header_component.menu import AdminMenu
-from speak_ukrainian.src.web.components.header_component.menu.guest_menu import GuestMenu
-from speak_ukrainian.src.web.components.header_component.menu.user_menu import UserMenu
-from speak_ukrainian.src.pages.all_news_page import AllNewsPage
+from speak_ukrainian.src.web.components.header_component.menu import (AdminMenu,
+                                                                      GuestMenu,
+                                                                      UserMenu)
+from speak_ukrainian.src.web.pages.all_news_page import AllNewsPage
 
 
 class HeaderComponent(BaseComponent):

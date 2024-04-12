@@ -5,8 +5,7 @@ from playwright._impl._locator import Locator
 from speak_ukrainian.src.web.base import BaseComponent
 from speak_ukrainian.src.web.components.add_club_popup.add_club_step_two import AddClubStepTwo
 from speak_ukrainian.src.web.elements.dropdown import Dropdown
-from speak_ukrainian.src.web.elements import InputValidationIconAndErrors
-from speak_ukrainian.src.web.elements import NumberInput
+from speak_ukrainian.src.web.elements import InputValidationIconAndErrors, NumberInput
 
 
 class AddClubStepOne(BaseComponent):

@@ -1,8 +1,8 @@
 from playwright._impl._locator import Locator
 
 from speak_ukrainian.src.web.base import BaseComponent
-from speak_ukrainian.src.components.login_popup_component.login_popup_component import LoginPopUpComponent
-from speak_ukrainian.src.components.registration_popup_component.registration_popup_component import \
+from speak_ukrainian.src.web.components.login_popup_component.login_popup_component import LoginPopUpComponent
+from speak_ukrainian.src.web.components.registration_popup_component.registration_popup_component import \
     RegistrationPopUpComponent
 
 

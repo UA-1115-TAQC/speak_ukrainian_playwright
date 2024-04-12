@@ -4,7 +4,7 @@ from playwright.sync_api import Locator
 
 from speak_ukrainian.src.web.base import BaseComponent
 from speak_ukrainian.src.web.elements.input_with_icon_element import InputWithIconElement
-from speak_ukrainian.src.pages.home_page import HomePage
+from speak_ukrainian.src.web.pages.home_page import HomePage
 
 
 class LoginPopUpComponent(BaseComponent):

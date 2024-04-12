@@ -1,5 +1,5 @@
-from speak_ukrainian.src.components.carousel.basic_carousel import BasicCarouselComponent
-from speak_ukrainian.src.components.carousel.carousel_img_card import CarouselImgCard
+from speak_ukrainian.src.web.components.carousel.basic_carousel import BasicCarouselComponent
+from speak_ukrainian.src.web.components.carousel.carousel_img_card import CarouselImgCard
 
 IMG_SLICK_SLIDE_XPATH = ".//div[contains(@class,\"slick-slide\")]"
 

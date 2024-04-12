@@ -1,7 +1,7 @@
 from playwright.sync_api import Page, expect
 
 from speak_ukrainian.src.web.base import BasePageWithAdvancedSearch
-from speak_ukrainian.src.pages.payment.payment_page import Payment
+from speak_ukrainian.src.web.pages.payment.payment_page import Payment
 
 CHALLENGE_IMAGE_PATH = "//div[contains(@class,\"banner\")]"
 HELP_BUTTON_PATH = "//div[contains(@class,\"help-button\")]"

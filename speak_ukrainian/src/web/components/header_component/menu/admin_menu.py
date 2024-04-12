@@ -4,7 +4,7 @@ from speak_ukrainian.src.web.base import BaseComponent, BasePage
 from speak_ukrainian.src.web.components.add_center_popup.add_center_popup_component import AddCenterPopUp
 from speak_ukrainian.src.web.components.add_club_popup import AddClubPopUp
 from speak_ukrainian.src.web.pages.search_certificate.search_certificate import SearchCertificatePage
-from speak_ukrainian.src.profile_page import ProfilePage
+from speak_ukrainian.src.web.profile_page import ProfilePage
 
 
 class AdminMenu(BaseComponent):

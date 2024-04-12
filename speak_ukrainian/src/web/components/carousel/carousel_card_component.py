@@ -1,4 +1,4 @@
-from speak_ukrainian.src.components.carousel.basic_carousel import BasicCarouselComponent
+from speak_ukrainian.src.web.components.carousel.basic_carousel import BasicCarouselComponent
 from speak_ukrainian.src.web.components.carousel.club_direction_card import ClubDirectionCard
 
 CAROUSEL_CARD_HEADING_XPATH = "//div[contains(@class,\"categories-header\")]/h2"

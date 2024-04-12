@@ -1,7 +1,7 @@
 from playwright.sync_api import Page, expect
 
 from speak_ukrainian.src.web.base import BasePageWithAdvancedSearch
-from speak_ukrainian.src.components.carousel.carousel_card_component import CarouselCardComponent
+from speak_ukrainian.src.web.components.carousel.carousel_card_component import CarouselCardComponent
 from speak_ukrainian.src.web.components.carousel.carousel_img_component import CarouselImgComponent
 from speak_ukrainian.src.web.pages.challenge_pages.base_challenge_page import BaseChallengePage, \
     ChallengeUkrainianClubSpeakPage

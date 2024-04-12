@@ -2,8 +2,8 @@ from playwright._impl._locator import Locator
 
 from speak_ukrainian.src.web.base import BasePopUp
 from speak_ukrainian.src.web.elements.dropdown import DropdownWithIconError, Dropdown
-from speak_ukrainian.src.web.elements import InputInfoValidationIconsAndErrors, \
-    InputValidationIconAndErrors
+from speak_ukrainian.src.web.elements import (InputInfoValidationIconsAndErrors,
+                                              InputValidationIconAndErrors)
 
 
 class AddLocationPopUp(BasePopUp):
