@@ -1,5 +1,4 @@
 from speak_ukrainian.src.base import BaseComponent
-from speak_ukrainian.src.components.header_component.advanced_search_tooltip import AdvancedSearchToolTip
 
 ADVANCED_SEARCH_HEADING_XPATH = "//h2[@class=\'city-name\']"
 SELECTION_SEARCH_INPUT_FIELD_XPATH = '//div[contains(@class, "search")]//input[@type="search"]'
@@ -51,8 +50,9 @@ class AdvancedSearchHeaderComponent(BaseComponent):
         self.wait_to_be_visible(self.selection_search_input_field).fill(text)
         return self
 
-    def click_selection_search_input_field(self) -> AdvancedSearchToolTip:
+    def click_selection_search_input_field(self) -> 'AdvancedSearchToolTip':
         self.selection_search_input_field.click()
+        from speak_ukrainian.src.components.header_component.advanced_search_tooltip import AdvancedSearchToolTip
         return AdvancedSearchToolTip(self.advanced_search_tooltip_node)
 
     def click_search_icon(self):

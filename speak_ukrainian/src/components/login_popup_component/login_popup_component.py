@@ -4,6 +4,7 @@ from playwright.sync_api import Locator
 
 from speak_ukrainian.src.base import BaseComponent, BasePage
 from speak_ukrainian.src.elements.input_with_icon_element import InputWithIconElement
+from speak_ukrainian.src.pages.home_page import HomePage
 
 
 class LoginPopUpComponent(BaseComponent):
@@ -75,9 +76,9 @@ class LoginPopUpComponent(BaseComponent):
         return self._sing_in_button
 
     @property
-    def click_sign_in_button(self) -> BasePage:
+    def click_sign_in_button(self) -> HomePage:
         self.sing_in_button.click()
-        return BasePage(self.locator.page)
+        return HomePage(self.locator.page)
 
     @property
     def restore_password_button(self) -> Locator:
@@ -131,7 +132,8 @@ class RestorationPasswordPopup(BaseComponent):
         return InputWithIconElement(self.locator.locator("div.login-input").last)
 
     def enter_email(self, email: str) -> Self:
-        return self.restore_email_input_element.set_input_value(email)
+        self.restore_email_input_element.set_input_value(email)
+        return self
 
     def click_close_restoration_popup(self) -> LoginPopUpComponent:
         self.close_button.click()
