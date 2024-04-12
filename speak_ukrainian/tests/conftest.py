@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 from playwright._impl._page import Page
 from playwright.sync_api import sync_playwright, Playwright, APIRequestContext
 
-from speak_ukrainian.src.components.header_component.header_component import HeaderComponent
+from speak_ukrainian.src.web.components.header_component.header_component import HeaderComponent
 from speak_ukrainian.src.pages.home_page import HomePage
 
 load_dotenv()
