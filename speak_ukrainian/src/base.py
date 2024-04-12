@@ -1,8 +1,5 @@
 from playwright.sync_api import expect, Page, Locator
 
-from speak_ukrainian.src.components.footer_component import FooterComponent
-from speak_ukrainian.src.components.header_component.advanced_search_header import AdvancedSearchHeaderComponent
-from speak_ukrainian.src.components.header_component.header_component import HeaderComponent
 
 HEADER_XPATH = "//header"
 FOOTER_XPATH = "//footer"
@@ -34,14 +31,17 @@ class BasePageWithoutHeaderAndFooter:
 
 class BasePage(BasePageWithoutHeaderAndFooter):
     def __init__(self, page: Page):
+        super().__init__(page)
         self.page = page
 
     @property
-    def header(self) -> HeaderComponent:
+    def header(self) -> 'HeaderComponent':
+        from speak_ukrainian.src.components.header_component.header_component import HeaderComponent
         return HeaderComponent(self.page.locator(HEADER_XPATH))
 
     @property
-    def footer(self) -> FooterComponent:
+    def footer(self) -> 'FooterComponent':
+        from speak_ukrainian.src.components.footer_component import FooterComponent
         return FooterComponent(self.page.locator(FOOTER_XPATH))
 
 
@@ -50,7 +50,8 @@ class BasePageWithAdvancedSearch(BasePage):
         super().__init__(page)
 
     @property
-    def advanced_search_header_component(self) -> AdvancedSearchHeaderComponent:
+    def advanced_search_header_component(self) -> 'AdvancedSearchHeaderComponent':
+        from speak_ukrainian.src.components.header_component.advanced_search_header import AdvancedSearchHeaderComponent
         return AdvancedSearchHeaderComponent(self.page.locator(ADVANCED_SEARCH_HEADER_XPATH))
 
 
