@@ -1,10 +1,10 @@
-import time
 from typing import Self
 
 from playwright._impl._locator import Locator
 from playwright._impl._page import Page
 
 from speak_ukrainian.src.base import BasePage, BaseComponent
+from speak_ukrainian.src.components.pagination_component import PaginationComponent
 from speak_ukrainian.src.pages.search_certificate.filter_dropdown_menu import FilterDropDownMenu
 
 
@@ -74,7 +74,6 @@ class CertificateTable(BaseComponent):
         while True:
             if self.serial_number_header.get_attribute("aria-sort") != "descending":
                 self.click_sort_serial_number_button()
-                time.sleep(1)
             else:
                 break
 
@@ -82,7 +81,6 @@ class CertificateTable(BaseComponent):
         while True:
             if self.serial_number_header.get_attribute("aria-sort") != "ascending":
                 self.click_sort_serial_number_button()
-                time.sleep(1)
             else:
                 break
 
@@ -116,6 +114,10 @@ class CertificateTable(BaseComponent):
             }
             information_report.append(data)
         return information_report
+
+    @property
+    def pagination(self) -> PaginationComponent:
+        return PaginationComponent(self.locator.locator("ul.ant-table-pagination"))
 
 
 class SearchCertificatePage(BasePage):
