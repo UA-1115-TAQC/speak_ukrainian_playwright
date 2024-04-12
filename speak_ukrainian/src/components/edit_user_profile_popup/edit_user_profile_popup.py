@@ -70,17 +70,16 @@ class EditUserProfilePopup(BasePopUp):
     @property
     def photo_title(self) -> Locator:
         if self._photo_title is None:
-            self._photo_title = self.locator.get_by_text("Фото")
+            self._photo_title = self.locator.get_by_title("Фото")
         return self._photo_title
 
     @property
     def question_photo_circle(self) -> Locator:
-        if self._question_circle_for_photo is None:
-            self._question_circle_for_photo = self.locator.get_by_label("question-circle").locator("svg")
-        return self._question_circle_for_photo
+        return self.locator.get_by_label("question-circle").locator("svg")
 
     def tooltip_form(self) -> Locator:
-        return self.locator.get_by_role("tooltip", name="Приймас зображення формату")
+        self.question_photo_circle.hover()
+        return self.locator.page.locator('div[role=tooltip]')
 
     @property
     def uploaded_photo_element(self):
