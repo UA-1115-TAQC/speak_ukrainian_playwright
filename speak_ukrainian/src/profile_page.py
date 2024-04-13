@@ -7,7 +7,7 @@ from playwright._impl._locator import Locator
 
 from speak_ukrainian.src.components.edit_user_profile_popup.edit_user_profile_popup import EditUserProfilePopup
 
-
+from speak_ukrainian.src.components.add_club_popup.add_club_popup_component import AddClubPopUp
 class ProfilePage(BasePage):
     def __init__(self, page):
         super().__init__(page)
@@ -22,7 +22,6 @@ class ProfilePage(BasePage):
         self._my_centers_dropdown_button = None
         self.edit_profile_button = page.locator("xpath=//span[text()='Редагувати профіль']")
         self.add_drop_down = page.get_by_role("button", name="plus Додати")
-        self._add_club_button = None
         self._add_center_button = None
         self.edit_modal_form = page.locator("xpath=./descendant::div[contains(@class, 'ant-modal css-13m256z user-edit')]"
                                             "//div[@class='ant-modal-content']")
@@ -59,10 +58,7 @@ class ProfilePage(BasePage):
 
     @property
     def add_club_button(self) -> Locator:
-        if self._add_club_button is None:
-            self._add_club_button = self.page.locator("//div[contains(@class,'ant-dropdown')]/child::*[1]//div[text("
-                                                      ")='Додати центр']")
-        return self._add_club_button
+        return self.page.locator("xpath=//div[contains(@class,'ant-dropdown')]/child::*[1]//div[text()='Додати гурток']")
 
     @property
     def add_center_button(self) -> Locator:
@@ -89,9 +85,13 @@ class ProfilePage(BasePage):
         self.add_drop_down.click()
         return self
 
-    def click_add_club_button(self) -> Self:
+    def click_add_club_button(self):
+        self.click_add_drop_down()
         self.add_club_button.click()
-        return self
+        pop_up_locator = (self.page
+                          .locator('div.ant-modal-wrap')
+                          .filter(has=self.page.get_by_text('Додати гурток')))
+        return AddClubPopUp(pop_up_locator)
 
     def click_add_center_button(self) -> Self:
         self.add_center_button.click()

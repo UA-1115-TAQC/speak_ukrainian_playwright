@@ -44,7 +44,7 @@ class AddClubStepTwo(BaseComponent):
 
     def click_add_location_button(self) -> AddLocationPopUp:
         self.add_location_button.click()
-        filter_locator = self.locator.page.locator("div.add-club-header", hasText="Додати локацію")
+        filter_locator = self.locator.page.locator("div.add-club-header", has_text="Додати локацію")
         return AddLocationPopUp(self.locator.page.locator("div.modal-add-club").filter(has=filter_locator))
 
     @property
