@@ -1,11 +1,11 @@
 from playwright._impl._locator import Locator
 
-from speak_ukrainian.src.components.add_center_popup.add_center_popup_component import AddCenterPopUp
-from speak_ukrainian.src.components.add_center_popup.add_center_step_one import AddCenterStepOne
-from speak_ukrainian.src.components.add_center_popup.add_center_step_three import AddCenterStepThree
-from speak_ukrainian.src.components.add_center_popup.add_center_step_two import AddCenterStepTwo
-from speak_ukrainian.src.components.add_club_popup.add_club_popup_component import Sider
-from speak_ukrainian.src.components.add_club_popup.locations_list_element import LocationsListElement
+from speak_ukrainian.src.web.components.add_center_popup import AddCenterStepThree
+from speak_ukrainian.src.web.components.add_center_popup.add_center_popup_component import AddCenterPopUp
+from speak_ukrainian.src.web.components.add_center_popup.add_center_step_one import AddCenterStepOne
+from speak_ukrainian.src.web.components.add_center_popup.add_center_step_two import AddCenterStepTwo
+from speak_ukrainian.src.web.components.add_club_popup import Sider
+from speak_ukrainian.src.web.components.add_club_popup.locations_list_element import LocationsListElement
 
 
 class EditCenterStepOne(AddCenterStepOne):
