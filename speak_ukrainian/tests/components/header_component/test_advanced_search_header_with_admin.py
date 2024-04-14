@@ -2,8 +2,8 @@ import os
 
 from playwright.sync_api import expect
 
-from speak_ukrainian.src.pages.clubs_page import ClubsPage
-from speak_ukrainian.src.pages.home_page import HomePage
+from speak_ukrainian.src.web.pages.clubs_page import ClubsPage
+from speak_ukrainian.src.web.pages.home_page import HomePage
 
 
 # TUA-850

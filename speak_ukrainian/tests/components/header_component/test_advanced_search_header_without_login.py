@@ -1,7 +1,7 @@
 from playwright.sync_api import expect
 from playwright._impl._page import Page
 
-from speak_ukrainian.src.pages.home_page import HomePage
+from speak_ukrainian.src.web.pages.home_page import HomePage
 
 
 # TUA-314

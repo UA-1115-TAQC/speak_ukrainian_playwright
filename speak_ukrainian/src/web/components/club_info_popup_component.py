@@ -1,7 +1,7 @@
 import re
 from speak_ukrainian.src.web.base import BasePopUp
 from speak_ukrainian.src.web.elements.contact_element import ContactElement
-from speak_ukrainian.src.web.elements import DirectionElement
+from speak_ukrainian.src.web.elements.direction_element import DirectionElement
 
 
 class ClubInfoPopup(BasePopUp):

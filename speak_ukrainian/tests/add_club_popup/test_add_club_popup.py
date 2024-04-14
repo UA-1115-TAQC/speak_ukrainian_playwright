@@ -1,7 +1,7 @@
 import allure
 from playwright.sync_api import expect
 
-from speak_ukrainian.src.pages.home_page import HomePage
+from speak_ukrainian.src.web.pages.home_page import HomePage
 
 VALID_CLUB_NAME = "Hip Hop"
 CATEGORY = "Танці, хореографія"

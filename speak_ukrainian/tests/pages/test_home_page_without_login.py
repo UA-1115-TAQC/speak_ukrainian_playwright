@@ -2,7 +2,8 @@ import re
 
 from playwright.sync_api import expect
 from playwright._impl._page import Page
-from speak_ukrainian.src.components.header_component.header_component import HeaderComponent
+
+from speak_ukrainian.src.web.components.header_component.header_component import HeaderComponent
 
 
 def test_news_button_redirects_to_news_page(page: Page):

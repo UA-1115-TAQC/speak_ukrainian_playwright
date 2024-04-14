@@ -1,9 +1,11 @@
 from speak_ukrainian.src.web.base import BasePage
 from speak_ukrainian.src.web.components.center_card_component import CenterCardComponent
 from speak_ukrainian.src.web.components.club_card_component import ClubCardComponent
-from speak_ukrainian.src.web.components.clubs_page_components import SearchSiderComponent
+from speak_ukrainian.src.web.components.clubs_page_components.list_control_component import ListControlComponent
+from speak_ukrainian.src.web.components.clubs_page_components.search_sider_component import SearchSiderComponent
+
 from speak_ukrainian.src.web.components.header_component.advanced_search_header import AdvancedSearchClubsHeaderComponent
-from speak_ukrainian.src.web.components.clubs_page_components import ListControlComponent
+
 from speak_ukrainian.src.web.components.pagination_component import PaginationComponent
 
 

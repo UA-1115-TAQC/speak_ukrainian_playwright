@@ -6,6 +6,7 @@ from speak_ukrainian.src.web.components.header_component.menu import (AdminMenu,
                                                                       GuestMenu,
                                                                       UserMenu)
 from speak_ukrainian.src.web.pages.all_news_page import AllNewsPage
+from speak_ukrainian.src.web.pages.clubs_page import ClubsPage
 
 
 class HeaderComponent(BaseComponent):
@@ -106,7 +107,7 @@ class HeaderComponent(BaseComponent):
 
     def click_logo(self) -> 'HomePage':
         self.get_logo.click()
-        from speak_ukrainian.src.pages.home_page import HomePage
+        from speak_ukrainian.src.web.pages.home_page import HomePage
         return HomePage(self.locator.page)
 
     def click_challenge_button(self):
