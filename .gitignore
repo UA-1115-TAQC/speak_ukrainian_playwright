@@ -163,3 +163,4 @@ cython_debug/
 .DS_Store
 
 speak_ukrainian/tests/logs/
+/allure-results

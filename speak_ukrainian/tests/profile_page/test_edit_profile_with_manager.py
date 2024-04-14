@@ -3,7 +3,7 @@ import time
 from playwright.sync_api import expect
 from playwright._impl._page import Page
 
-from speak_ukrainian.src.components.header_component.header_component import HeaderComponent
+from speak_ukrainian.src.web.components.header_component.header_component import HeaderComponent
 
 from speak_ukrainian.tests.conftest import page_with_manager
 
