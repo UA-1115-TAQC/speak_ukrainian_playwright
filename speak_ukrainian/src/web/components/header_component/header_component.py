@@ -6,14 +6,9 @@ from speak_ukrainian.src.web.components.header_component.menu import (AdminMenu,
                                                                       GuestMenu,
                                                                       UserMenu)
 from speak_ukrainian.src.web.pages.all_news_page import AllNewsPage
-from speak_ukrainian.src.base import BaseComponent
-from speak_ukrainian.src.components.add_club_popup.add_club_popup_component import AddClubPopUp
-from speak_ukrainian.src.components.header_component.menu.admin_menu import AdminMenu
-from speak_ukrainian.src.components.header_component.menu.guest_menu import GuestMenu
-from speak_ukrainian.src.components.header_component.menu.user_menu import UserMenu
-from speak_ukrainian.src.components.add_club_popup.add_club_popup_component import AddClubPopUp
-from speak_ukrainian.src.pages.all_news_page import AllNewsPage
-from speak_ukrainian.src.pages.clubs_page import ClubsPage
+
+from speak_ukrainian.src.web.pages.clubs_page import ClubsPage
+
 
 class HeaderComponent(BaseComponent):
     def __init__(self, locator: Locator):
@@ -113,7 +108,7 @@ class HeaderComponent(BaseComponent):
 
     def click_logo(self) -> 'HomePage':
         self.get_logo.click()
-        from speak_ukrainian.src.pages.home_page import HomePage
+        from speak_ukrainian.src.web.pages.home_page import HomePage
         return HomePage(self.locator.page)
 
     def click_challenge_button(self):

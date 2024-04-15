@@ -1,15 +1,15 @@
 from speak_ukrainian.src.web.base import BasePage
-from speak_ukrainian.src.web.components.edit_user_profile_popup.edit_user_profile_popup import EditUserProfilePopup
 from typing import Self
 
-from speak_ukrainian.src.base import BasePage
-from speak_ukrainian.src.components.center_card_component import CenterCardComponent
-from speak_ukrainian.src.components.club_card_component import ClubCardComponent
+from speak_ukrainian.src.web.components.center_card_component import CenterCardComponent
+from speak_ukrainian.src.web.components.club_card_component import ClubCardComponent
 from playwright._impl._locator import Locator
 
-from speak_ukrainian.src.components.edit_user_profile_popup.edit_user_profile_popup import EditUserProfilePopup
+from speak_ukrainian.src.web.components.edit_user_profile_popup.edit_user_profile_popup import EditUserProfilePopup
 
-from speak_ukrainian.src.components.add_club_popup.add_club_popup_component import AddClubPopUp
+from speak_ukrainian.src.web.components.add_club_popup.add_club_popup_component import AddClubPopUp
+
+
 class ProfilePage(BasePage):
     def __init__(self, page):
         super().__init__(page)
@@ -25,8 +25,9 @@ class ProfilePage(BasePage):
         self.edit_profile_button = page.locator("xpath=//span[text()='Редагувати профіль']")
         self.add_drop_down = page.get_by_role("button", name="plus Додати")
         self._add_center_button = None
-        self.edit_modal_form = page.locator("xpath=./descendant::div[contains(@class, 'ant-modal css-13m256z user-edit')]"
-                                            "//div[@class='ant-modal-content']")
+        self.edit_modal_form = page.locator(
+            "xpath=./descendant::div[contains(@class, 'ant-modal css-13m256z user-edit')]"
+            "//div[@class='ant-modal-content']")
         self._switch_pagination = None
         self.center_cards_list = page.locator(".//div[contains(@class, 'menu-component')]")
 
@@ -60,7 +61,8 @@ class ProfilePage(BasePage):
 
     @property
     def add_club_button(self) -> Locator:
-        return self.page.locator("xpath=//div[contains(@class,'ant-dropdown')]/child::*[1]//div[text()='Додати гурток']")
+        return self.page.locator(
+            "xpath=//div[contains(@class,'ant-dropdown')]/child::*[1]//div[text()='Додати гурток']")
 
     @property
     def add_center_button(self) -> Locator:
@@ -68,11 +70,12 @@ class ProfilePage(BasePage):
             self._add_center_button = self.page.get_by_role("menuitem", name="Додати центр").locator("div")
         return self._add_center_button
 
-    #todo перервірити локатор пагінації коли запрацює сайт
+    # todo перервірити локатор пагінації коли запрацює сайт
     @property
     def switch_pagination(self) -> Locator:
         if self._switch_pagination is None:
-            self._switch_pagination = self.page.locator(".//ul[contains(@class,'ant-pagination') and contains(@class,'pagination')]")
+            self._switch_pagination = self.page.locator(
+                ".//ul[contains(@class,'ant-pagination') and contains(@class,'pagination')]")
         return self._switch_pagination
 
     def click_my_lessons_dropdown_button(self) -> Self:
@@ -103,7 +106,7 @@ class ProfilePage(BasePage):
         club_cards = self.page.locator(".ant-card").all()
         return [ClubCardComponent(card) for card in club_cards]
 
-    #todo перевірити локатор центрів коли запрацює сайт
+    # todo перевірити локатор центрів коли запрацює сайт
     def get_center_cards(self) -> list[CenterCardComponent]:
         center_cards = self.page.locator(".ant-card").all()
         return [CenterCardComponent(card) for card in center_cards]

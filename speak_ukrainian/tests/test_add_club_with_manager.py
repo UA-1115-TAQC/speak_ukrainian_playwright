@@ -1,6 +1,6 @@
 import pytest
 from playwright.sync_api import expect
-from speak_ukrainian.src.pages.home_page import HomePage
+from speak_ukrainian.src.web.pages.home_page import HomePage
 
 invalid_name_data = [
     ('a' + ('a' * 100), 'Min: 5 characters, Max: 100 characters.'),
@@ -29,13 +29,13 @@ def test_tip_about_amount_characters_in_name_field(page_with_manager: HomePage, 
 @pytest.mark.parametrize("location_name, error_message", invalid_location_name_data)
 def test_error_249(page_with_manager: HomePage, location_name, error_message):
     open_popup = (page_with_manager.header
-                      .open_user_menu
-                      .open_profile_page
-                      .click_add_club_button())
+                  .open_user_menu
+                  .open_profile_page
+                  .click_add_club_button())
     step_one = open_popup.step_one_container
     step_one.name_input_element.set_input_value("Abra Cadabra")
     (step_one.click_on_category_by_name("Художня студія, мистецтво, дизайн")
-            .min_age_input_element.set_input_value("5"))
+     .min_age_input_element.set_input_value("5"))
     step_one.max_age_input_element.set_input_value("10")
     step_two = step_one.click_next_step_button().click_add_location_button()
     location = step_two.name_input_element
@@ -43,6 +43,3 @@ def test_error_249(page_with_manager: HomePage, location_name, error_message):
     location.set_input_value(location_name)
     (expect(location.error_messages_list[0], f'Error messages \'{error_message} should be displayed')
      .to_have_text(error_message, timeout=50))
-
-
-
