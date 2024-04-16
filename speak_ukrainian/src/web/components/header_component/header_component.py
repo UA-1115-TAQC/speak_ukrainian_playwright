@@ -133,7 +133,7 @@ class HeaderComponent(BaseComponent):
         if self.get_add_club_button.is_visible():
             self.get_add_club_button.click()
         pop_up_locator = (self.locator.page
-                          .locator('div.ant-modal-wrap')
+                          .locator('div.modal-add-club')
                           .filter(has=self.locator.page.get_by_text('Додати гурток')))
         return AddClubPopUp(pop_up_locator)
 
