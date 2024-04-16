@@ -88,3 +88,6 @@ class HomePage(BasePageWithAdvancedSearch):
     def scroll_to_carousel_card_component_web_element(self):
         self.carousel_card_component.slider_container.scroll_into_view_if_needed()
         return self
+
+    def wait_until_directions_carousel_is_visible(self):
+        self.page.wait_for_selector(CAROUSEL_CARD_COMPONENT_XPATH)

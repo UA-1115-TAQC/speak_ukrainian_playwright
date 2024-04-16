@@ -2,10 +2,9 @@ from speak_ukrainian.src.web.base import BaseComponent
 from playwright.sync_api import ElementHandle
 
 LEFT_ARROW_BUTTON_XPATH = ".//span[contains(@aria-label, 'arrow-left')]"
-RIGHT_ARROW_BUTTON_XPATH = ".//span[contains(@aria-label, 'arrow-right')]"
 SLICK_DOTS_XPATH = ".//ul[contains(@class,\"slick-dots\")]/li"
 SLICK_DOTS_CONTAINER_XPATH = ".//ul[contains(@class,\"slick-dots\")]"
-SLIDER_CONTAINER_XPATH = ".//div[contains(@class,\"slick-slider\")]"
+SLIDER_CONTAINER_XPATH = "//div[contains(@class,\"slick-slider\")]"
 
 
 class BasicCarouselComponent(BaseComponent):
@@ -18,7 +17,7 @@ class BasicCarouselComponent(BaseComponent):
 
     @property
     def right_arrow_button(self):
-        return self.locator.locator(RIGHT_ARROW_BUTTON_XPATH)
+        return self.locator.get_by_role("img", name="arrow-right").nth(0)
 
     @property
     def slider_container(self):

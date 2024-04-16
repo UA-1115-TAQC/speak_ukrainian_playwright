@@ -3,7 +3,7 @@ from speak_ukrainian.src.web.components.carousel.club_direction_card import Club
 
 CAROUSEL_CARD_HEADING_XPATH = "//div[contains(@class,\"categories-header\")]/h2"
 CAROUSEL_CARD_ALL_CLUBS_BUTTON_XPATH = "//div[contains(@class,\"categories-header\")]/a/button"
-CAROUSEL_CARD_XPATH = ".//div[contains(@class,\"slick-slide\")]"
+CAROUSEL_CARD_XPATH = "//div[contains(@class, 'slick-slide')]//div[contains(@class, 'slick-slide')]"
 
 
 class CarouselCardComponent(BasicCarouselComponent):
@@ -23,7 +23,7 @@ class CarouselCardComponent(BasicCarouselComponent):
     @property
     def carousel_cards(self) -> list[ClubDirectionCard]:
         if not self._carousel_cards:
-            cards = self.slider_container.locator.locator(CAROUSEL_CARD_XPATH).all()
+            cards = self.locator.locator(CAROUSEL_CARD_XPATH).all()
             self._carousel_cards = [ClubDirectionCard(card) for card in cards]
         return self._carousel_cards
 
@@ -38,7 +38,7 @@ class CarouselCardComponent(BasicCarouselComponent):
             f"The index must be in the range between 0 and {len(self.carousel_cards) - 1}, inclusive")
 
     def check_that_the_club_direction_card_obtained_by_index_is_active(self, index) -> bool:
-        return (self.get_club_direction_card_by_index(index)).club_card_heading.is_displayed()
+        return self.get_club_direction_card_by_index(index).locator.get_attribute("aria-hidden") == "false"
 
     def get_active_carousel_cards(self) :
         if not self._active_carousel_cards:
