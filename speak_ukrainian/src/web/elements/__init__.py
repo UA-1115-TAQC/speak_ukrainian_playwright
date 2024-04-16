@@ -7,3 +7,5 @@ from .input_with_icons_and_errors import (InputValidationIconAndErrors,
                                           InputLabelValidationIconAndErrors,
                                           InputPasswordVisibilityIcon)
 from .number_input_element import NumberInput
+from .direction_element import DirectionElement
+from .location_search_sider_clubs_element import LocationSearchSiderElement

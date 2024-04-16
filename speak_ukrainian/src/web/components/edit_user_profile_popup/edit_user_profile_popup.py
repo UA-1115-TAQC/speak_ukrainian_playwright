@@ -8,12 +8,7 @@ from speak_ukrainian.src.web.elements import (InputPasswordVisibilityIcon,
 
 
 class EditUserProfilePopup(BasePopUp):
-
     def __init__(self, locator: Locator):
-        super().__init__(locator)
-        self._edit_user_popup_title = None
-
-    def __int__(self, locator: Locator):
         super().__init__(locator)
         self._edit_user_popup_title = None
         self._country_code = None
