@@ -6,7 +6,6 @@ from speak_ukrainian.src.web.components.header_component.menu import (AdminMenu,
                                                                       GuestMenu,
                                                                       UserMenu)
 from speak_ukrainian.src.web.pages.all_news_page import AllNewsPage
-
 from speak_ukrainian.src.web.pages.clubs_page import ClubsPage
 
 

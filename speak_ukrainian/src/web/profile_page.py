@@ -1,10 +1,10 @@
-from speak_ukrainian.src.web.base import BasePage
 from typing import Self
 
-from speak_ukrainian.src.web.components.center_card_component import CenterCardComponent
-from speak_ukrainian.src.web.components.club_card_component import ClubCardComponent
 from playwright._impl._locator import Locator
 
+from speak_ukrainian.src.web.base import BasePage
+from speak_ukrainian.src.web.components.center_card_component import CenterCardComponent
+from speak_ukrainian.src.web.components.club_card_component import ClubCardComponent
 from speak_ukrainian.src.web.components.edit_user_profile_popup.edit_user_profile_popup import EditUserProfilePopup
 
 from speak_ukrainian.src.web.components.add_club_popup.add_club_popup_component import AddClubPopUp
