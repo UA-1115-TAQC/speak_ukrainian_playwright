@@ -1,8 +1,10 @@
 from playwright._impl._locator import Locator
 from playwright._impl._page import Page
+from playwright.sync_api import Locator
 
 from speak_ukrainian.src.base import BasePage
 from speak_ukrainian.src.components.add_comment_popup.add_comment_popup_component import AddCommentPopUpComponent
+from speak_ukrainian.src.components.add_comment_popup.comments_component import CommentsClubComponent
 from speak_ukrainian.src.components.sign_up_to_club_popup.sign_up_to_club import SignUpToClub
 from speak_ukrainian.src.components.write_to_manager_popup.write_to_manager_component import WriteToManagerPopUp
 
@@ -23,7 +25,7 @@ class ClubPage(BasePage):
 
     def click_sign_up_club_button(self) -> SignUpToClub:
         self.sign_up_to_club_button.click()
-        return SignUpToClub(self.page.locator("div.SignUpForClub_signUpForClubModal"))
+        return SignUpToClub(self.page.locator("div[class*='SignUpForClub_signUpForClubModal']"))
 
     @property
     def write_to_manager_button(self) -> Locator:
@@ -44,3 +46,16 @@ class ClubPage(BasePage):
     def click_leave_comment_button(self) -> AddCommentPopUpComponent:
         self.leave_comment_button.click()
         return AddCommentPopUpComponent(self.page.locator("div.ant-modal-content"))
+
+    @property
+    def get_comment(self) -> list[Locator]:
+        self.page.wait_for_selector(selector='.ant-comment-content-detail', timeout=5000)
+        return self.page.get_by_role("list").all()
+
+
+
+
+
+
+
+

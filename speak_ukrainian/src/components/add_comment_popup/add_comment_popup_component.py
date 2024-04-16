@@ -42,7 +42,7 @@ class AddCommentPopUpComponent(BasePopUp):
 
     @property
     def submit_button(self) -> Locator:
-        self._submit_button = self.get_by_role("button", name="Надіслати")
+        self._submit_button = self.locator.get_by_role("button", name="Надіслати")
         return self._submit_button
 
     def click_submit_button(self) -> Self:
@@ -50,6 +50,12 @@ class AddCommentPopUpComponent(BasePopUp):
         return self
 
     @property
-    def rating_star(self) -> Locator:
-        self._rating = self.locator.locator("#comment-edit_rate").get_by_role("radio", name="star star")
-        return self._rating
+    def star_list(self) -> list[Locator]:
+        return self.locator.get_by_role("radio", name="star star").all()
+
+    def rate_the_club(self, rate: int) -> Self:
+        for i in range(min(rate, len(self.star_list))):
+            self.star_list[i].click()
+        return self
+
+

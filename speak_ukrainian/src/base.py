@@ -44,6 +44,10 @@ class BasePage(BasePageWithoutHeaderAndFooter):
         from speak_ukrainian.src.components.footer_component import FooterComponent
         return FooterComponent(self.page.locator(FOOTER_XPATH))
 
+    @property
+    def get_top_notice_message(self):
+        return self.page.locator(TOP_NOTICE_MESSAGE_XPATH)
+
 
 class BasePageWithAdvancedSearch(BasePage):
     def __init__(self, page: Page) -> None:

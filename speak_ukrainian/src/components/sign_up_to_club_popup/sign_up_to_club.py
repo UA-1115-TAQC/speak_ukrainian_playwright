@@ -24,10 +24,7 @@ class SignUpToClub(BasePopUp):
 
     @property
     def children_list(self) -> list[Locator]:
-        return self.locator.locator(".ant-checkbox-group > div:nth-child").all()
-
-    def get_children_list_names(self) -> list[str]:
-        return [children.text_content() for children in self.children_list]
+        return self.locator.locator('div[class*="SignUpForClub_customCheckbox"]').all()
 
     def click_child_checkbox_by_index(self, index: int) -> Self:
         self.children_list[index].click()
