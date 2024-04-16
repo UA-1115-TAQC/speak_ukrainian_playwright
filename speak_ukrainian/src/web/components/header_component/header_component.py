@@ -6,11 +6,13 @@ from speak_ukrainian.src.web.components.header_component.menu import (AdminMenu,
                                                                       GuestMenu,
                                                                       UserMenu)
 from speak_ukrainian.src.web.pages.all_news_page import AllNewsPage
+from speak_ukrainian.src.web.pages.clubs_page import ClubsPage
 
 
 class HeaderComponent(BaseComponent):
     def __init__(self, locator: Locator):
         super().__init__(locator)
+        self._logo = None
         self._club_container = None
         self._news_container = None
         self._challenge_container = None
@@ -21,6 +23,15 @@ class HeaderComponent(BaseComponent):
         self._location_button = None
         self._avatar = None
         self._profile_menu_button = None
+
+    @property
+    def get_logo(self) -> Locator:
+        if not self._logo:
+            self._logo = (self.locator
+                          .get_by_role("link")
+                          .filter(has=self.locator.page
+                                  .locator("div.logo")))
+        return self._logo
 
     @property
     def get_news_container_locator(self) -> Locator:
@@ -94,15 +105,22 @@ class HeaderComponent(BaseComponent):
             self._profile_menu_button = (self.locator.locator("div.user-profile"))
         return self._profile_menu_button
 
+    def click_logo(self) -> 'HomePage':
+        self.get_logo.click()
+        from speak_ukrainian.src.web.pages.home_page import HomePage
+        return HomePage(self.locator.page)
+
     def click_challenge_button(self):
         self.get_challenge_container.click()
 
-    def click_club_button(self):
+    def click_club_button(self) -> ClubsPage:
         self.get_club_container.click()
+        self.locator.page.wait_for_selector(selector='.ant-card-bordered', timeout=5000)
+        return ClubsPage(self.locator.page)
 
     def click_news_button(self) -> AllNewsPage:
         self.get_news_container_locator.click()
-        self.locator.page.wait_for_selector(selector="#newsContainer", timeout=5000)
+        self.locator.page.wait_for_selector(selector='#newsContainer', timeout=5000)
         return AllNewsPage(self.locator.page)
 
     def click_about_us_button(self):
@@ -123,7 +141,9 @@ class HeaderComponent(BaseComponent):
 
     def get_city_locators_list(self) -> Locator:
         self.get_location_button.click()
-        return (self.locator.page.locator("div[class*=placement-bottom]").locator("li"))
+        return (self.locator
+                .page.locator("div[class*=placement-bottom]")
+                .locator("li"))
 
     @property
     def open_guest_menu(self) -> GuestMenu:
