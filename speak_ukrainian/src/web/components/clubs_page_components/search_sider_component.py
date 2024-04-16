@@ -1,5 +1,5 @@
 from speak_ukrainian.src.web.base import BaseComponent
-from speak_ukrainian.src.web.elements import LocationSearchSiderElement
+from speak_ukrainian.src.web.elements.location_search_sider_clubs_element import LocationSearchSiderElement
 
 
 class SearchSiderComponent(BaseComponent):

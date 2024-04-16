@@ -1,8 +1,8 @@
 from playwright._impl._locator import Locator
 from playwright._impl._page import Page
-from speak_ukrainian.src.base import BasePageWithAdvancedSearch
-from speak_ukrainian.src.components.news_card_component import NewsCardComponent
-from speak_ukrainian.src.components.club_card_component import ClubCardComponent
+from speak_ukrainian.src.web.base import BasePageWithAdvancedSearch
+from speak_ukrainian.src.web.components.news_card_component import NewsCardComponent
+from speak_ukrainian.src.web.components.club_card_component import ClubCardComponent
 
 
 class AllNewsPage(BasePageWithAdvancedSearch):

@@ -1,6 +1,6 @@
 from speak_ukrainian.src.web.base import BaseComponent
 from speak_ukrainian.src.web.components.club_info_popup_component import ClubInfoPopup
-from speak_ukrainian.src.web.elements import DirectionElement
+from speak_ukrainian.src.web.elements.direction_element import DirectionElement
 
 
 class ClubCardComponent(BaseComponent):
