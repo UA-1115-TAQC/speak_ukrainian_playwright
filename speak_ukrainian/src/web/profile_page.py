@@ -1,5 +1,12 @@
+from typing import Self
+
+from playwright._impl._locator import Locator
+
 from speak_ukrainian.src.web.base import BasePage
+from speak_ukrainian.src.web.components.center_card_component import CenterCardComponent
+from speak_ukrainian.src.web.components.club_card_component import ClubCardComponent
 from speak_ukrainian.src.web.components.edit_user_profile_popup.edit_user_profile_popup import EditUserProfilePopup
+
 
 
 class ProfilePage(BasePage):
@@ -11,46 +18,91 @@ class ProfilePage(BasePage):
         self.user_role = page.locator(".//div[@class='user-role']")
         self.user_phone = page.locator("./descendant::div[@class='user-phone-data']")
         self.user_email = page.locator("./descendant::div[@class='user-email-data']")
-        self.my_drop_down_selected_item = page.locator(".//div[contains(@class, 'ant-select-selector')]")
-        self.my_lessons_dropdown_button = page.locator("//div[contains(@class, 'select-item')]//span[text()='гуртки']")
-        self.my_centers_dropdown_button = page.locator("//div[contains(@class, 'select-item')]//span[text()='центри']")
+        self._my_drop_down_selected_item = None
+        self._my_lessons_dropdown_button = None
+        self._my_centers_dropdown_button = None
         self.edit_profile_button = page.locator("xpath=//span[text()='Редагувати профіль']")
         self.add_drop_down = page.get_by_role("button", name="plus Додати")
-        self.add_club_button = page.locator("//div[contains(@class,'ant-dropdown')]/child::*[1]//div[text()='Додати центр']")
-        self.add_center_button = page.get_by_role("menuitem", name="Додати центр").locator("div")
+        self._add_club_button = None
+        self._add_center_button = None
         self.edit_modal_form = page.locator("xpath=./descendant::div[contains(@class, 'ant-modal css-13m256z user-edit')]"
                                             "//div[@class='ant-modal-content']")
-        self.club_cards_list = page.locator(".//div[contains(@class,'ant-card-body')]")
-        self.switch_pagination = page.locator(".//ul[contains(@class,'ant-pagination') and contains(@class,'pagination')]")
+        self._switch_pagination = None
         self.center_cards_list = page.locator(".//div[contains(@class, 'menu-component')]")
 
     def click_edit_profile_button(self) -> EditUserProfilePopup:
         self.edit_profile_button.click()
         return EditUserProfilePopup(self.edit_modal_form)
 
-    def my_drop_down_selected_item_click(self) -> None:
+    def my_drop_down_selected_item_click(self) -> Self:
         self.my_drop_down_selected_item.click()
+        return self
 
-    def my_lessons_dropdown_button_click(self) -> None:
+    @property
+    def my_drop_down_selected_item(self) -> Locator:
+        if self._my_drop_down_selected_item is None:
+            self._my_drop_down_selected_item = self.page.locator(".//div[contains(@class, 'ant-select-selector')]")
+        return self._my_drop_down_selected_item
+
+    @property
+    def my_lessons_dropdown_button(self) -> Locator:
+        if self._my_lessons_dropdown_button is None:
+            self._my_lessons_dropdown_button = self.page.locator("//div[contains(@class, 'select-item')]//span[text("
+                                                                 ")='гуртки']")
+        return self._my_lessons_dropdown_button
+
+    @property
+    def my_centers_dropdown_button(self) -> Locator:
+        if self._my_centers_dropdown_button is None:
+            self._my_centers_dropdown_button = self.page.locator("//div[contains(@class, 'select-item')]//span[text("
+                                                                 ")='центри']")
+        return self._my_centers_dropdown_button
+
+    @property
+    def add_club_button(self) -> Locator:
+        if self._add_club_button is None:
+            self._add_club_button = self.page.locator("//div[contains(@class,'ant-dropdown')]/child::*[1]//div[text("
+                                                      ")='Додати центр']")
+        return self._add_club_button
+
+    @property
+    def add_center_button(self) -> Locator:
+        if self._add_center_button is None:
+            self._add_center_button = self.page.get_by_role("menuitem", name="Додати центр").locator("div")
+        return self._add_center_button
+
+    #todo перервірити локатор пагінації коли запрацює сайт
+    @property
+    def switch_pagination(self) -> Locator:
+        if self._switch_pagination is None:
+            self._switch_pagination = self.page.locator(".//ul[contains(@class,'ant-pagination') and contains(@class,'pagination')]")
+        return self._switch_pagination
+
+    def click_my_lessons_dropdown_button(self) -> Self:
         self.my_lessons_dropdown_button.click()
+        return self
 
-    def my_centers_dropdown_button_click(self) -> None:
+    def click_my_centers_dropdown_button(self) -> Self:
         self.my_centers_dropdown_button.click()
+        return self
 
-    def add_drop_down_click(self) -> None:
+    def click_add_drop_down(self) -> Self:
         self.add_drop_down.click()
+        return self
 
-    def add_club_button_click(self) -> None:
+    def click_add_club_button(self) -> Self:
         self.add_club_button.click()
+        return self
 
-    def add_center_button_click(self) -> None:
+    def click_add_center_button(self) -> Self:
         self.add_center_button.click()
+        return self
 
-    # todo по лісту розібратись як його формувати коли буде елемент ClubCard
+    def get_club_cards(self) -> list[ClubCardComponent]:
+        club_cards = self.page.locator(".ant-card").all()
+        return [ClubCardComponent(card) for card in club_cards]
 
-    # def get_club_cards(self):
-    #     club_cards = []
-    #     elements = self.club_cards_list.query_selector_all(".//div[contains(@class,'ant-card-body')]")
-    #     for element in elements:
-    #         club_cards.append(ClubCard(element))
-    #     return club_cards
+    #todo перевірити локатор центрів коли запрацює сайт
+    def get_center_cards(self) -> list[CenterCardComponent]:
+        center_cards = self.page.locator(".ant-card").all()
+        return [CenterCardComponent(card) for card in center_cards]
