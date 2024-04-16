@@ -1,3 +1,5 @@
+from playwright.sync_api import expect
+
 from speak_ukrainian.src.web.base import BaseComponent
 
 ADVANCED_SEARCH_HEADING_XPATH = "//h2[@class=\'city-name\']"
@@ -48,6 +50,8 @@ class AdvancedSearchHeaderComponent(BaseComponent):
 
     def set_text_selection_search_input_field(self, text: str):
         self.wait_to_be_visible(self.selection_search_input_field).fill(text)
+        # expect(self.selection_search_input_field).to_have_attribute("value", text)
+        self.locator.page.wait_for_timeout(5000);
         return self
 
     def click_selection_search_input_field(self) -> 'AdvancedSearchToolTip':
