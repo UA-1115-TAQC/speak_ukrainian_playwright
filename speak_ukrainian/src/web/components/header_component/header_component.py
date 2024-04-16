@@ -137,7 +137,6 @@ class HeaderComponent(BaseComponent):
                           .filter(has=self.locator.page.get_by_text('Додати гурток')))
         return AddClubPopUp(pop_up_locator)
 
-    #  ClubsPage will be returned
     def select_city(self, city: str):
         self.get_location_button.click()
         self.locator.page.get_by_text(text=city, exact=True).click()

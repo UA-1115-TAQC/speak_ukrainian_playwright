@@ -2,7 +2,8 @@ import re
 
 from playwright.sync_api import expect
 from playwright._impl._page import Page
-from speak_ukrainian.src.components.header_component.header_component import HeaderComponent
+
+from speak_ukrainian.src.web.components.header_component.header_component import HeaderComponent
 
 
 def test_news_button_redirects_to_news_page(page: Page):
@@ -30,4 +31,3 @@ def test_news_button_redirects_to_news_page(page: Page):
      .not_to_have_class(re.compile(expected_active_class)))
     (expect(page, 'Home page should be opened')
      .not_to_have_url(re.compile(expected_news_path)))
-
