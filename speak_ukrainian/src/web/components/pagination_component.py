@@ -1,3 +1,5 @@
+from playwright.sync_api import expect
+
 from speak_ukrainian.src.web.base import BaseComponent
 
 
@@ -49,3 +51,19 @@ class PaginationComponent(BaseComponent):
 
     def scroll_into_view(self):
         self.next.scroll_into_view_if_needed()
+
+
+class ClubsPaginationComponent(PaginationComponent):
+    FIRST_CLUB_NAME_XPATH = "//div[contains(@class,'content-clubs-list')]//div[contains(@class, 'ant-card-body')]//div[@class='title']//div[@class='name']"
+
+    def __init__(self, locator):
+        super().__init__(locator)
+
+    @property
+    def first_club_name(self):
+        return self.locator.page.locator(self.FIRST_CLUB_NAME_XPATH).nth(0)
+
+    def click_next(self):
+        first_club_text = self.first_club_name.text_content()
+        self.next.click()
+        expect(self.first_club_name).not_to_contain_text(first_club_text)

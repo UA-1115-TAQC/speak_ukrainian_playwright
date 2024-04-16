@@ -6,7 +6,7 @@ from speak_ukrainian.src.web.components.clubs_page_components.search_sider_compo
 
 from speak_ukrainian.src.web.components.header_component.advanced_search_header import AdvancedSearchClubsHeaderComponent
 
-from speak_ukrainian.src.web.components.pagination_component import PaginationComponent
+from speak_ukrainian.src.web.components.pagination_component import ClubsPaginationComponent
 
 
 class ClubsPage (BasePage):
@@ -28,9 +28,9 @@ class ClubsPage (BasePage):
         return self._search_clubs_header
 
     @property
-    def pagination(self):
+    def pagination(self) -> ClubsPaginationComponent:
         if self.is_element_present(self.PAGINATION_XPATH):
-            return PaginationComponent(self.page.locator(self.PAGINATION_XPATH))
+            return ClubsPaginationComponent(self.page.locator(self.PAGINATION_XPATH))
 
     @property
     def list_control(self):
