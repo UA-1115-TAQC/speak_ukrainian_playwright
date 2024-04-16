@@ -1,10 +1,10 @@
 from playwright.sync_api import Locator
 
-from speak_ukrainian.src.web.base import BaseComponent
+from speak_ukrainian.src.web.base import BasePopUp
 from speak_ukrainian.src.web.elements.input_with_icon_element import InputWithIconElement
 
 
-class RegistrationPopUpComponent(BaseComponent):
+class RegistrationPopUpComponent(BasePopUp):
     def __init__(self, locator: Locator):
         super().__init__(locator)
         self._registration_popup_title = None
