@@ -1,6 +1,6 @@
 import pytest
-from speak_ukrainian.src.pages.clubs_page import ClubsPage
-from speak_ukrainian.src.pages.home_page import HomePage
+from speak_ukrainian.src.web.pages.clubs_page import ClubsPage
+from speak_ukrainian.src.web.pages.home_page import HomePage
 
 
 @pytest.fixture(autouse=True)
