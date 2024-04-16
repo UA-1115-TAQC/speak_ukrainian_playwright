@@ -50,8 +50,6 @@ def page_with_user(page) -> HomePage:
                  .click_sign_in_button)
     return HomePage(base_page.page)
 
-    return HomePage(base_page.page)
-
 
 @pytest.fixture(scope="session")
 def api_context(pw: Playwright) -> APIRequestContext:
