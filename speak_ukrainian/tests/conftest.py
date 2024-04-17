@@ -52,13 +52,15 @@ def page_with_user(page) -> HomePage:
 
 
 @pytest.fixture(scope="session")
-def api_context(pw: Playwright) -> APIRequestContext:
-    header = {
-        "Authorization": f"Bearer {os.environ['API_KEY']}"
-    }
-    request_context = pw.request.new_context(
-        base_url=f'{os.environ["BASE_URL"]}/api/',
-        extra_http_headers=header
-    )
-    yield request_context
-    request_context.dispose()
+def api_context() -> APIRequestContext:
+    with sync_playwright() as pw:
+
+        header = {
+            # "Authorization": f"Bearer {os.environ['API_KEY']}"
+        }
+        request_context = pw.request.new_context(
+            base_url=f'{os.environ["BASE_URL"]}',
+            extra_http_headers=header
+        )
+        yield request_context
+        request_context.dispose()

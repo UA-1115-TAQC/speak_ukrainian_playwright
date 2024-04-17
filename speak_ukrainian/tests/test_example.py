@@ -1,9 +1,14 @@
 import logging
+import os
 import time
 
 import pytest
+from playwright._impl._fetch import APIRequestContext
 from playwright._impl._page import Page
 from playwright.sync_api import sync_playwright
+
+from speak_ukrainian.src.api.login_client import LoginClient
+from speak_ukrainian.src.api.user_client import UserClient
 
 LOGGER = logging.getLogger(__name__)
 
@@ -34,9 +39,27 @@ LOGGER = logging.getLogger(__name__)
 #         text = l.locator(".description").text_content()
 #         LOGGER.info(text)  # page.get_by_text("Ми вивчаємо все, що можна уявити в ІТ і навіть більше. Загалом ми вчимо 20").click()  # page.get_by_text("Ми вивчаємо все, що можна уявити в ІТ і навіть більше. Загалом ми вчимо 20").click()
 
+token = ""
+def test_example1(api_context):
+    lc = LoginClient(api_context)
+    resource = lc.singin(os.environ["USER_EMAIL"], os.environ["USER_PASSWORD"])
+    assert resource.ok
+    response_body = resource.json()
+    assert response_body.get("email") == os.environ["USER_EMAIL"]
+    global token
+    token = response_body["accessToken"]
+
+def test_example2(api_context):
+    uc = UserClient(api_context, token=token)
+    resource_user = uc.get_user(19)
+    assert resource_user.ok
+    assert resource_user.json() == {'email': '7dbcf3770c@emailaoa.pro',
+                                    'firstName': 'Tester', 'id': 19,
+                                    'lastName': 'TesteR',
+                                    'password': '$2a$10$pMQWZdjqTFaJMip3i9fgQOOGLwYZBbbc5j1/Qg/iEriFb9DcK2QtK',
+                                    'phone': '3809643849',
+                                    'roleName': 'ROLE_MANAGER',
+                                    'status': 'true',
+                                    'urlLogo': None}
 
 
-def test_example1(page_with_admin: Page):
-    time.sleep(1)
-def test_example2(page_with_admin: Page):
-    time.sleep(1)
