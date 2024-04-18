@@ -1,15 +1,19 @@
+import logging
 import os
 
 import pytest
 from dotenv import load_dotenv
+from marshmallow import ValidationError
 from playwright._impl._page import Page
 from playwright.sync_api import sync_playwright, Playwright, APIRequestContext
 
+from speak_ukrainian.src.api.login_client import LoginClient
+from speak_ukrainian.src.api.schames.login import SignInResponseSchema, SingInResponse
 from speak_ukrainian.src.web.components.header_component.header_component import HeaderComponent
 from speak_ukrainian.src.web.pages.home_page import HomePage
 
 load_dotenv()
-
+LOGGER = logging.getLogger(__name__)
 
 @pytest.fixture
 def page() -> Page:
@@ -64,3 +68,39 @@ def api_context() -> APIRequestContext:
         )
         yield request_context
         request_context.dispose()
+
+@pytest.fixture(scope="session")
+def api_context_with_user(api_context) -> (APIRequestContext, SingInResponse):
+    lc = LoginClient(api_context)
+    resource = lc.singin(os.environ["USER_EMAIL"], os.environ["USER_PASSWORD"])
+
+    schema = SignInResponseSchema()
+    try:
+        sing_in_response = schema.load(resource.json())
+    except ValidationError as err:
+        LOGGER.error(err)
+    return api_context, sing_in_response
+
+@pytest.fixture(scope="session")
+def api_context_with_admin(api_context) -> (APIRequestContext, SingInResponse):
+    lc = LoginClient(api_context)
+    resource = lc.singin(os.environ["ADMIN_EMAIL"], os.environ["ADMIN_PASSWORD"])
+
+    schema = SignInResponseSchema()
+    try:
+        sing_in_response = schema.load(resource.json())
+    except ValidationError as err:
+        LOGGER.error(err)
+    return api_context, sing_in_response
+
+@pytest.fixture(scope="session")
+def api_context_with_manager(api_context) -> (APIRequestContext, SingInResponse):
+    lc = LoginClient(api_context)
+    resource = lc.singin(os.environ["MANAGER_EMAIL"], os.environ["MANAGER_PASSWORD"])
+
+    schema = SignInResponseSchema()
+    try:
+        sing_in_response = schema.load(resource.json())
+    except ValidationError as err:
+        LOGGER.error(err)
+    return api_context, sing_in_response
