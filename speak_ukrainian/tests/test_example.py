@@ -49,17 +49,48 @@ def test_example1(api_context):
     global token
     token = response_body["accessToken"]
 
-def test_example2(api_context):
-    uc = UserClient(api_context, token=token)
+
+class UserResource:
+    def __init__(self, id, email, firstName, lastName, password,  phone, roleName, status, urlLogo):
+        self.id = id
+        self.email = email
+        self.firstName = firstName
+        self.lastName = lastName
+        self.password = password
+        self.phone = phone
+        self.roleName = roleName
+        self.status = status
+        self.urlLogo = urlLogo
+
+    def __eq__(self, other):
+        return (self.id == other.id
+                and self.email == other.email
+                and self.firstName == other.firstName
+                and self.lastName == other.lastName
+                and self.phone == other.phone
+                and self.roleName == other.roleName
+                and self.status == other.status
+                and self.urlLogo == other.urlLogo)
+
+
+
+
+def test_example2(api_context_with_user):
+    user_exp = UserResource(email='7dbcf3770c@emailaoa.pro',
+                        firstName='Tester',
+                        id=19,
+                        lastName='TesteR',
+                        password='$2a$10$pMQWZdjqTFaJMip3i9fgQOOGLwYZBbbc5j1/Qg/iEriFb9DcK2QtK',
+                        phone='3809643849',
+                        roleName='ROLE_MANAGER',
+                        status='true',
+                        urlLogo=None)
+    context, model = api_context_with_user
+
+    uc = UserClient(context, token=model.access_token)
     resource_user = uc.get_user(19)
     assert resource_user.ok
-    assert resource_user.json() == {'email': '7dbcf3770c@emailaoa.pro',
-                                    'firstName': 'Tester', 'id': 19,
-                                    'lastName': 'TesteR',
-                                    'password': '$2a$10$pMQWZdjqTFaJMip3i9fgQOOGLwYZBbbc5j1/Qg/iEriFb9DcK2QtK',
-                                    'phone': '3809643849',
-                                    'roleName': 'ROLE_MANAGER',
-                                    'status': 'true',
-                                    'urlLogo': None}
+    user_act = UserResource(**resource_user.json())
+    assert user_act == user_exp
 
 
