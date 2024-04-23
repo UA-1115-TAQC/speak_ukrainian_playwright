@@ -1,15 +1,18 @@
+import allure
+
 from speak_ukrainian.src.web.pages.home_page import HomePage
 from playwright.sync_api import expect
 import pytest
 
 
-# TUA-312
+@allure.issue("TUA-312")
+@allure.description("[Header] Verify that pop-up 'Додати гурток' appears when clicking 'Додати гурток' button at 'Home' page")
 def test_display_add_club_popup(page_with_admin):
     add_club_popup = page_with_admin.header.click_add_club_button()
     expect(add_club_popup.locator).to_be_visible()
 
 
-# TUA-931
+# TUA-931 data
 valid_club_names = ["0123456789",
                     "фЙїqfGJHdsmnФІля",
                     "!@#$%^&*()_{:\"}]'",
@@ -19,6 +22,8 @@ valid_club_names = ["0123456789",
                     ]
 
 
+@allure.issue("TUA-931")
+@allure.description("[Додати гурток] Verify that 'Назва' field accepts allowed characters combinations")
 @pytest.mark.parametrize("valid_name", valid_club_names)
 def test_valid_club_name(page_with_admin, valid_name):
     add_club_popup = page_with_admin.header.click_add_club_button()

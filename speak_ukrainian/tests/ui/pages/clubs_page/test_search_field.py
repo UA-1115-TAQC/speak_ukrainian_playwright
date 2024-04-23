@@ -1,8 +1,10 @@
+import allure
 from speak_ukrainian.src.web.pages.clubs_page import ClubsPage
 from speak_ukrainian.src.web.pages.home_page import HomePage
 
 
-# TUA-825
+@allure.issue("TUA-825")
+@allure.description("[Basic Search] Verify that the search results change with each new entered character")
 def test_clubs_change_with_entered_character(page):
     HomePage(page).header.click_club_button()
     text = ["С", "п", "о", "р", "т"]

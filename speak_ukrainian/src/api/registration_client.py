@@ -1,19 +1,20 @@
+from playwright._impl._fetch import APIResponse
+
 from speak_ukrainian.src.api.base_client import BaseClient
 
 
 class RegistrationClient(BaseClient):
-    def __init__(self, request_context):
-        super().__init__(request_context)
+    def __init__(self, api_context):
+        super().__init__(api_context)
         self.path = "api/signup"
 
-    def signup(self, email, first_name, last_name, phone, password, role_name, url_logo):
-        response = self.request_context.post(url=self.path, data={
-            "email": email,
+    def signup(self, first_name, last_name, email, password, phone, role_name) -> APIResponse:
+        body = {
             "firstName": first_name,
             "lastName": last_name,
-            "phone": phone,
+            "email": email,
             "password": password,
-            "roleName": role_name,
-            "urlLogo": url_logo,
-        })
-        return response
+            "phone": phone,
+            "roleName": role_name
+        }
+        return self.request_context.post(url=self.path, data=body)
