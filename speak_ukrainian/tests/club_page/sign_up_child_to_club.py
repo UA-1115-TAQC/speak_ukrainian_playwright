@@ -3,9 +3,9 @@ import time
 from playwright._impl._page import Page
 from playwright.sync_api import expect
 
-from speak_ukrainian.src.pages.club_page import ClubPage
-from speak_ukrainian.src.pages.clubs_page import ClubsPage
-from speak_ukrainian.src.pages.home_page import HomePage
+from speak_ukrainian.src.web.pages.club_page import ClubPage
+from speak_ukrainian.src.web.pages.clubs_page import ClubsPage
+from speak_ukrainian.src.web.pages.home_page import HomePage
 
 
 def test_leave_comment_about_club(page_with_user: Page, page):
