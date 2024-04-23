@@ -12,17 +12,17 @@ def test_register_with_invalid_first_names_data(api_context_with_user):
 
     request_body = make_request_body(response)
     request_body["firstName"] = "Anna"
-    response = uc.put_user(user_id, request_body)
+    response = uc.put_user_with_body(user_id, request_body)
     assert response.status == 200
 
     request_body = make_request_body(response)
     request_body["lastName"] = "Kukarska"
-    response = uc.put_user(user_id, request_body)
+    response = uc.put_user_with_body(user_id, request_body)
     assert response.status == 200
 
     request_body = make_request_body(response)
     request_body["phone"] = "0234567891"
-    response = uc.put_user(user_id, request_body)
+    response = uc.put_user_with_body(user_id, request_body)
     assert response.status == 200
 
 
