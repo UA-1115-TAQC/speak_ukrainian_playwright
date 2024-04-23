@@ -1,3 +1,5 @@
+import os
+
 from speak_ukrainian.src.api.user_client import UserClient
 
 
@@ -10,11 +12,11 @@ def test_registered_user_can_see_personal_data(api_context_with_admin):
     assert resource_user.ok
 
     response_body = resource_user.json()
-    assert response_body['id'] == 1
-    assert response_body['firstName'] == 'Admin'
-    assert response_body['lastName'] == 'Admin'
-    assert response_body['phone'] == '0671234567'
-    assert response_body['email'] == 'admin@gmail.com'
-    assert response_body['roleName'] == 'ROLE_ADMIN'
-    assert response_body['urlLogo'] == '/static/images/user/avatar/user1.png'
-    assert response_body['status'] == 'true'
+    assert response_body['id'] == int(os.environ["ADMIN_ID"])
+    assert response_body['firstName'] == os.environ["ADMIN_FIRST_NAME"]
+    assert response_body['lastName'] == os.environ["ADMIN_LAST_NAME"]
+    assert response_body['phone'] == os.environ["ADMIN_PHONE"]
+    assert response_body['email'] == os.environ["ADMIN_EMAIL"]
+    assert response_body['roleName'] == os.environ["ADMIN_ROLE_NAME"]
+    assert response_body['urlLogo'] == os.environ["ADMIN_URL_LOGO"]
+    assert response_body['status'] == os.environ["ADMIN_STATUS"]
