@@ -43,14 +43,9 @@ def test_register_with_invalid_first_names_data(api_context, last_name, error_ms
 
 
 def signup(first_name, last_name, registration_client):
-    return registration_client.signup("bitoj41392@nubenews.com",
-                                      first_name,
+    return registration_client.signup(first_name,
                                       last_name,
-                                      "0123456789",
+                                      "bitoj41392@nubenews.com",
                                       "T12345678/",
-                                      "ROLE_MANAGER",
-                                      "")
-
-
-
-
+                                      "0123456789",
+                                      "ROLE_MANAGER")
