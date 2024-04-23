@@ -1,8 +1,10 @@
+import allure
 from speak_ukrainian.src.web.pages.clubs_page import ClubsPage
 from speak_ukrainian.src.web.pages.home_page import HomePage
 
 
-# TUA-863
+@allure.issue("TUA-863")
+@allure.description("[Home page] [The user is logged in] Verify that clickable is all block and the 'Переглянути' button on the carousel with suggested clubs")
 def test_direction_carousel_clickable_block_and_button(page_with_user):
     page_with_user.scroll_to_carousel_card_component_web_element()
     cards_num = len(page_with_user.carousel_card_component.carousel_cards)
