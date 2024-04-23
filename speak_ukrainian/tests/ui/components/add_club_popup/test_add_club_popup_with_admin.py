@@ -25,7 +25,7 @@ valid_club_names = ["0123456789",
 @allure.issue("TUA-931")
 @allure.description("[Додати гурток] Verify that 'Назва' field accepts allowed characters combinations")
 @pytest.mark.parametrize("valid_name", valid_club_names)
-def test_valid_club_name(page_with_admin,valid_name):
+def test_valid_club_name(page_with_admin, valid_name):
     add_club_popup = page_with_admin.header.click_add_club_button()
     step_one = add_club_popup.step_one_container
 

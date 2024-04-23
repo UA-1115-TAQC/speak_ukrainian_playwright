@@ -8,14 +8,13 @@ class RegistrationClient(BaseClient):
         super().__init__(api_context)
         self.path = "api/signup"
 
-    def signup(self, firstName, lastName, email, password, phone, roleName) -> APIResponse:
+    def signup(self, first_name, last_name, email, password, phone, role_name) -> APIResponse:
         body = {
-            "firstName": firstName,
-            "lastName": lastName,
+            "firstName": first_name,
+            "lastName": last_name,
             "email": email,
             "password": password,
             "phone": phone,
-            "roleName": roleName
+            "roleName": role_name
         }
-        response = self.request_context.post(url=self.path, data=body)
-        return response
+        return self.request_context.post(url=self.path, data=body)
