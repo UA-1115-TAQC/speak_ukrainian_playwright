@@ -1,3 +1,4 @@
+import allure
 import pytest
 from playwright.sync_api import expect
 
@@ -20,6 +21,9 @@ invalid_data = [
     ]
 
 
+@allure.issue("TUA-835")
+@allure.description("Verify that error messages are shown and 'Зберегти зміни' button "
+                    "becomes disabled while entering invalid data into the 'Ім'я' field as 'Керівник'")
 @pytest.mark.parametrize("invalid_first_name,expected_error_message", invalid_data)
 def test_first_name_element_invalid_data(page_with_manager: HomePage, invalid_first_name, expected_error_message):
     edit_user = (page_with_manager.header
@@ -34,6 +38,9 @@ def test_first_name_element_invalid_data(page_with_manager: HomePage, invalid_fi
     (expect(edit_user.submit_button, 'Submit button should be disabled').to_be_disabled(timeout=100))
 
 
+@allure.issue("TUA-867")
+@allure.description("Verify that the user as 'Керівник' see 'Завантажити фото' text link "
+                    "under the 'Фото' link and tooltip message appears")
 def test_tooltip(page_with_manager: HomePage):
     edit_user = (page_with_manager.header
                       .open_user_menu

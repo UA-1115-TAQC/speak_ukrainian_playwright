@@ -1,10 +1,12 @@
 import os
 
+import allure
+
 from speak_ukrainian.src.api.user_client import UserClient
 
 
-# TUA-375
-# [API]Verify if registered user can see personal data
+@allure.issue("TUA-375")
+@allure.description("[API]Verify if registered user can see personal data")
 def test_registered_user_can_see_personal_data(api_context_with_admin):
     context, model = api_context_with_admin
     uc = UserClient(context, token=model.access_token)

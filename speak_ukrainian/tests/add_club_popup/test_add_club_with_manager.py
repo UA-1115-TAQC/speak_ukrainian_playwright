@@ -1,3 +1,4 @@
+import allure
 import pytest
 from playwright.sync_api import expect
 from speak_ukrainian.src.web.pages.home_page import HomePage
@@ -26,8 +27,10 @@ def test_tip_about_amount_characters_in_name_field(page_with_manager: HomePage, 
      .to_have_text('Min: 5 characters, Max: 100 characters.', timeout=100))
 
 
+@allure.issue("TUA-249")
+@allure.description("Verify error message for ‘Назва’ field of ‘Додати локацію’ pop-up when creating a club")
 @pytest.mark.parametrize("location_name, error_message", invalid_location_name_data)
-def test_error_249(page_with_manager: HomePage, location_name, error_message):
+def test_error_messages_for_name_location_field(page_with_manager: HomePage, location_name, error_message):
     open_popup = (page_with_manager.header
                   .open_user_menu
                   .open_profile_page
