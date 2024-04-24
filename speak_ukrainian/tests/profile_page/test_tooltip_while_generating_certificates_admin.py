@@ -1,5 +1,6 @@
 import os
 
+import allure
 import pytest
 from playwright.sync_api import expect
 
@@ -12,6 +13,10 @@ from speak_ukrainian.src.web.pages.home_page import HomePage
     ("1300", "999"),
     ("0", "1")
 ])
+
+
+@allure.description("Verify that the Admin can't continue generating certificates with an invalid value "
+                    "in the 'Тривалість навчання' field and will receive a tooltip")
 def test_invalid_certificates_get_tool_tip(page_with_admin: HomePage, input_value, expected_value):
     generate_certificate_page = page_with_admin.header.open_admin_menu().click_content().open_certificates_submenu_popup().click_generate_certificate()
     enter_invalid_value(generate_certificate_page, input_value)

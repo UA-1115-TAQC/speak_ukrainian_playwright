@@ -1,6 +1,7 @@
 import os
 import re
 
+import allure
 from playwright.sync_api import expect
 from playwright._impl._page import Page
 
@@ -40,8 +41,9 @@ def test_check_that_slick_dots_container_on_img_carousel_is_centered(page: Page)
     assert "center" in home_page.carousel_img_component.slick_dots_container.evaluate(
         '(element) => getComputedStyle(element).justifyContent')
 
-#TUA-44
-#Verify that user can perform basic search by whole words
+
+@allure.issue("TUA-44")
+@allure.description("Verify that user can perform basic search by whole words")
 def test_basic_search_in_advanced_search_header(page: Page):
     home_page = HomePage(page)
     search_queries = ["American Gymnastics Club", "Сфера"]
