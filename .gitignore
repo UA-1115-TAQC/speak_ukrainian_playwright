@@ -162,5 +162,5 @@ cython_debug/
 #Mac OS
 .DS_Store
 
-speak_ukrainian/tests/logs/
+**/logs/
 **/allure-results
