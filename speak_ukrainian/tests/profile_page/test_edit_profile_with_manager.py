@@ -52,6 +52,6 @@ def test_tooltip(page_with_manager: HomePage):
     expected_tooltip_text = ("Приймас зображення формату JPG / PNG із мінімальною роздільною"
                              " здатністю 200x200 пікселів та максимальним розміром файлу 5МВ")
 
-    (expect(edit_user.tooltip_form(), f'\'{expected_tooltip_text}\' should apper')
+    (expect(edit_user.tooltip_form(), f'\'{expected_tooltip_text}\' should appeared')
      .to_have_text(expected_tooltip_text))
 
