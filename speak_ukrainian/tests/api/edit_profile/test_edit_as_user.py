@@ -36,3 +36,31 @@ def make_request_body(response):
             "urlLogo": response_body['urlLogo'],
             "status": response_body['status'],
             "roleName": response_body['roleName']}
+
+
+#TUA-416
+def test_user_can_change_his_role(api_context_with_user):
+    api_context, sing_in_response = api_context_with_user
+    user_client = UserClient(api_context, sing_in_response.access_token)
+
+    response = user_client.get_user(sing_in_response.id)
+    user_id = response.json()['id']
+
+    request_body = make_request_body(response)
+    request_body["roleName"] = "ROLE_MANAGER"
+    response = user_client.put_user_with_body(user_id, request_body)
+    assert response.status == 200
+    back_user_role(api_context_with_user)
+
+def back_user_role(api_context_with_user):
+    api_context, sing_in_response = api_context_with_user
+    user_client = UserClient(api_context, sing_in_response.access_token)
+
+    response = user_client.get_user(sing_in_response.id)
+    user_id = response.json()['id']
+
+    request_body = make_request_body(response)
+    request_body["roleName"] = "ROLE_USER"
+    response = user_client.put_user_with_body(user_id, request_body)
+    assert response.status == 200
+
