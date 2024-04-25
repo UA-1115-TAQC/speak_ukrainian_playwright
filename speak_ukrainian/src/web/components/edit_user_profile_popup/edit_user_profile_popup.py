@@ -114,7 +114,7 @@ class EditUserProfilePopup(BasePopUp):
     @property
     def submit_button(self) -> Locator:
         return self.locator.locator("button", has_text="Зберегти зміни")
-        #return self.locator.get_by_role("button")
+
 
     def click_on_submit_button(self) -> Self:
         return self.submit_button.click()

@@ -11,7 +11,7 @@ invalid_data = [
     ("Ігор", "Когут", "youremail", "", "0971151309", "ROLE_MANAGER", "\"password\" can`t be empty"),
     ("Ігор", "Когут", "youremail", "Kvitka1989@", "", "ROLE_MANAGER", "\"phone\" can`t be empty"),
     ("Ігор", "Когут", "youremail", "Kvitka1989@", "0971151309", "", "\"roleName\" can`t be empty")
-]
+    ]
 
 
 @allure.issue("TUA-420")
@@ -24,7 +24,7 @@ def test_user_can_not_be_created_with_empty_fields(api_context):
                            "",
                            "",
                            ""
-    )
+                            )
     assert resource is not True
 
     response_body = resource.json()
@@ -43,7 +43,7 @@ def test_user_is_not_created_with_empty_required_field(api_context,
                                                        roleName,
                                                        expected_message):
     user = RegistrationClient(api_context)
-    resource = user.signup(firstName, lastName,  email, password, phone, roleName)
+    resource = user.signup(firstName, lastName, email, password, phone, roleName)
     assert resource is not True
 
     response_body = resource.json()
