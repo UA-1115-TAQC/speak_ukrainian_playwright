@@ -3,8 +3,51 @@ from playwright._impl._locator import Locator
 from speak_ukrainian.src.web.base import BaseComponent, BasePage
 from speak_ukrainian.src.web.components.add_center_popup.add_center_popup_component import AddCenterPopUp
 from speak_ukrainian.src.web.components.add_club_popup import AddClubPopUp
+from speak_ukrainian.src.web.pages.admin_generate_certificate_page import AdminGenerateCertificatePage
 from speak_ukrainian.src.web.pages.search_certificate.search_certificate import SearchCertificatePage
 from speak_ukrainian.src.web.profile_page import ProfilePage
+
+
+class CertificatesSubmenuPopup(BaseComponent):
+    def __init__(self, locator: Locator):
+        super().__init__(locator)
+        self._generate_certificate = None
+
+    @property
+    def generate_certificate(self) -> Locator:
+        if self._generate_certificate is None:
+            self._generate_certificate = self.locator.locator("//li[contains(@data-menu-id, 'generate_certificate')]")
+        return self._generate_certificate
+
+    def click_generate_certificate(self) -> AdminGenerateCertificatePage:
+        self.generate_certificate.click()
+        return AdminGenerateCertificatePage(self.locator.page)
+
+
+class ContentAdminMenuPopup(BaseComponent):
+    def __init__(self, locator: Locator):
+        super().__init__(locator)
+        self._certificates_submenu_popup = None
+        self._challenges_submenu_popup = None
+
+    @property
+    def certificates_submenu_popup(self) -> Locator:
+        if self._certificates_submenu_popup is None:
+            self._certificates_submenu_popup = self.locator.locator(
+                "//div[contains(@aria-controls, 'certificates-popup')]")
+        return self._certificates_submenu_popup
+
+    @property
+    def challenges_submenu_popup(self) -> Locator:
+        if self._challenges_submenu_popup is None:
+            self._challenges_submenu_popup = self.locator.locator(
+                "//div[contains(@aria-controls, 'challenges-submenu-popup')]")
+        return self._challenges_submenu_popup
+
+    def open_certificates_submenu_popup(self) -> CertificatesSubmenuPopup:
+        self.certificates_submenu_popup.click()
+        return CertificatesSubmenuPopup(
+            self.locator.page.locator("//div[contains(@aria-controls, 'challenges-submenu-popup')]"))
 
 
 class AdminMenu(BaseComponent):
@@ -101,8 +144,9 @@ class AdminMenu(BaseComponent):
     def click_location(self) -> None:  # TODO
         self.location.click()
 
-    def click_content(self) -> None:  # TODO
+    def click_content(self) -> ContentAdminMenuPopup:  # TODO
         self.content.click()
+        return ContentAdminMenuPopup(self.locator.page.get_by_role("menuitem", name="Контент right"))
 
     def click_clubs(self) -> None:  # TODO
         self.clubs.click()
