@@ -1,3 +1,4 @@
+import allure
 import pytest
 from playwright.sync_api import expect
 
@@ -18,6 +19,11 @@ invalid_name_data = [
 ]
 
 
+@allure.issue('TUA-328')
+@allure.description('Verify that error messages are shown'
+                    ' and \'Зберегти зміни\' button becomes disabled'
+                    ' while entering invalid data into the \'Ім\'я\' field as \'Відвідувач\'')
+@allure.label("owner", "Olena Stankevych")
 @pytest.mark.parametrize("invalid_name, expected_error_msg", invalid_name_data)
 def test_edit_name_filed_with_invalid_data(page_with_user: HomePage, invalid_name, expected_error_msg):
     profile_pop_up = (page_with_user.header.open_user_menu
@@ -34,6 +40,10 @@ def test_edit_name_filed_with_invalid_data(page_with_user: HomePage, invalid_nam
      .to_be_disabled(timeout=300))
 
 
+@allure.issue('TUA-866')
+@allure.description('Verify that the user can see ''Завантажити фото\' text link'
+                    ' under the \'Фото\' link and tooltip message appears')
+@allure.label("owner", "Olena Stankevych")
 def test_verify_photo_link_visible(page_with_user: HomePage):
     expected_message = ("Приймас зображення формату JPG / PNG"
                         " із мінімальною роздільною здатністю 200x200 пікселів"
