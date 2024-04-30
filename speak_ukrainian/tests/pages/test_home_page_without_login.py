@@ -1,11 +1,16 @@
 import re
 
-from playwright.sync_api import expect
+import allure
 from playwright._impl._page import Page
+from playwright.sync_api import expect
 
 from speak_ukrainian.src.web.components.header_component.header_component import HeaderComponent
 
 
+@allure.issue('TUA-346')
+@allure.description('Verify that user is redirected to \'Новини\' page'
+                    ' when clicking on it and its label is underlined')
+@allure.label("owner", "Olena Stankevych")
 def test_news_button_redirects_to_news_page(page: Page):
     expected_active_class = 'ant-menu-item-active'
     expected_news_path = '/news'

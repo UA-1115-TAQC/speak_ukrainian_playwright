@@ -14,6 +14,7 @@ invalid_contacts_data = [(ContactDataResponse(ContactType(1, 'Телефон'),
 @allure.issue("TUA-977")
 @allure.description('[API] Vefiry that user cannot save \'Контакти\' fields'
                     ' with invalid data (for club that is not in the center)')
+@allure.label("owner", "Olena Stankevych")
 @pytest.mark.parametrize('invalid_contact, club_id', invalid_contacts_data)
 def test_edit_club_contacts_with_incorrect_data(api_context_with_manager,
                                                 invalid_contact,
